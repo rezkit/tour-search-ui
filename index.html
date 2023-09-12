@@ -10,8 +10,26 @@
   <body>
     <h1>Tours UI</h1>
 
-    <div id="app"></div>
+    <div id="app">
+      <h2>auf Vue</h2>
 
-    <script type="module" src="/src/main.ts"></script>
+      <SearchBox v-model="search" />
+    </div>
+
+    <script type="module">
+      import { createApp, ref } from 'vue'
+      import { vue as searchUI } from './src/main.ts'
+      const app = createApp({
+        setup() {
+          return {
+            search: ref('')
+          }
+        }
+      })
+
+      app.use(searchUI)
+
+      app.mount('#app')
+    </script>
   </body>
 </html>

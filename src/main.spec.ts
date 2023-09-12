@@ -8,7 +8,8 @@ describe('Client', () => {
     })
 
     describe('search', () => {
-        const client = new Client('mock')
+        const client = new Client('ke', { host: 'https://rezkit-tours-staging.fly.dev' })
+        const params = { ccy: 'GBP' }
         
         describe('throws an error with invalid parameters', () => {
             test('when `ccy` is missing', async () => {
@@ -23,6 +24,9 @@ describe('Client', () => {
                 await expect(client.search(params)).rejects.toThrow(ZodError)
             })
         })
-    })
 
+        test('returns an object', async () => {
+            await expect(client.search(params)).resolves.toBeTruthy()
+        })
+    })
 })
