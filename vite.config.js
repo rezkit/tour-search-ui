@@ -13,6 +13,6 @@ export default defineConfig({
             name: 'tour_search_ui',
             entry: resolve(__dirname, 'src/main.ts'),
             fileName: 'toursui',
-        }
+        },
     }
 })
