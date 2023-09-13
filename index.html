@@ -18,8 +18,9 @@
 
     <script type="module">
       import { createApp, ref } from 'vue'
-      import { vue as searchUI } from './src/main.ts'
+      import * as SearchUI from './src/main.ts'
       const app = createApp({
+        name: 'Search UI Demo',
         setup() {
           return {
             search: ref('')
@@ -27,8 +28,7 @@
         }
       })
 
-      app.use(searchUI)
-
+      app.use(SearchUI.vue)
       app.mount('#app')
     </script>
   </body>
