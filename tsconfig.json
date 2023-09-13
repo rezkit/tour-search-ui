@@ -21,7 +21,13 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Testing */
-    "types": ["@types/jest"]
+    "types": ["@types/jest"],
+    "plugins": [
+      {
+        "name": "lit-analyzer-plugin",
+        "strict": true
+      }
+    ]
   },
   "include": ["src"]
 }

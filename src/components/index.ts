@@ -1,1 +1,5 @@
-export { default as SearchBox } from './SearchBox.vue'
+import SearchBox from "./SearchBox"
+
+export default {
+    SearchBox
+}

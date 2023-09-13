@@ -13,23 +13,11 @@
     <div id="app">
       <h2>auf Vue</h2>
 
-      <SearchBox v-model="search" />
+      <rkts-searchbox />
     </div>
 
     <script type="module">
-      import { createApp, ref } from 'vue'
       import * as SearchUI from './src/main.ts'
-      const app = createApp({
-        name: 'Search UI Demo',
-        setup() {
-          return {
-            search: ref('')
-          }
-        }
-      })
-
-      app.use(SearchUI.vue)
-      app.mount('#app')
     </script>
   </body>
 </html>
