@@ -18,6 +18,9 @@
 
     <script type="module">
       import * as SearchUI from './src/main.ts'
+      const client = new SearchUI.Client('ke', { host: 'https://api.tours.staging.rezkit.app'})
+
+      client.search({ccy: 'GBP', l: { Region: ['Europe'] }}).then(console.log)
     </script>
   </body>
 </html>

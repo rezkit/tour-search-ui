@@ -3,6 +3,8 @@ export * as Components from './components'
 
 const SEARCH_HOST = 'https://api.tours.rezkit.app'
 
+export type CustomFieldsData = { [key: string]: string | number | boolean | null | string[] }
+
 export interface SearchRequest {
   ccy: string
   q?: string
@@ -31,7 +33,7 @@ export interface SearchRequest {
   pi?: number
 }
 
-interface SearchResponse {
+export interface SearchResponse {
   took: number
   timed_out: boolean
   hits: {
@@ -40,30 +42,107 @@ interface SearchResponse {
       relation: string
     }
     max_score: number
-    hits: SearchHit<HolidayHit>[]
+    hits: HolidayHit[]
+  }
+  aggregations: Aggregations
+}
+
+interface CategoryBucket {
+  key: string
+  path: string[]
+  term: string
+  level: number
+  doc_count: number
+  children: CategoryBucket[]
+}
+
+interface Aggregations {
+  categories: {
+    doc_count_error_upper_bound: number
+    sum_other_doc_count: number 
+    buckets: CategoryBucket[]
+  }
+  departures: {
+    doc_count: number
+    matching: {
+      doc_count: number
+      date_histogram: {
+        buckets: Array<{
+          key: number
+          key_as_string: string
+          doc_count: number
+        }>
+      }
+      price_histogram: {
+        buckets: Array<{key: number, doc_count: number}>
+      }
+      price_stats: {
+        count: number
+        min: number
+        max: number
+        avg: number
+        sum: number
+      }
+    }
   }
 }
 
 interface HolidayHit {
-  name: string
-  code: string
-  type: 'holiday'
-  published: boolean
-  description: string
-  duration: number[]
-  categories: { [key: number]: string[] },
-  locations: { [key: string]: string[] },
-  organization_id: string
-  image_ids: string[]
-  ordering: number
-}
-
-interface SearchHit<T> {
   _index: string
   _id: string
   _score: number
   _routing?: string
-  _source: T
+  _source: {
+    name: string
+    code: string
+    type: 'holiday'
+    published: boolean
+    description: string
+    duration: number[]
+    categories: { [key: number]: string[] },
+    locations: { [key: string]: string[] },
+    organization_id: string
+    image_ids: string[]
+    ordering: number
+    custom_fields: CustomFieldsData
+  }
+  calculated: {
+    lead_prices: { [key: string]: number[] },
+    months_of_operation: number[]
+  }
+  inner_hits: {
+    departure: {
+      hits: {
+        total: {
+          value: number
+          relation: string
+        }
+        max_score: number
+        hits: DepartureHit[]
+      }
+    }
+  }
+}
+
+export interface DepartureHit {
+  _index: string
+  _id: string
+  _score: number
+  _routing?: string
+  _source: {
+    type: 'departure'
+    name: string
+    code: string
+    published: boolean
+    kind: 'fixed' | 'fixed_duration' | 'flexible'
+    dates: {
+      gte: string
+      lte: string
+    }
+    duration: number
+    lead_prices: { [key: string]: number[] }
+    custom_fields: CustomFieldsData
+  }
 }
 
 export interface ClientOptions {
@@ -97,26 +176,46 @@ export class Client {
     url.searchParams.set('ccy', params.ccy)
 
     const response = await fetch(url)
-    const data = await response.json()
+    const data = await response.json() as SearchResponse
 
     tracker.trackSearch({
       search: {
-        query: '',
-        filters: {
-          key: this.searchKey,
-          currency: params.ccy,
-        },
-        page: { current: 1, size: 10 },
+        query: params.q || params.qs || '',
+        filters: this.getFilters(params),
+        page: { current: params.o || 1, size: params.i || 10 },
         results: {
           total_results: data.hits.total.value,
-          items: data.hits.hits.map( (h: { _id: string, _index: string}) => ({
+          items: data.hits.hits.map( (h) => ({
             document: { id: h._id, index: h._index },
             page: { url: `/holiday/${h._id}` }
           }))
         }
       }
     })
+
     return data 
+  }
+
+
+  /**
+   * Convert SearchRequest filters into analytics data.
+   */
+  private getFilters(params: SearchRequest): Record<string, string | string[]> {
+    const filters: Record<string, string | string[]> = {
+      organization_key: this.searchKey,
+      currency: params.ccy
+    }
+
+    if (params.l) {
+      const locations: string[] = []
+      for (const c in params.l) {
+        locations.concat(params.l[c].map(l => c + ' > ' + l))
+      }
+
+      filters.locations = locations
+    }
+
+    return filters
   }
 }
 
