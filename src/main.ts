@@ -2,6 +2,9 @@ import { z } from 'zod'
 import { type App } from 'vue'
 import * as components from '@/components'
 
+import '~bootstrap/dist/css/bootstrap-utilities.css'
+import './assets/scss/template.scss'
+
 const StringArray = z.array(z.string().nonempty())
 
 const SearchRequest = z.object({
@@ -162,9 +165,9 @@ export class Client {
   }
 
   /**
-   * 
-   * @param _params 
-   * @returns 
+   *
+   * @param _params
+   * @returns
    */
   async search(params: SearchRequest): Promise<SearchResponse> {
     params = SearchRequest.parse(params)
