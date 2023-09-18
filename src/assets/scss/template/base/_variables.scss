@@ -7,3 +7,25 @@
 /*------------------------------------------------------------------------------
 // Global Variables / Bootstrap 5 :root variables
 //----------------------------------------------------------------------------*/
+
+/*-- Main Palette --*/
+$primary: #84288E;
+$primary-light: #C74394;
+$primary-lighter: #C291C5;
+$primary-lightest: #E4A5CC;
+$primary-dark: #7A1685;
+$secondary: #1C1431;
+$secondary-light: #342657;
+$secondary-lighter: #503C81;
+$secondary-dark: #0C0821;
+$default-light: #3B3B3B;
+$default-dark: #262626;
+$default: #212121;
+
+$text: #585858;
+
+:root {
+  // Main palette
+  --rk-primary: #{$primary};
+  --rk-text: #{$text};
+}
