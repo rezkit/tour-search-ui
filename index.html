@@ -2,19 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <link rel="stylesheet" href="/demo.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tours UI</title>
   </head>
   <body>
+    <main role="main">
     <h1>Tours UI</h1>
 
-    <div id="app">
-      <h2>auf Vue</h2>
+      <div id="vue-app">
+        <h2>Vue</h2>
 
-      <SearchBox v-model="search" />
-    </div>
+        <h3>Available Components</h3>
+
+        <h4>Search Box</h4>
+        <rkts-searchbox v-model="search" />
+      </div>
+    </main>
 
     <script type="module">
       import { createApp, ref } from 'vue'
@@ -28,8 +32,10 @@
         }
       })
 
+      const search = new SearchUI.Client('rezkit', { host: 'http://localhost:8000' })
+
       app.use(SearchUI.vue)
-      app.mount('#app')
+      app.mount('#vue-app')
     </script>
   </body>
 </html>

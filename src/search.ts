@@ -27,6 +27,7 @@ export const SearchRequest = z.object({
   pt: z.coerce.number().min(0).optional(),
   df: z.string().or(z.date()).optional(),
   dt: z.string().or(z.date()).optional(),
+  j: z.literal('a').or(z.literal('d')).optional(),
 }).refine( params => !(params.q && params.qs), { message: '`q` and `qs` are mutually exclusive' , path: ['q', 'qs'] } )
 
 
@@ -77,7 +78,7 @@ const HolidayHit = z.object({
           value: z.number().int().nonnegative(),
           relation: z.string()
         }),
-        max_score: z.number().nonnegative(),
+        max_score: z.number().nonnegative().nullable(),
         hits: z.array(DepartureHit),
       }).required()
     }).required()
@@ -94,11 +95,11 @@ const Aggregations = z.object({
     matching: z.object({
       doc_count: z.number().int().nonnegative(),
       price_stats: z.object({
-        count: z.number().int().nonnegative(),
-        min: z.number(),
-        max: z.number(),
-        avg: z.number(),
-        sum: z.number(),
+        count: z.number().int().nonnegative().nullable(),
+        min: z.number().nullable(),
+        max: z.number().nullable(),
+        avg: z.number().nullable(),
+        sum: z.number().nullable(),
       }).required(),
       price_histogram: z.object({
         buckets: z.array(z.object({
@@ -125,8 +126,25 @@ export const SearchResponse = z.object({
       value: z.number().int().nonnegative(),
       relation: z.string(),
     }),
-    max_score: z.number().nonnegative(),
+    max_score: z.number().nonnegative().nullable(),
     hits: z.array(HolidayHit)
   }).required(),
   aggregations: Aggregations
 }).required()
+
+
+const SuggestionOption = z.object({
+  text: z.string().nonempty(),
+  _index: z.string(),
+  _id: z.string(),
+  _score: z.number().nonnegative(),
+}).required()
+
+const Suggestion = z.object({
+  text: z.string().nonempty(),
+  offset: z.number().int().nonnegative(),
+  length: z.number().int().nonnegative(),
+  options: z.array(SuggestionOption)
+}).required()
+
+export const SuggestResponse = z.record(z.array(Suggestion))

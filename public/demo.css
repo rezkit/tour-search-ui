@@ -1,4 +1,11 @@
 body {
     background: #131323;
     color: white;
+    margin-top: 3em;
+}
+
+main[role="main"] {
+    margin: auto;
+    width: 100%;
+    max-width: 1280px;
 }
