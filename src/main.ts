@@ -36,8 +36,9 @@ export class Client {
   }
 
   /**
+   * Perform a search
    * 
-   * @param _params 
+   * @param params 
    * @returns 
    */
   async search(params: SearchRequest): Promise<SearchResponse> {
@@ -49,6 +50,17 @@ export class Client {
     const data = await response.json()
 
     return SearchResponse.parse(data)
+  }
+
+
+  async suggest(params: SearchRequest): Promise<SuggestResponse> {
+    params = SearchRequest.parse(params)
+
+    const url = this.getUrl('suggest', params)
+
+    const response = await fetch(url)
+    const data = await response.json()
+    return SuggestResponse.parse(data)
   }
 
   /**
@@ -108,12 +120,14 @@ export class Client {
   }
 }
 
+export const SEARCH_CLIENT = Symbol.for('rezkit.tour_search.client')
 
 /**
  * Vue Plugin Module -- Exports some Vue components for building Search UIs
  */
-export const vue = {
+export const vue = (key: string, params?: ClientOptions) => ({
   install(Vue: App) {
     Vue.component('rkts-searchbox', components.SearchBox)
+    Vue.provide(SEARCH_CLIENT, new Client(key, params))
   }
-}
+})
