@@ -12,3 +12,11 @@ html {
   overflow-x: hidden;
   height: 100%;
 }
+
+body {
+  @include fluid-prop(font-size, $viewport-full-min, $viewport-xl, 12px, 14px);
+
+  font-family: var(--rk-primary-font);
+  color: var(--rk-text);
+  height: 100%;
+}

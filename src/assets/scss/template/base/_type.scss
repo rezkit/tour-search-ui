@@ -1,0 +1,81 @@
+/*==============================================================================
+// File:        _type.scss
+// Package:     Tour Search UI - Vue3 - RezKit
+// Synopsis:    Main type styling - SASS
+//============================================================================*/
+
+h1 {
+  @include fluid-prop(font-size, $viewport-full-min, $viewport-xl, 22px, 28px);
+
+  font-weight: var(--rk-font-bold);
+  color: var(--rk-secondary);
+  margin: 0 0 var(--rk-m-df);
+}
+
+h2 {
+  @include fluid-prop(font-size, $viewport-full-min, $viewport-xl, 24px, 26px);
+
+  font-weight: var(--rk-font-bold);
+  color: var(--rk-secondary);
+  margin: 0 0 var(--rk-m-df);
+}
+
+h3 {
+  @include fluid-prop(font-size, $viewport-full-min, $viewport-xl, 22px, 24px);
+
+  font-weight: var(--rk-font-bold);
+  color: var(--rk-secondary);
+  margin: 0 0 var(--rk-m-df);
+}
+
+h4 {
+  @include fluid-prop(font-size, $viewport-full-min, $viewport-xl, 20px, 22px);
+
+  font-weight: var(--rk-font-bold);
+  color: var(--rk-secondary);
+  margin: 0 0 var(--rk-m-df);
+}
+
+h5 {
+  @include fluid-prop(font-size, $viewport-full-min, $viewport-xl, 18px, 20px);
+
+  font-weight: var(--rk-font-bold);
+  color: var(--rk-secondary);
+  margin: 0 0 var(--rk-m-df);
+}
+
+h6 {
+  @include fluid-prop(font-size, $viewport-full-min, $viewport-xl, 16px, 18px);
+
+  font-weight: var(--rk-font-bold);
+  color: var(--rk-secondary);
+  margin: 0 0 var(--rk-m-df);
+}
+
+/*------------------------------------------------------------------------------
+// Extend heading tags
+//----------------------------------------------------------------------------*/
+
+%h1 {
+  @extend h1;
+}
+
+%h2 {
+  @extend h2;
+}
+
+%h3 {
+  @extend h3;
+}
+
+%h4 {
+  @extend h4;
+}
+
+%h5 {
+  @extend h5;
+}
+
+%h6 {
+  @extend h6;
+}

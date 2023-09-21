@@ -3,19 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tours UI</title>
   </head>
   <body class="rk-body p-3">
     <h1>Tours UI</h1>
 
-    <main id="vue-app" class="rk-card rk-card--content">
-      <div class="p-5">
-        <h2>Vue</h2>
+    <main id="vue-app">
+      <div class="rk-card rk-card--content">
+        <h2>Vue 3</h2>
 
-        <h3>Available Components</h3>
-
-        <h4>Search Box</h4>
+        <h6>Available Components</h6>
+        <hr />
+        <p class="rk-text rk-text--lead">Search Box:</p>
         <rkts-searchbox v-model="search" />
       </div>
     </main>

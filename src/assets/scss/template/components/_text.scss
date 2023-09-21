@@ -1,0 +1,85 @@
+/*==============================================================================
+// File:        _text.scss
+// Package:     Tour Search UI - Vue3 - RezKit
+// Synopsis:    Shared text component - SASS
+//============================================================================*/
+
+.rk-text {
+  /*==============================================================================
+  // Modifiers
+  //============================================================================*/
+
+  @include modifier("default") {
+    color: var(--rk-default);
+  }
+
+  @include modifier("default-light") {
+    color: var(--rk-base-grey-dark);
+  }
+
+  @include modifier("primary") {
+    color: var(--rk-primary);
+  }
+
+  @include modifier("secondary") {
+    color: var(--rk-secondary);
+  }
+
+  @include modifier("dark") {
+    color: var(--rk-base-black);
+  }
+
+  @include modifier("medium") {
+    color: var(--rk-base-grey-medium);
+  }
+
+  @include modifier("alert") {
+    color: var(--rk-alert);
+  }
+
+  @include modifier("error") {
+    color: var(--rk-alert);
+  }
+
+  @include modifier("success") {
+    color: var(--rk-success);
+  }
+
+  @include modifier("warning") {
+    color: var(--rk-warning);
+  }
+
+  @include modifier("lead") {
+    @include fluid-prop(font-size, $viewport-full-min, $viewport-xl, 15px, 18px);
+
+    font-weight: var(--rk-font-bold);
+  }
+
+  /*------------------------------------------------------------------------------
+  // Font Size Changes
+  //----------------------------------------------------------------------------*/
+
+  @include modifier("text-df") {
+    @include fluid-prop(font-size, $viewport-full-min, $viewport-xl, 14px, 15px);
+  }
+
+  @include modifier("text-xl") {
+    @include fluid-prop(font-size, $viewport-full-min, $viewport-xl, 18px, 20px);
+  }
+
+  @include modifier("text-lg") {
+    @include fluid-prop(font-size, $viewport-full-min, $viewport-xl, 15px, 18px);
+  }
+
+  @include modifier("text-md") {
+    @include fluid-prop(font-size, $viewport-full-min, $viewport-xl, 13px, 16px);
+  }
+
+  @include modifier("text-sm") {
+    @include fluid-prop(font-size, $viewport-full-min, $viewport-xl, 12px, 13px);
+  }
+
+  @include modifier("text-xs") {
+    font-size: var(--rk-font-size-xs);
+  }
+}

@@ -71,6 +71,8 @@ $primary-card-bg: rgba($primary, .3);
 // Font Variables
 //----------------------------------------------------------------------------*/
 
+$primary-font: "Outfit", helvetica, arial, sans-serif;
+
 $font-bolder: 700;
 $font-bold: 500;
 $font-normal: 400;
@@ -151,11 +153,22 @@ $z-index-bottom: 5;
 :root {
   // Main palette
   --rk-primary: #{$primary};
-  --rk-text: #{$text};
+  --rk-primary-light: #{$primary-light};
+  --rk-primary-lighter: #{$primary-lighter};
+  --rk-primary-lightest: #{$primary-lightest};
+  --rk-secondary: #{$secondary};
+  --rk-secondary-light: #{$secondary-light};
+  --rk-secondary-lighter: #{$secondary-lighter};
+  --rk-secondary-dark: #{$secondary-dark};
+  --rk-main-border-color: #{$primary-border};
   --rk-card-bg-colour: #{$primary-card-bg};
   --rk-main-bg-colour: #{$primary-bg};
   --rk-gradiant-primary: #FFF4EE;
   --rk-gradiant-secondary: #F2E9F4;
+  --rk-text-shadow: #{$text-shadow};
+  --rk-text-lighter: #{$text-lighter};
+  --rk-text-light: #{$text-light};
+  --rk-text: #{$text};
   // Colours
   --rk-base-green: #{$base-green};
   --rk-base-blue: #{$base-blue};
@@ -209,6 +222,9 @@ $z-index-bottom: 5;
   --rk-font-size-sm: #{$font-size-sm};
   --rk-font-size-xs: #{$font-size-xs};
   --rk-font-size-xxs: #{$font-size-xxs};
+  --rk-primary-font: #{$primary-font};
+  --rk-font-normal: #{$font-normal};
+  --rk-font-bold: #{$font-bold};
   // Icon size
   --rk-icon-size-df: #{$icon-size-df};
   --rk-icon-size-xxl: #{$icon-size-xxl};

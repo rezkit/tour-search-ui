@@ -2,10 +2,14 @@
 // Add RezKit styles to the project
 //============================================================================*/
 
+/*-- Root items --*/
+@import "template/base/type";
+
 /*-- Shared component styles --*/
 @import "template/components/input";
 @import "template/components/card";
 @import "template/components/list";
+@import "template/components/text";
 
 /*-- Vue component styles --*/
 @import "template/vue-components/search-box";

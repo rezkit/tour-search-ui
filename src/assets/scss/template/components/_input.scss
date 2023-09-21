@@ -14,6 +14,36 @@
   min-height: 58px;
   height: auto;
 
+  &:focus {
+    border-color: var(--rk-primary);
+    box-shadow: none;
+    outline: none;
+    color: var(--rk-text);
+  }
+
+  &::-webkit-input-placeholder {
+    color: var(--rk-base-grey-dark);
+  }
+
+  &:-ms-input-placeholder {
+    color: var(--rk-base-grey-dark);
+  }
+
+  &::placeholder {
+    color: var(--rk-base-grey-dark);
+  }
+
+  @include adjoin("focus") {
+    border-color: var(--rk-primary);
+    box-shadow: none;
+    outline: none;
+    color: var(--rk-text);
+  }
+
+  /*==============================================================================
+  // Modifiers
+  //============================================================================*/
+
   @include modifier("search-box") {
     color: var(--rk-primary);
   }
