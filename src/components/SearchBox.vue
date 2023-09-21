@@ -1,8 +1,7 @@
 <template>
-    <div class="rkts.SearchBox-container">
-        <input type="search" class="rkts.SearchBox-input" v-model="value" />
-        <ul class="rkts.SearchBox-suggestions" v-if="enableSuggestions">
-        </ul>
+    <div class="rkts-search-box">
+        <input type="search" class="rk-input rk-input--search-box" v-model="value" />
+        <ul class="rkts-search-box__suggestions" v-if="enableSuggestions"></ul>
     </div>
 </template>
 
