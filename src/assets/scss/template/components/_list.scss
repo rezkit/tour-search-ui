@@ -1,0 +1,28 @@
+/*==============================================================================
+// File:        _list.scss
+// Package:     Tour Search UI - Vue3 - RezKit
+// Synopsis:    Shared list component - SASS
+//============================================================================*/
+
+.rk-list {
+  padding: 0 0 0 var(--rk-p-md);
+  margin: 0;
+
+  /*==============================================================================
+  // Modifiers
+  //============================================================================*/
+
+  @include modifier("no-type") {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  @include modifier("inline") {
+    padding: 0;
+
+    li {
+      display: inline-block;
+      margin: 0 var(--rk-m-df) 0 0;
+    }
+  }
+}

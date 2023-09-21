@@ -51,6 +51,11 @@ $base-grey-light: #EEE;
 $base-grey: #CBCBCB;
 $white-dark-mode: #DDD;
 
+/*-- Style Palette --*/
+$classic: #287CE2;
+$light: $base-grey-light;
+$dark: $text;
+
 /*-- Semi-transparent Items --*/
 $file-upload-bg: rgba($base-blue, .1);
 $blue-bg: rgba($base-blue, .75);
@@ -61,6 +66,36 @@ $text-shadow: rgba($base-black, .85);
 $primary-border: rgba($primary, .2);
 $primary-bg: rgba($primary, .1);
 $primary-card-bg: rgba($primary, .3);
+
+/*------------------------------------------------------------------------------
+// Font Variables
+//----------------------------------------------------------------------------*/
+
+$font-bolder: 700;
+$font-bold: 500;
+$font-normal: 400;
+$font-light: 300;
+
+$font-size-df: .938rem; /*-- 15px --*/
+$font-size-xl: 1.25rem; /*-- 20px --*/
+$font-size-lg: 1.125rem; /*-- 18px --*/
+$font-size-md: 1rem; /*-- 16px --*/
+$font-size-sm: .813rem; /*-- 13px --*/
+$font-size-xs: .75rem; /*-- 12px --*/
+$font-size-xxs: .6rem; /*-- 9.6px --*/
+
+/*------------------------------------------------------------------------------
+// Icon Variables
+//----------------------------------------------------------------------------*/
+
+$icon-size-df: 1.875rem; /*-- 30px --*/
+$icon-size-xxl: 4.5rem; /*-- 72px --*/
+$icon-size-xl: 3.75rem; /*-- 60px --*/
+$icon-size-lg: 3.125rem; /*-- 50px --*/
+$icon-size-md: 2.5rem; /*-- 40px --*/
+$icon-size-sm: 1.5rem; /*-- 24px --*/
+$icon-size-xs: 1.15rem; /*-- 18px --*/
+$icon-size-xxs: 1rem; /*-- 15px --*/
 
 /*------------------------------------------------------------------------------
 // Layout Variables
@@ -87,6 +122,32 @@ $border-radius-md: 15px;
 $border-radius-sm: 10px;
 $border-radius-xs: 5px;
 
+/*------------------------------------------------------------------------------
+// Breakpoint Variables
+//----------------------------------------------------------------------------*/
+
+$viewport-full-max: 1920px;
+$viewport-full-min: 300px;
+$viewport-xl: 1600px;
+$viewport-lg: 1200px;
+$viewport-md: 992px;
+$viewport-sm: 768px;
+$viewport-xs: 576px;
+$viewport-xxs: 400px;
+
+/*-- Bootstrap 4 Alternatives --*/
+
+$xs: $viewport-xxs;
+
+/*------------------------------------------------------------------------------
+// z-index Variables
+//----------------------------------------------------------------------------*/
+
+$z-index-df: 10;
+$z-index-top: 30;
+$z-index-middle: 20;
+$z-index-bottom: 5;
+
 :root {
   // Main palette
   --rk-primary: #{$primary};
@@ -95,6 +156,23 @@ $border-radius-xs: 5px;
   --rk-main-bg-colour: #{$primary-bg};
   --rk-gradiant-primary: #FFF4EE;
   --rk-gradiant-secondary: #F2E9F4;
+  // Colours
+  --rk-base-green: #{$base-green};
+  --rk-base-blue: #{$base-blue};
+  --rk-base-yellow: #{$base-yellow};
+  --rk-base-orange: #{$base-orange};
+  --rk-base-black: #{$base-black};
+  --rk-base-white: #{$base-white};
+  --rk-base-red: #{$base-red};
+  --rk-base-grey: #{$base-grey};
+  --rk-base-grey-light: #{$base-grey-light};
+  --rk-base-grey-lighter: #{$base-grey-lighter};
+  --rk-base-grey-dark: #{$base-grey-dark};
+  --rk-base-grey-darker: #{$base-grey-darker};
+  --rk-base-grey-medium: #{$base-grey-medium};
+  --rk-light-bg: #{$light-bg};
+  --rk-light: #{$light};
+  --rk-dark: #{$dark};
   // Border radius
   --rk-border-radius-df: #{$border-radius-df};
   --rk-border-radius-xl: #{$border-radius-xl};
@@ -116,4 +194,33 @@ $border-radius-xs: 5px;
   --rk-m-md: #{$m-md};
   --rk-m-sm: #{$m-sm};
   --rk-m-xs: #{$m-xs};
+  // Status
+  --rk-warning: #{$warning};
+  --rk-success: #{$success};
+  --rk-danger: #{$danger};
+  --rk-error: #{$error};
+  --rk-alert: #{$alert};
+  --rk-info: #{$info};
+  // Font size
+  --rk-font-size-df: #{$font-size-df};
+  --rk-font-size-xl: #{$font-size-xl};
+  --rk-font-size-lg: #{$font-size-lg};
+  --rk-font-size-md: #{$font-size-md};
+  --rk-font-size-sm: #{$font-size-sm};
+  --rk-font-size-xs: #{$font-size-xs};
+  --rk-font-size-xxs: #{$font-size-xxs};
+  // Icon size
+  --rk-icon-size-df: #{$icon-size-df};
+  --rk-icon-size-xxl: #{$icon-size-xxl};
+  --rk-icon-size-xl: #{$icon-size-xl};
+  --rk-icon-size-lg: #{$icon-size-lg};
+  --rk-icon-size-md: #{$icon-size-md};
+  --rk-icon-size-sm: #{$icon-size-sm};
+  --rk-icon-size-xs: #{$icon-size-xs};
+  --rk-icon-size-xxs: #{$icon-size-xxs};
+  // z-index
+  --rk-z-index-df: #{$z-index-df};
+  --rk-z-index-top: #{$z-index-top};
+  --rk-z-index-middle: #{$z-index-middle};
+  --rk-z-index-bottom: #{$z-index-bottom};
 }

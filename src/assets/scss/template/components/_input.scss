@@ -5,7 +5,14 @@
 //============================================================================*/
 
 .rk-input {
-  padding: 0;
+  border-radius: var(--rk-border-radius-df);
+  border: 1px solid var(--rk-base-grey);
+  font-size: var(--rk-font-size-df);
+  background: var(--rk-base-white);
+  padding: var(--rk-p-sm);
+  color: var(--rk-text);
+  min-height: 58px;
+  height: auto;
 
   @include modifier("search-box") {
     color: var(--rk-primary);
