@@ -1,0 +1,15 @@
+/*==============================================================================
+// Add RezKit styles to the project
+//============================================================================*/
+
+/*-- Shared component styles --*/
+@import "template/components/input";
+@import "template/components/card";
+
+/*-- Generic styles --*/
+@import "template/base/styles";
+
+/*-- Layout styles --*/
+@import "template/layout/body";
+@import "template/layout/filters";
+@import "template/layout/results";

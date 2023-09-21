@@ -1,0 +1,119 @@
+/*==============================================================================
+// File:        _variables.scss
+// Package:     Tour Search UI - Vue3 - RezKit
+// Synopsis:    Main variables & reusable items - SASS
+//============================================================================*/
+
+/*------------------------------------------------------------------------------
+// Global Variables / Bootstrap 5 :root variables
+//----------------------------------------------------------------------------*/
+
+/*-- Main Palette --*/
+$primary: #84288E;
+$primary-light: #C74394;
+$primary-lighter: #C291C5;
+$primary-lightest: #E4A5CC;
+$primary-dark: #7A1685;
+$secondary: #1C1431;
+$secondary-light: #342657;
+$secondary-lighter: #503C81;
+$secondary-dark: #0C0821;
+$default-light: #3B3B3B;
+$default-dark: #262626;
+$default: #212121;
+
+$text-dark: $secondary-dark;
+$text-lighter: #707070;
+$text-light: #676767;
+$text: #585858;
+
+/*-- Alert Colours --*/
+$success: #1FB25F;
+$warning: #FC9E44;
+$danger: #CC1417;
+$error: $danger;
+$alert: $danger;
+$info: red;
+
+/*-- Base Colours --*/
+$base-orange: $warning;
+$base-green: $success;
+$base-yellow: #FFC107;
+$base-red: #B85971;
+$base-blue: #0096CF;
+$base-white: #FFF;
+$base-black: #000;
+$base-grey-medium: #999;
+$base-grey-darker: $text;
+$base-grey-dark: #6E6E6E;
+$base-grey-lighter: #F7F7F7;
+$base-grey-light: #EEE;
+$base-grey: #CBCBCB;
+$white-dark-mode: #DDD;
+
+/*-- Semi-transparent Items --*/
+$file-upload-bg: rgba($base-blue, .1);
+$blue-bg: rgba($base-blue, .75);
+$light-bg: rgba($base-white, .75);
+$shadow-dark: rgba($base-black, .5);
+$shadow: rgba($base-black, .15);
+$text-shadow: rgba($base-black, .85);
+$primary-border: rgba($primary, .2);
+$primary-bg: rgba($primary, .1);
+$primary-card-bg: rgba($primary, .3);
+
+/*------------------------------------------------------------------------------
+// Layout Variables
+//----------------------------------------------------------------------------*/
+
+$p-df: 15px;
+$p-xl: 50px;
+$p-lg: 30px;
+$p-md: 20px;
+$p-sm: 10px;
+$p-xs: 5px;
+
+$m-df: 15px;
+$m-xl: 30px;
+$m-lg: 25px;
+$m-md: 20px;
+$m-sm: 10px;
+$m-xs: 5px;
+
+$border-radius-df: 4px;
+$border-radius-xl: 30px;
+$border-radius-lg: 25px;
+$border-radius-md: 15px;
+$border-radius-sm: 10px;
+$border-radius-xs: 5px;
+
+:root {
+  // Main palette
+  --rk-primary: #{$primary};
+  --rk-text: #{$text};
+  --rk-card-bg-colour: #{$primary-card-bg};
+  --rk-main-bg-colour: #{$primary-bg};
+  --rk-gradiant-primary: #FFF4EE;
+  --rk-gradiant-secondary: #F2E9F4;
+  // Border radius
+  --rk-border-radius-df: #{$border-radius-df};
+  --rk-border-radius-xl: #{$border-radius-xl};
+  --rk-border-radius-lg: #{$border-radius-lg};
+  --rk-border-radius-md: #{$border-radius-md};
+  --rk-border-radius-sm: #{$border-radius-sm};
+  --rk-border-radius-xs: #{$border-radius-xs};
+  // Padding
+  --rk-p-df: #{$p-df};
+  --rk-p-xl: #{$p-xl};
+  --rk-p-lg: #{$p-lg};
+  --rk-p-md: #{$p-md};
+  --rk-p-sm: #{$p-sm};
+  --rk-p-xs: #{$p-xs};
+  // Margin
+  --rk-m-df: #{$m-df};
+  --rk-m-xl: #{$m-xl};
+  --rk-m-lg: #{$m-lg};
+  --rk-m-md: #{$m-md};
+  --rk-m-sm: #{$m-sm};
+  --rk-m-xs: #{$m-xs};
+}

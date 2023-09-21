@@ -1,12 +1,19 @@
 import { defineConfig } from 'vite'
-import { resolve } from 'path'
+import path, { resolve } from 'path'
 import dts from 'vite-plugin-dts'
+import stylelint from 'vite-plugin-stylelint'
 import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
     plugins: [
         dts(),
         vue(),
+        stylelint({
+            build: false,
+            include: ['src/**/*.{scss,sass}'],
+            lintInWorker: true,
+            lintOnStart: true,
+        }),
     ],
 
     build: {
@@ -31,8 +38,20 @@ export default defineConfig({
     },
     resolve: {
         alias: {
+            '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
             '@': resolve(__dirname, 'src'),
             'vue': 'vue/dist/vue.esm-bundler.js'
         }
-    }
+    },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: [
+                    '@import "~bootstrap/scss/bootstrap-utilities";' +
+                    '@import "src/assets/scss/template/base/mixins";' +
+                    '@import "src/assets/scss/template/base/variables";',
+                ],
+            },
+        },
+    },
 })

@@ -1,0 +1,26 @@
+/*==============================================================================
+// File:        _filters.scss
+// Package:     Tour Search UI - Vue3 - RezKit
+// Synopsis:    Main filters style for the UI - SASS
+//============================================================================*/
+
+.rk-filters {
+  --rkts-justify-content: start;
+  --rkts-flex-direction: column;
+  --rkts-align-items: center;
+  --rkts-display: flex;
+
+  justify-content: var(--rkts-justify-content);
+  flex-direction: var(--rkts-flex-direction);
+  align-items: var(--rkts-align-items);
+  display: var(--rkts-display);
+
+  /*==============================================================================
+  // Modifiers
+  //============================================================================*/
+
+  @include modifier("horizontal") {
+    --rkts-justify-content: space-evenly;
+    --rkts-flex-direction: row;
+  }
+}

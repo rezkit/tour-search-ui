@@ -1,0 +1,13 @@
+/*==============================================================================
+// File:        _input.scss
+// Package:     Tour Search UI - Vue3 - RezKit
+// Synopsis:    Shared input component - SASS
+//============================================================================*/
+
+.rk-input {
+  padding: 0;
+
+  @include modifier("search-box") {
+    color: var(--rk-primary);
+  }
+}

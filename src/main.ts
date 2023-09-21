@@ -37,9 +37,9 @@ export class Client {
 
   /**
    * Perform a search
-   * 
-   * @param params 
-   * @returns 
+   *
+   * @param params
+   * @returns
    */
   async search(params: SearchRequest): Promise<SearchResponse> {
     params = SearchRequest.parse(params)
@@ -65,10 +65,10 @@ export class Client {
 
   /**
    * Get the URL for a search request
-   * 
+   *
    * Encodes the search manually as any library to auto-encode the value
    * adds signficant bloat to the package.
-   * 
+   *
    * @param endpoint Search Endpoint to use
    * @param params Search Parameters
    * @returns Search URL Object
@@ -85,15 +85,15 @@ export class Client {
       // Handle simple string values
       if (typeof v === 'string') {
         u.searchParams.set(param, v)
-      // Handle simple number values
+        // Handle simple number values
       } else if (typeof v === 'number') {
         u.searchParams.set(param, v.toString())
-      // Complex (non-scalar) values
+        // Complex (non-scalar) values
       } else {
         // Simple string arrays
         if (param === 's' || param.match(/^c(\d)$/)) {
           (v as string[]).forEach(s => u.searchParams.append(param + '[]', s))
-        // Locations (map of string arrays)
+          // Locations (map of string arrays)
         } else if (param === 'l') {
           // Fields (map of strings)
           const m = v as Record<string, string[]>
@@ -106,7 +106,7 @@ export class Client {
           for (const key in m) {
             u.searchParams.set(`${param}[${key}]`, m[key].toString())
           }
-        // Handle dates if a `Date` is passed
+          // Handle dates if a `Date` is passed
         } else if (param === 'df' || param == 'dt') {
           if (typeof v === 'object') {
             const d = (v as Date)

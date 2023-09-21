@@ -35,7 +35,7 @@ const suggestions = ref()
 
 const value = computed({
     get(): string {
-        return props.modelValue || '' 
+        return props.modelValue || ''
     },
 
     set(value: string) {

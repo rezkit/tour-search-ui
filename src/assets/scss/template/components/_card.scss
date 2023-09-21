@@ -1,0 +1,21 @@
+/*==============================================================================
+// File:        _card.scss
+// Package:     Tour Search UI - Vue3 - RezKit
+// Synopsis:    Shared card component - SASS
+//============================================================================*/
+
+.rk-card {
+  border-radius: var(--rk-border-radius-df);
+  padding: var(--rk-p-md);
+  border: none;
+
+  /*==============================================================================
+  // Modifiers
+  //============================================================================*/
+
+  @include modifier("content") {
+    background: var(--rk-main-bg-colour);
+    border: 1px solid var(--rk-main-border-color);
+    box-shadow: none;
+  }
+}
