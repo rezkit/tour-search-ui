@@ -5,6 +5,8 @@ import * as components from './components'
 export * as Filters from './filters'
 import { SearchRequest, SearchResponse, SuggestResponse } from './search'
 
+import '~bootstrap/dist/css/bootstrap-utilities.css'
+import './assets/scss/template.scss'
 
 export const SEARCH_HOST = 'https://api.tours.rezkit.app'
 
