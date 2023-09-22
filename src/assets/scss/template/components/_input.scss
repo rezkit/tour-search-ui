@@ -47,4 +47,8 @@
   @include modifier("search-box") {
     color: var(--rk-primary);
   }
+
+  @include modifier("checkbox") {
+    margin: 0 var(--rk-m-xs) 0 0;
+  }
 }

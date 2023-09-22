@@ -1,17 +1,21 @@
 /*==============================================================================
-// File:        _search-box.scss
+// File:        _collapsible-list.scss
 // Package:     Tour Search UI - Vue3 - RezKit
-// Synopsis:    Search box component - SASS
+// Synopsis:    Collapsible list component - SASS
 //============================================================================*/
 
-.rkts-search-box {
-  margin: 0 0 var(--rk-m-df);
+.rkts-collapsible-list {
+  padding: 0;
 
   /*==============================================================================
   // Elements
   //============================================================================*/
 
-  @include element("suggestions") {
-    margin: 0;
+  @include element("title") {
+    display: flex;
+  }
+
+  @include element("content") {
+    margin: 0 0 var(--rk-m-df);
   }
 }
