@@ -1,0 +1,157 @@
+/*==============================================================================
+// File:        _fonts.scss
+// Package:     Tour Search UI - Vue3 - RezKit
+// Synopsis:    Main font references - SASS
+//============================================================================*/
+
+/*----------------------------------------------------------------------------*/
+// RezKit Icons - Source: "http://fontello.com/"
+//----------------------------------------------------------------------------*/
+
+@font-face {
+  font-family: fontello;
+  src: url("/fonts/fontello.eot");
+  src:
+    url("/fonts/fontello.eot#iefix") format("embedded-opentype"),
+    url("/fonts/fontello.woff") format("woff"),
+    url("/fonts/fontello.ttf") format("truetype"),
+    url("/fonts/fontello.svg#fontello") format("svg");
+  font-weight: normal;
+  font-display: swap;
+  font-style: normal;
+}
+
+.fontello {
+  /*-- Use important to prevent issues --*/
+  font-family: fontello !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-variant: normal;
+  text-transform: none;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  speak: none;
+}
+
+.icon-sys-add-booking:before { content: "\e800"; }
+.icon-sys-add-customer:before { content: "\e801"; }
+.icon-sys-add-copy-item:before { content: "\e802"; }
+.icon-sys-alert:before { content: "\e803"; }
+.icon-sys-close:before { content: "\e804"; }
+.icon-sys-dashboard:before { content: "\e805"; }
+.icon-sys-disable:before { content: "\e806"; }
+.icon-sys-dropdown:before { content: "\e807"; }
+.icon-sys-edit:before { content: "\e808"; }
+.icon-sys-envelope:before { content: "\e809"; }
+.icon-sys-hamburger:before { content: "\e80a"; }
+.icon-sys-heart-solid:before { content: "\e80b"; }
+.icon-sys-heart:before { content: "\e80c"; }
+.icon-sys-home-outline:before { content: "\e80d"; }
+.icon-sys-home-solid:before { content: "\e80e"; }
+.icon-sys-login:before { content: "\e80f"; }
+.icon-sys-info:before { content: "\e810"; }
+.icon-sys-plus:before { content: "\e811"; }
+.icon-sys-save:before { content: "\e812"; }
+.icon-sys-share:before { content: "\e813"; }
+.icon-sys-search-1:before { content: "\e814"; }
+.icon-sys-star-outline-half:before { content: "\e815"; }
+.icon-sys-star-outline:before { content: "\e816"; }
+.icon-sys-star-solid-half:before { content: "\e817"; }
+.icon-sys-star-solid:before { content: "\e818"; }
+.icon-sys-tick:before { content: "\e819"; }
+.icon-sys-telephone:before { content: "\e81a"; }
+.icon-sys-trash:before { content: "\e81b"; }
+.icon-sys-warning:before { content: "\e81c"; }
+.icon-arrow-down:before { content: "\e81d"; }
+.icon-arrow-left:before { content: "\e81e"; }
+.icon-arrow-right:before { content: "\e81f"; }
+.icon-arrow-up:before { content: "\e820"; }
+.icon-caret-down:before { content: "\e821"; }
+.icon-caret-left:before { content: "\e822"; }
+.icon-caret-right:before { content: "\e823"; }
+.icon-caret-up:before { content: "\e824"; }
+.icon-chevron-down-thin:before { content: "\e825"; }
+.icon-chevron-down:before { content: "\e826"; }
+.icon-chevron-left-thin:before { content: "\e827"; }
+.icon-chevron-left:before { content: "\e828"; }
+.icon-chevron-right-thin:before { content: "\e829"; }
+.icon-chevron-right:before { content: "\e82a"; }
+.icon-chevron-up-thin:before { content: "\e82b"; }
+.icon-chevron-up:before { content: "\e82c"; }
+.icon-calendar:before { content: "\e82d"; }
+.icon-clock:before { content: "\e82e"; }
+.icon-cog:before { content: "\e82f"; }
+.icon-covid:before { content: "\e830"; }
+.icon-discount:before { content: "\e831"; }
+.icon-sys-location:before { content: "\e832"; }
+.icon-download:before { content: "\e833"; }
+.icon-email:before { content: "\e834"; }
+.icon-footprint:before { content: "\e835"; }
+.icon-gallery:before { content: "\e836"; }
+.icon-hotel:before { content: "\e837"; }
+.icon-info:before { content: "\e838"; }
+.icon-link:before { content: "\e839"; }
+.icon-location:before { content: "\e83a"; }
+.icon-sys-holiday:before { content: "\e83b"; }
+.icon-payment:before { content: "\e83c"; }
+.icon-save:before { content: "\e83d"; }
+.icon-security:before { content: "\e83e"; }
+.icon-service:before { content: "\e83f"; }
+.icon-tag:before { content: "\e840"; }
+.icon-ticket:before { content: "\e841"; }
+.icon-user:before { content: "\e842"; }
+.icon-facebook:before { content: "\e843"; }
+.icon-instagram:before { content: "\e844"; }
+.icon-pintrest:before { content: "\e845"; }
+.icon-snapchat:before { content: "\e846"; }
+.icon-telephone:before { content: "\e847"; }
+.icon-twitter:before { content: "\e848"; }
+.icon-whatsapp:before { content: "\e849"; }
+.icon-youtube:before { content: "\e84a"; }
+.icon-double-chevron-left:before { content: "\e84b"; }
+.icon-double-chevron-right:before { content: "\e84c"; }
+.icon-sys-add-product:before { content: "\e84d"; }
+.icon-sys-product-list:before { content: "\e84e"; }
+.icon-close-sidebar:before { content: "\e84f"; }
+.icon-cancelled:before { content: "\e850"; }
+.icon-confirmed:before { content: "\e851"; }
+.icon-error:before { content: "\e852"; }
+.icon-pending:before { content: "\e853"; }
+.icon-flight:before { content: "\e854"; }
+.icon-landing:before { content: "\e855"; }
+.icon-no-flight:before { content: "\e856"; }
+.icon-takeoff:before { content: "\e857"; }
+.icon-more:before { content: "\e858"; }
+.icon-user-list:before { content: "\e859"; }
+.icon-cancel-item:before { content: "\e85a"; }
+.icon-confirm-item:before { content: "\e85b"; }
+.icon-sys-search:before { content: "\e85c"; }
+.icon-sys-accommodation:before { content: "\e85d"; }
+.icon-sys-add-location:before { content: "\e85e"; }
+.icon-logout:before { content: "\e85f"; }
+.icon-sys-add-holiday:before { content: "\e860"; }
+.icon-sys-categories:before { content: "\e861"; }
+.icon-add-category:before { content: "\e862"; }
+.icon-solid-circle:before { content: "\e863"; }
+.icon-panel-slide:before { content: "\e864"; }
+.icon-sys-notification:before { content: "\e866"; }
+.icon-sys-bullet-list:before { content: "\e867"; }
+.icon-sys-number-list:before { content: "\e868"; }
+.icon-sys-blockquote:before { content: "\e869"; }
+.icon-sys-bold:before { content: "\e86a"; }
+.icon-sys-codeblock:before { content: "\e86b"; }
+.icon-sys-italic:before { content: "\e86c"; }
+.icon-sys-strikethrough:before { content: "\e86d"; }
+.icon-sys-add-accommodation:before { content: "\e86e"; }
+.icon-sys-copy-item:before { content: "\e86f"; }
+.icon-dark-mode:before { content: "\e870"; }
+.icon-light-mode:before { content: "\e871"; }
+
+/*------------------------------------------------------------------------------
+// Extend Icon Class
+//----------------------------------------------------------------------------*/
+
+%fontello {
+  @extend .fontello;
+}

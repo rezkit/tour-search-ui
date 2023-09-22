@@ -129,7 +129,8 @@ export const SEARCH_CLIENT = Symbol.for('rezkit.tour_search.client')
  */
 export const vue = (key: string, params?: ClientOptions) => ({
   install(Vue: App) {
-    Vue.component('rkts-searchbox', components.SearchBox)
+    Vue.component('rkts-collapsible-list', components.CollapsibleList)
+    Vue.component('rkts-search-box', components.SearchBox)
     Vue.provide(SEARCH_CLIENT, new Client(key, params))
   }
 })

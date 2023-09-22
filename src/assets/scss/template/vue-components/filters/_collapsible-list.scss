@@ -12,10 +12,36 @@
   //============================================================================*/
 
   @include element("title") {
+    --rkts-justify-content: space-between;
+    --rkts-align-items: center;
+
+    justify-content: var(--rkts-justify-content);
+    align-items: var(--rkts-align-items);
     display: flex;
+
+    &:after {
+      @extend %fontello;
+
+      @include insert-transition(transform, .3s, ease-in-out, 0s);
+
+      font-size: var(--rk-icon-size-sm);
+      transform-origin: center;
+      content: "\e825";
+    }
+
+    @include adjoin("open") {
+      &:after {
+        transform: rotate(180deg);
+      }
+    }
   }
 
   @include element("content") {
+    --rkts-max-height: 400px;
+    --rkts-overflow: auto;
+
+    max-height: var(--rkts-max-height);
+    overflow: var(--rkts-overflow);
     margin: 0 0 var(--rk-m-df);
   }
 }
