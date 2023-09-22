@@ -1,0 +1,25 @@
+/*==============================================================================
+// File:        _description-list.scss
+// Package:     Tour Search UI - Vue3 - RezKit
+// Synopsis:    Description list component - SASS
+//============================================================================*/
+
+.rkts-description-list {
+  padding: 0;
+
+  /*==============================================================================
+  // Elements
+  //============================================================================*/
+
+  @include element("title") {
+    display: flex;
+  }
+
+  @include element("text") {
+    font-size: var(--rk-font-size-sm);
+  }
+
+  @include element("line-break") {
+    margin: 0 0 var(--rk-m-df);
+  }
+}
