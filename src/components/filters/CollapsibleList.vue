@@ -14,10 +14,15 @@ const title = toRef(props, 'title')
   <div class="rkts-collapsible-list">
     <div class="rkts-collapsible-list__title">
       <input class="rk-input rk-input--checkbox" type="checkbox" />
-      <p class="m-0">{{ title }}</p>
+      <p class="label m-0">{{ title }}</p>
     </div>
     <div class="rkts-collapsible-list__content">
-      <ul class="rk-list"></ul>
+      <ul class="rk-list" >
+        <li>
+          <slot></slot>
+        </li>
+        <li></li>
+      </ul>
     </div>
   </div>
 </template>

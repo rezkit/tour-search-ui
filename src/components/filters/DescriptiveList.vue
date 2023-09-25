@@ -5,11 +5,13 @@ import { toRef } from 'vue'
 const props = defineProps<{
   title: string
   text: string
+  showCount?: boolean
 }>()
 // Main variables.
 //
 const title = toRef(props, 'title')
 const text = toRef(props, 'text')
+const showCount = toRef(props, 'showCount')
 </script>
 
 <template>
@@ -17,6 +19,7 @@ const text = toRef(props, 'text')
     <div class="rkts-description-list__title">
       <input class="rk-input rk-input--checkbox" type="checkbox" />
       <p class="m-0">{{ title }}</p>
+      <span v-if="showCount">(40)</span>
     </div>
     <div class="rkts-description-list__text">
       {{ text }}
