@@ -10,6 +10,9 @@ import './assets/scss/template.scss'
 
 export const SEARCH_HOST = 'https://api.tours.rezkit.app'
 
+/**
+ * Schema for a tour search request
+ */
 export type SearchRequest = z.infer<typeof SearchRequest>
 export type SearchResponse = z.infer<typeof SearchResponse>
 export type SuggestResponse = z.infer<typeof SuggestResponse>
@@ -20,6 +23,11 @@ const ClientOptions = z.object({
 
 export type ClientOptions = z.infer<typeof ClientOptions>
 
+/**
+ * A Client interface to the RezKit Tour Search
+ * 
+ * Handles configuration of search along with validating, sending, and receiving queries
+ */
 export class Client {
   private searchKey: string
   private host: string = SEARCH_HOST
@@ -54,7 +62,12 @@ export class Client {
     return SearchResponse.parse(data)
   }
 
-
+  /**
+   * Get suggested terms, completions for a query along with some top-ranked results
+   * 
+   * @param params Query to get suggestions for
+   * @returns Search suggestions
+   */
   async suggest(params: SearchRequest): Promise<SuggestResponse> {
     params = SearchRequest.parse(params)
 
@@ -122,6 +135,10 @@ export class Client {
   }
 }
 
+/**
+ * This constant symbol is used whenever a static reference for the search client
+ * is required. Such as an injection key for Vue.
+ */
 export const SEARCH_CLIENT = Symbol.for('rezkit.tour_search.client')
 
 /**

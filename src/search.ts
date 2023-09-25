@@ -1,7 +1,14 @@
 import { z } from 'zod'
 
+/**
+ * An array of non-empty strings
+ */
 const StringArray = z.array(z.string().nonempty())
 
+/**
+ * Schema for a tour search request
+ * 
+ */
 export const SearchRequest = z.object({
   ccy: z.string().nonempty(),
   q: z.string().optional(),
@@ -31,8 +38,14 @@ export const SearchRequest = z.object({
 }).refine( params => !(params.q && params.qs), { message: '`q` and `qs` are mutually exclusive' , path: ['q', 'qs'] } )
 
 
+/**
+ * A custom field value, which can be a primitive, or array of strings.
+ */
 const CustomFieldValue = z.union([ z.string(), z.number(), z.boolean(), z.array(z.string())])
 
+/**
+ * Schema for a Holiday result payload
+ */
 const HolidaySource = z.object({
   name: z.string(),
   code: z.string(),
@@ -146,5 +159,6 @@ const Suggestion = z.object({
   length: z.number().int().nonnegative(),
   options: z.array(SuggestionOption)
 }).required()
+
 
 export const SuggestResponse = z.record(z.array(Suggestion))
