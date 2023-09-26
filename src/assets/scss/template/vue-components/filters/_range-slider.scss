@@ -1,9 +1,10 @@
 /*==============================================================================
-// File:        _demo.scss
+// File:        _range-slider.scss
 // Package:     Tour Search UI - Vue3 - RezKit
-// Synopsis:    Client side override example - SASS
+// Synopsis:    Range slider component - SASS
 //============================================================================*/
 
-.rkts-description-list {
-    --rkts-max-witdth: 400px;
+.rkts-range-slider {
+  --slider-connect-bg: var(--rk-primary);
+  --slider-tooltip-bg: var(--rk-primary);
 }

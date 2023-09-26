@@ -16,9 +16,9 @@
 
   &:focus {
     border-color: var(--rk-primary);
+    color: var(--rk-text);
     box-shadow: none;
     outline: none;
-    color: var(--rk-text);
   }
 
   &::-webkit-input-placeholder {
@@ -35,9 +35,9 @@
 
   @include adjoin("focus") {
     border-color: var(--rk-primary);
+    color: var(--rk-text);
     box-shadow: none;
     outline: none;
-    color: var(--rk-text);
   }
 
   /*==============================================================================
@@ -45,10 +45,16 @@
   //============================================================================*/
 
   @include modifier("search-box") {
+    --rkts-search-bg: transparent;
+
+    background: var(--rkts-search-bg);
+    padding-left: var(--rk-p-xl);
     color: var(--rk-primary);
+    position: relative;
+    width: 100%;
   }
 
   @include modifier("checkbox") {
-    margin: 0 var(--rk-m-xs) 0 0;
+    margin: 0 var(--rk-m-sm) 0 0;
   }
 }

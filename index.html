@@ -6,27 +6,69 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/demo.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tours UI</title>
   </head>
   <body class="rk-body p-3">
-    <h1>Tours UI</h1>
+    <h1 class="mb-5">Tours UI</h1>
 
-    <main id="vue-app">
+    <main id="vue-app" class="pb-5">
       <div class="rk-card rk-card--content">
         <h2>Vue 3</h2>
         <h6>Available Components</h6>
-        <hr />
 
-        <p class="rk-text rk-text--lead">Search Box:</p>
-        <rkts-search-box v-model="search"></rkts-search-box>
-        <hr />
-
-        <p class="rk-text rk-text--lead">Collapsible List:</p>
-        <div style="max-width: 400px;">
-          <rkts-collapsible-list v-model="items" title="Holiday Type"></rkts-collapsible-list>
+        <div class="py-3">
+          <p class="rk-text rk-text--lead">Search Box:</p>
+          <div class="rk-card">
+            <rkts-search-box v-model="search"></rkts-search-box>
+          </div>
         </div>
+
         <hr />
+
+        <div class="py-3">
+          <p class="rk-text rk-text--lead">Collapsible List:</p>
+          <div class="rk-card" style="max-width: 400px;">
+            <rkts-collapsible-list v-model="items" title="Holiday Type"></rkts-collapsible-list>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="py-3">
+          <p class="rk-text rk-text--lead">Descriptive List:</p>
+          <div class="rk-card" style="max-width: 400px;">
+            <rkts-descriptive-list title="Grade 1" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></rkts-descriptive-list>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="py-3">
+          <p class="rk-text rk-text--lead">Refine Tag:</p>
+          <div class="rk-card">
+            <rkts-refine-tag filter-value="$0 - $1000"></rkts-refine-tag>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="py-3">
+          <p class="rk-text rk-text--lead">Range Slider:</p>
+          <div class="rk-card">
+            <rkts-range-slider></rkts-range-slider>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="py-3">
+          <p class="rk-text rk-text--lead">Chosen Date:</p>
+          <div class="rk-card">
+            <rkts-chosen-date :date="new Date()" type="Vue"></rkts-chosen-date>
+          </div>
+        </div>
 
       </div>
     </main>

@@ -5,7 +5,7 @@
 //============================================================================*/
 
 .rkts-collapsible-list {
-  padding: 0;
+  --rkts-collapse-icon: "\e825";
 
   /*==============================================================================
   // Elements
@@ -30,10 +30,10 @@
 
       @include insert-transition(transform, .3s, ease-in-out, 0s);
 
+      content: var(--rkts-collapse-icon);
       font-size: var(--rk-icon-size-sm);
       transform-origin: center;
       position: absolute;
-      content: "\e825";
       right: 0;
     }
 
@@ -45,7 +45,7 @@
   }
 
   @include element("content") {
-    --rkts-max-height: 400px;
+    --rkts-max-height: auto;
     --rkts-overflow: auto;
 
     max-height: var(--rkts-max-height);

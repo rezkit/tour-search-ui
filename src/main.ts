@@ -25,7 +25,7 @@ export type ClientOptions = z.infer<typeof ClientOptions>
 
 /**
  * A Client interface to the RezKit Tour Search
- * 
+ *
  * Handles configuration of search along with validating, sending, and receiving queries
  */
 export class Client {
@@ -64,7 +64,7 @@ export class Client {
 
   /**
    * Get suggested terms, completions for a query along with some top-ranked results
-   * 
+   *
    * @param params Query to get suggestions for
    * @returns Search suggestions
    */
@@ -146,7 +146,11 @@ export const SEARCH_CLIENT = Symbol.for('rezkit.tour_search.client')
  */
 export const vue = (key: string, params?: ClientOptions) => ({
   install(Vue: App) {
+    Vue.component('rkts-descriptive-list', components.DescriptiveList)
     Vue.component('rkts-collapsible-list', components.CollapsibleList)
+    Vue.component('rkts-range-slider', components.RangeSlider)
+    Vue.component('rkts-chosen-date', components.ChosenDate)
+    Vue.component('rkts-refine-tag', components.RefineTag)
     Vue.component('rkts-search-box', components.SearchBox)
     Vue.provide(SEARCH_CLIENT, new Client(key, params))
   }

@@ -5,7 +5,23 @@
 //============================================================================*/
 
 .rkts-search-box {
+  --rkts-search-icon: "\e814";
+
   margin: 0 0 var(--rk-m-df);
+  align-items: center;
+  position: relative;
+  display: flex;
+
+  &:before {
+    @extend %fontello;
+
+    font-size: var(--rk-icon-size-df);
+    content: var(--rkts-search-icon);
+    padding: 0 var(--rk-p-sm);
+    color: var(--rk-primary);
+    position: absolute;
+    left: 0;
+  }
 
   /*==============================================================================
   // Elements

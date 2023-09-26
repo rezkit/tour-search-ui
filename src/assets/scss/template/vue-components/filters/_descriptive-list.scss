@@ -5,14 +5,27 @@
 //============================================================================*/
 
 .rkts-description-list {
-  padding: 0;
+  --rkts-max-witdth: auto;
+
+  max-width: var(--rkts-max-witdth);
 
   /*==============================================================================
   // Elements
   //============================================================================*/
 
   @include element("title") {
+    --rkts-justify-content: start;
+    --rkts-align-items: center;
+
+    justify-content: var(--rkts-justify-content);
+    align-items: var(--rkts-align-items);
+    padding: 0 var(--rk-p-lg) 0 0;
+    position: relative;
     display: flex;
+
+    .label {
+      padding: 0 var(--rk-p-df) 0 0;
+    }
   }
 
   @include element("text") {
@@ -20,6 +33,6 @@
   }
 
   @include element("line-break") {
-    margin: 0 0 var(--rk-m-df);
+    margin: var(--rk-m-df) 0;
   }
 }

@@ -1,0 +1,57 @@
+/*==============================================================================
+// File:        _icon.scss
+// Package:     Tour Search UI - Vue3 - RezKit
+// Synopsis:    Shared icon component - SASS
+//============================================================================*/
+
+.rk-icon {
+  font-size: var(--rk-icon-size-df);
+
+  /*==============================================================================
+  // Modifiers
+  //============================================================================*/
+
+  @include modifier("default") {
+    color: var(--rk-text);
+  }
+
+  @include modifier("primary") {
+    color: var(--rk-primary);
+  }
+
+  @include modifier("secondary") {
+    color: var(--rk-secondary);
+  }
+
+  @include modifier("light") {
+    color: var(--rk-base-white);
+  }
+
+  /*------------------------------------------------------------------------------
+	// Font Size Changes
+	//----------------------------------------------------------------------------*/
+
+  @include modifier("text-xl") {
+    font-size: var(--rk-icon-size-xl);
+  }
+
+  @include modifier("text-lg") {
+    font-size: var(--rk-icon-size-lg);
+  }
+
+  @include modifier("text-md") {
+    font-size: var(--rk-icon-size-md);
+  }
+
+  @include modifier("text-sm") {
+    font-size: var(--rk-icon-size-sm);
+  }
+
+  @include modifier("text-xs") {
+    font-size: var(--rk-icon-size-xs);
+  }
+
+  @include modifier("text-xxs") {
+    font-size: var(--rk-icon-size-xxs);
+  }
+}

@@ -2,6 +2,7 @@
 import { toRef } from 'vue'
 // Properties and events.
 //
+const emit = defineEmits(['process:clearFilters'])
 const props = defineProps<{
   title: string
 }>()
@@ -24,6 +25,10 @@ const title = toRef(props, 'title')
         <li></li>
       </ul>
     </div>
+    <button class="rk-btn rk-btn--clear" type="button" @click="emit('process:clearFilters')">
+      <i class="rk-icon rk-icon--primary rk-icon--text-xs fontello icon-sys-close me-2"></i>
+      Clear
+    </button>
   </div>
 </template>
 

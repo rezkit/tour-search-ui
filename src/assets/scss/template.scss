@@ -7,15 +7,20 @@
 @import "template/base/type";
 
 /*-- Shared component styles --*/
+@import "template/components/button";
 @import "template/components/input";
 @import "template/components/card";
 @import "template/components/list";
 @import "template/components/text";
+@import "template/components/icon";
 
 /*-- Vue component styles --*/
 @import "template/vue-components/search-box";
 @import "template/vue-components/filters/descriptive-list";
 @import "template/vue-components/filters/collapsible-list";
+@import "template/vue-components/filters/range-slider";
+@import "template/vue-components/filters/refine-tag";
+@import "template/vue-components/filters/chosen-date";
 
 /*-- Generic styles --*/
 @import "template/base/styles";

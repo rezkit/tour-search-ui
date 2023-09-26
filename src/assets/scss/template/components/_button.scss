@@ -1,0 +1,58 @@
+/*==============================================================================
+// File:        _button.scss
+// Package:     Tour Search UI - Vue3 - RezKit
+// Synopsis:    Shared button component - SASS
+//============================================================================*/
+
+.rk-btn {
+  @include insert-transition(all, .5s, ease, .1s);
+
+  padding: var(--rk-p-df) var(--rk-p-lg);
+  font-family: var(--rk-primary-font);
+  font-size: var(--rk-font-size-sm);
+  font-weight: var(--rk-font-bold);
+  border-color: var(--rk-primary);
+  background: var(--rk-primary);
+  color: var(--rk-base-white);
+  text-decoration: none;
+  display: inline-block;
+
+  &:active,
+  &:hover,
+  &:focus {
+    background: var(--rk-primary-light);
+    color: var(--rk-base-off-white);
+    text-decoration: none;
+    box-shadow: none;
+    cursor: pointer;
+    outline: none;
+  }
+
+  &:disabled {
+    border-color: var(--rk-base-grey);
+    background: var(--rk-base-grey);
+    color: var(--rk-text);
+    cursor: not-allowed;
+    opacity: .6;
+  }
+
+  /*==============================================================================
+  // Modifiers
+  //============================================================================*/
+
+  @include modifier("clear") {
+    color: var(--rk-text);
+    align-items: center;
+    background: none;
+    display: flex;
+    border: none;
+    padding: 0;
+
+    &:hover,
+    &:focus {
+      color: var(--rk-text);
+      background: none;
+      border: none;
+    }
+  }
+}
