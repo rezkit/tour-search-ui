@@ -19,6 +19,15 @@
         <h6>Available Components</h6>
 
         <div class="py-3">
+          <p class="rk-text rk-text--lead">Results Count:</p>
+          <div class="rk-card">
+            <rkts-results-count :count="50" label="Showing" message="results"></rkts-results-count>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="py-3">
           <p class="rk-text rk-text--lead">Search Box:</p>
           <div class="rk-card">
             <rkts-search-box v-model="search"></rkts-search-box>

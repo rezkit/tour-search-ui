@@ -1,0 +1,34 @@
+/*==============================================================================
+// File:        _results-count.scss
+// Package:     Tour Search UI - Vue3 - RezKit
+// Synopsis:    Results count component - SASS
+//============================================================================*/
+
+.rkts-results-count {
+  --rkts-justify-content: start;
+  --rkts-flex-direction: row;
+  --rkts-align-items: center;
+  --rkts-display: flex;
+
+  justify-content: var(--rkts-justify-content);
+  flex-direction: var(--rkts-flex-direction);
+  align-items: var(--rkts-align-items);
+  display: var(--rkts-display);
+
+  /*==============================================================================
+  // Elements
+  //============================================================================*/
+
+  @include element("label") {
+    margin-right: var(--rk-m-xs);
+  }
+
+  @include element("count") {
+    font-weight: var(--rk-font-bold);
+    margin-right: var(--rk-m-xs);
+  }
+
+  @include element("message") {
+    margin-right: var(--rk-m-xs);
+  }
+}

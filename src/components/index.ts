@@ -9,3 +9,5 @@ export { default as RefineTag } from './filters/RefineTag.vue'
 export { default as RangeSlider } from './filters/RangeSlider.vue'
 
 export { default as ChosenDate } from './filters/ChosenDate.vue'
+
+export { default as ResultsCount } from './ResultsCount.vue'

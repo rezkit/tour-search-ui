@@ -151,6 +151,7 @@ export const vue = (key: string, params?: ClientOptions) => ({
     Vue.component('rkts-range-slider', components.RangeSlider)
     Vue.component('rkts-chosen-date', components.ChosenDate)
     Vue.component('rkts-refine-tag', components.RefineTag)
+    Vue.component('rkts-results-count', components.ResultsCount)
     Vue.component('rkts-search-box', components.SearchBox)
     Vue.provide(SEARCH_CLIENT, new Client(key, params))
   }

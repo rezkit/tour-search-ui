@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { toRef, ref } from 'vue'
+import { toRef } from 'vue'
 import VueDatePicker from '@vuepic/vue-datepicker'
 // Properties and events.
 //
