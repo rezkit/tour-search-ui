@@ -7,6 +7,7 @@
 @import "template/base/type";
 
 /*-- Shared component styles --*/
+@import "template/components/select";
 @import "template/components/button";
 @import "template/components/input";
 @import "template/components/card";
@@ -15,8 +16,10 @@
 @import "template/components/icon";
 
 /*-- Vue component styles --*/
+@import "template/vue-components/sort-by";
 @import "template/vue-components/search-box";
 @import "template/vue-components/results-count";
+@import "template/vue-components/results-card";
 @import "template/vue-components/filters/descriptive-list";
 @import "template/vue-components/filters/collapsible-list";
 @import "template/vue-components/filters/range-slider";

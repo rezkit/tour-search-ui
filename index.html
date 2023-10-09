@@ -19,6 +19,15 @@
         <h6>Available Components</h6>
 
         <div class="py-3">
+          <p class="rk-text rk-text--lead">Sort By:</p>
+          <div class="rk-card">
+            <rkts-sort-by v-model="sort"></rkts-sort-by>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="py-3">
           <p class="rk-text rk-text--lead">Results Count:</p>
           <div class="rk-card">
             <rkts-results-count :count="50" label="Showing" message="results"></rkts-results-count>
@@ -79,6 +88,14 @@
           </div>
         </div>
 
+        <hr />
+
+        <div class="py-3">
+          <p class="rk-text rk-text--lead">Results Card:</p>
+
+          <rkts-results-card :data="[{ title: 'Holiday Title' }]"></rkts-results-card>
+        </div>
+
       </div>
     </main>
 
@@ -89,6 +106,7 @@
         name: 'Search UI Demo',
         setup() {
           return {
+            sort: ref('PRICE_ASC'),
             search: ref(''),
             items: ref([])
           }

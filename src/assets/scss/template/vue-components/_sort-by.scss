@@ -1,0 +1,38 @@
+/*==============================================================================
+// File:        _sort-by.scss
+// Package:     Tour Search UI - Vue3 - RezKit
+// Synopsis:    Sort by component - SASS
+//============================================================================*/
+
+.rkts-sort-by {
+  --rkts-select-message: "Sort By:";
+  --rkts-justify-content: start;
+  --rkts-flex-direction: row;
+  --rkts-align-items: center;
+  --rkts-display: flex;
+
+  justify-content: var(--rkts-justify-content);
+  flex-direction: var(--rkts-flex-direction);
+  align-items: var(--rkts-align-items);
+  display: var(--rkts-display);
+  position: relative;
+
+  &:before {
+    content: var(--rkts-select-message);
+    font-weight: var(--rk-font-bold);
+    z-index: var(--rk-z-index-df);
+    padding: 0 var(--rk-p-sm);
+    position: absolute;
+    display: block;
+  }
+
+  /*==============================================================================
+  // Elements
+  //============================================================================*/
+
+  @include element("drop-down") {
+    --rkts-message-indent: 65px;
+
+    padding-left: var(--rkts-message-indent);
+  }
+}

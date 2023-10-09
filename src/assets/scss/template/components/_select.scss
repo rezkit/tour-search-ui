@@ -1,0 +1,34 @@
+/*==============================================================================
+// File:        _select.scss
+// Package:     Tour Search UI - Vue3 - RezKit
+// Synopsis:    Shared select component - SASS
+//============================================================================*/
+
+.rk-select {
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  background-image: url("/images/sys-dropdown.svg");
+  border-radius: var(--rk-border-radius-df);
+  background-color: var(--rk-base-white);
+  border: 1px solid var(--rk-base-grey);
+  font-weight: var(--rk-font-normal);
+  font-size: var(--rk-font-size-df);
+  background-repeat: no-repeat;
+  background-clip: padding-box;
+  background-position: right;
+  padding: .375rem .75rem;
+  background-size: 22px;
+  color: var(--rk-text);
+  position: relative;
+  line-height: 1.5;
+  appearance: none;
+  display: block;
+  width: 100%;
+
+  &:focus {
+    box-shadow: 0 0 0 .25rem var(--rk-main-border-color);
+    background-color: var(--rk-base-white);
+    border-color: var(--rk-primary-light);
+    color: var(--rk-text);
+    outline: 0;
+  }
+}
