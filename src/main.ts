@@ -153,7 +153,7 @@ export const vue = (key: string, params?: ClientOptions) => ({
     Vue.component('rkts-chosen-date', components.ChosenDate)
     Vue.component('rkts-refine-tag', components.RefineTag)
     Vue.component('rkts-results-count', components.ResultsCount)
-    Vue.component('rkts-results-card', components.ResultsCard)
+    Vue.component('rkts-result-card', components.ResultCard)
     Vue.component('rkts-search-box', components.SearchBox)
     Vue.component('rkts-sort-by', components.SortBy)
     Vue.provide(SEARCH_CLIENT, new Client(key, params))

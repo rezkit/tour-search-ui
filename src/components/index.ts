@@ -4,7 +4,7 @@ export { default as SearchBox } from './SearchBox.vue'
 
 export { default as ResultsCount } from './ResultsCount.vue'
 
-export { default as ResultsCard } from './ResultsCard.vue'
+export { default as ResultCard } from './ResultCard.vue'
 
 export { default as CollapsibleList } from './filters/CollapsibleList.vue'
 
