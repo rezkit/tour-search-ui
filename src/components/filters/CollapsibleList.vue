@@ -4,7 +4,7 @@ import { toRef } from 'vue'
 //
 const emit = defineEmits(['process:clearFilters'])
 const props = defineProps<{
-  title: string
+  title: string,
 }>()
 // Main variables.
 //

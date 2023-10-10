@@ -30,7 +30,7 @@
         <div class="py-3">
           <p class="rk-text rk-text--lead">Results Count:</p>
           <div class="rk-card">
-            <rkts-results-count :count="50" label="Showing" message="results"></rkts-results-count>
+            <rkts-results-count :count="results?.hits?.total?.value || 0" label="Showing" message="results"></rkts-results-count>
           </div>
         </div>
 
@@ -48,7 +48,7 @@
         <div class="py-3">
           <p class="rk-text rk-text--lead">Collapsible List:</p>
           <div class="rk-card" style="max-width: 400px;">
-            <rkts-collapsible-list v-model="items" title="Holiday Type"></rkts-collapsible-list>
+            <rkts-collapsible-list v-model="filters" :options="response?.aggregations?.categories || []" title="Holiday Type"></rkts-collapsible-list>
           </div>
         </div>
 
@@ -110,17 +110,20 @@
           return {
             sort: ref(['name|asc']),
             search: ref(''),
-            items: ref([])
+            results: ref(),
+            filters: ref({}),
           }
         },
 
         setup() {
+          const client = inject(SearchUI.SEARCH_CLIENT);
           return {
-            client: inject(SearchUI.SEARCH_CLIENT)
+            client,
           }
         },
 
         watch: {
+          // Run a search whenever the search term changes
           search(term, oldTerm) {
             this.runSearch();
           }
@@ -131,15 +134,17 @@
             const response = await this.client.search({
               ccy: 'GBP',
               q: this.search,
-              s: this.sort,
+              ...filters,
             })
+
+            this.results = response
           }
         }
       })
 
 
 
-      app.use(SearchUI.vue('ke', {host: 'https://rekzit-tours-staging.fly.dev'}))
+      app.use(SearchUI.vue('ke', {host: 'https://rezkit-tours-staging.fly.dev'}))
       app.mount('#vue-app')
     </script>
   </body>

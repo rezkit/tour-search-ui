@@ -55,9 +55,9 @@ const HolidaySource = z.object({
   duration: z.array(z.number().int().nonnegative()),
   ordering: z.number().int().positive(),
   categories: z.record(z.array(z.string())),
-  locations: z.record(z.array(z.string())),
+  locations: z.record(z.array(z.string())).or(z.array(z.undefined())),
   custom_fields: z.record( CustomFieldValue ),
-  image_ids: z.array(z.string())
+  images: z.array(z.any()),
 }).required().passthrough()
 
 const DepartureHit = z.object({
