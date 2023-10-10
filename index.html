@@ -100,20 +100,46 @@
     </main>
 
     <script type="module">
-      import { createApp, ref } from 'vue'
+      import { createApp, ref, watch, inject } from 'vue'
+      import { debounce } from 'lodash-es'
       import * as SearchUI from './src/main.ts'
       const app = createApp({
         name: 'Search UI Demo',
-        setup() {
+
+        data() {
           return {
-            sort: ref('PRICE_ASC'),
+            sort: ref(['name|asc']),
             search: ref(''),
             items: ref([])
+          }
+        },
+
+        setup() {
+          return {
+            client: inject(SearchUI.SEARCH_CLIENT)
+          }
+        },
+
+        watch: {
+          search(term, oldTerm) {
+            this.runSearch();
+          }
+        },
+
+        methods: {
+          async runSearch() {
+            const response = await this.client.search({
+              ccy: 'GBP',
+              q: this.search,
+              s: this.sort,
+            })
           }
         }
       })
 
-      app.use(SearchUI.vue('rezkit', {host: 'http://localhost:8000'}))
+
+
+      app.use(SearchUI.vue('ke', {host: 'https://rekzit-tours-staging.fly.dev'}))
       app.mount('#vue-app')
     </script>
   </body>

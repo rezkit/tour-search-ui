@@ -40,7 +40,7 @@ const value = computed({
 // Functions.
 //
 debounce(async () => {
-  suggestions.value = await client?.suggest({ ccy: 'GBP', q: value || '' })
+  suggestions.value = await client?.suggest({ ccy: 'GBP', q: value.value || '' })
 }, props.debounce)
 
 </script>
@@ -49,7 +49,8 @@ debounce(async () => {
     <div class="rkts-search-box">
         <input type="search" class="rk-input rk-input--search-box" v-model="value" />
         <div class="rkts-search-box__suggestions">
-          <ul class="rk-list" v-if="enableSuggestions"></ul>
+          <ul class="rk-list" v-if="enableSuggestions">
+          </ul>
         </div>
     </div>
 </template>
