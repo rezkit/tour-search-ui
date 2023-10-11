@@ -5,23 +5,30 @@
 //============================================================================*/
 
 .rk-btn {
+  --rkts-display: inline-block;
+  --rk-border-style: solid;
+  --rkts-border-width: 1px;
+
   @include insert-transition(all, .5s, ease, .1s);
 
   padding: var(--rk-p-df) var(--rk-p-lg);
+  border-width: var(--rkts-border-width);
+  border-style: var(--rk-border-style);
   font-family: var(--rk-primary-font);
   font-size: var(--rk-font-size-sm);
   font-weight: var(--rk-font-bold);
   border-color: var(--rk-primary);
   background: var(--rk-primary);
+  display: var(--rkts-display);
   color: var(--rk-base-white);
   text-decoration: none;
-  display: inline-block;
 
   &:active,
   &:hover,
   &:focus {
+    border-color: var(--rk-primary-light);
     background: var(--rk-primary-light);
-    color: var(--rk-base-off-white);
+    color: var(--rk-base-white);
     text-decoration: none;
     box-shadow: none;
     cursor: pointer;
@@ -29,11 +36,13 @@
   }
 
   &:disabled {
+    --rkts-opacity: .6;
+
     border-color: var(--rk-base-grey);
     background: var(--rk-base-grey);
+    opacity: var(--rkts-opacity);
     color: var(--rk-text);
     cursor: not-allowed;
-    opacity: .6;
   }
 
   /*==============================================================================
@@ -41,10 +50,15 @@
   //============================================================================*/
 
   @include modifier("clear") {
+    --rkts-justify-content: center;
+    --rkts-align-items: center;
+    --rkts-display: flex;
+
+    justify-content: var(--rkts-justify-content);
+    align-items: var(--rkts-align-items);
+    display: var(--rkts-display);
     color: var(--rk-text);
-    align-items: center;
     background: none;
-    display: flex;
     border: none;
     padding: 0;
 

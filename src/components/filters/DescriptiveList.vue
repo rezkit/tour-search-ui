@@ -1,24 +1,38 @@
 <script setup lang="ts">
-import { toRef } from 'vue'
+import { toRef, computed } from 'vue'
 // Properties and events.
 //
-const emit = defineEmits(['process:clearFilters'])
+const emit = defineEmits(['update:modelValue', 'process:clearFilters'])
 const props = defineProps<{
+  modelValue: boolean
+  showCount?: boolean
+  styleOpts?: string
   title: string
   text: string
-  showCount?: boolean
 }>()
 // Main variables.
 //
+const styleOpts = toRef(props, 'styleOpts')
+const showCount = toRef(props, 'showCount')
 const title = toRef(props, 'title')
 const text = toRef(props, 'text')
-const showCount = toRef(props, 'showCount')
+// Model.
+//
+const value = computed({
+  get(): any {
+    return props.modelValue
+  },
+
+  set(value: any) {
+    emit('update:modelValue', value)
+  },
+})
 </script>
 
 <template>
-  <div class="rkts-description-list">
+  <div class="rkts-description-list" :class="[styleOpts]">
     <div class="rkts-description-list__title">
-      <input class="rk-input rk-input--checkbox" type="checkbox" />
+      <input v-model="value" class="rk-input rk-input--checkbox" type="checkbox" />
       <p class="label m-0">{{ title }}</p>
       <span v-if="showCount">(40)</span>
     </div>

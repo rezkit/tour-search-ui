@@ -147,6 +147,8 @@ export const SEARCH_CLIENT = Symbol.for('rezkit.tour_search.client')
  */
 export const vue = (key: string, params?: ClientOptions) => ({
   install(Vue: App) {
+    Vue.component('rkts-filters-panel', components.FiltersPanel)
+    Vue.component('rkts-results-panel', components.ResultsPanel)
     Vue.component('rkts-descriptive-list', components.DescriptiveList)
     Vue.component('rkts-collapsible-list', components.CollapsibleList)
     Vue.component('rkts-range-slider', components.RangeSlider)

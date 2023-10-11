@@ -22,12 +22,12 @@ const props = defineProps({
     default: 200
   }
 })
-
 // Main variables.
 //
 const client = inject<Client>(SEARCH_CLIENT)
 const suggestions = ref()
-
+// Model.
+//
 const value = computed({
   get(): string {
     return props.modelValue || ''

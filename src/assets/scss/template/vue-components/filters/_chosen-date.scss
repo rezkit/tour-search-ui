@@ -5,6 +5,12 @@
 //============================================================================*/
 
 .rkts-chosen-date {
+  --rkts-position: relative;
+  --rkts-display: flex;
+
+  position: var(--rkts-position);
+  display: var(--rkts-display);
+
   .dp__theme_light {
     --dp-primary-color: var(--rk-primary);
     --dp-icon-color: var(--rk-primary);

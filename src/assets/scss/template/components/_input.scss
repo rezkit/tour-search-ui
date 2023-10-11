@@ -5,19 +5,25 @@
 //============================================================================*/
 
 .rk-input {
+  --rkts-min-height: 58px;
+  --rkts-width: 100%;
+
   border-radius: var(--rk-border-radius-df);
   border: 1px solid var(--rk-base-grey);
+  min-height: var(--rkts-min-height);
   font-size: var(--rk-font-size-df);
   background: var(--rk-base-white);
+  width: var(--rkts-width);
   padding: var(--rk-p-sm);
   color: var(--rk-text);
-  min-height: 58px;
   height: auto;
 
   &:focus {
+    --rkts-box-shadow: none;
+
+    box-shadow: var(--rkts-box-shadow);
     border-color: var(--rk-primary);
     color: var(--rk-text);
-    box-shadow: none;
     outline: none;
   }
 
@@ -34,9 +40,11 @@
   }
 
   @include adjoin("focus") {
+    --rkts-box-shadow: none;
+
+    box-shadow: var(--rkts-box-shadow);
     border-color: var(--rk-primary);
     color: var(--rk-text);
-    box-shadow: none;
     outline: none;
   }
 
@@ -46,15 +54,17 @@
 
   @include modifier("search-box") {
     --rkts-search-bg: transparent;
+    --rkts-position: relative;
 
     background: var(--rkts-search-bg);
+    position: var(--rkts-position);
     padding-left: var(--rk-p-xl);
     color: var(--rk-primary);
-    position: relative;
-    width: 100%;
   }
 
   @include modifier("checkbox") {
-    margin: 0 var(--rk-m-sm) 0 0;
+    margin-right: var(--rk-m-sm);
+    min-height: auto;
+    width: auto;
   }
 }

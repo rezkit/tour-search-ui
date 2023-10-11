@@ -5,9 +5,12 @@
 //============================================================================*/
 
 .rk-select {
+  --rkts-background-size: 22px;
+
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-  background-image: url("/images/sys-dropdown.svg");
+  background-size: var(--rkts-background-size);
   border-radius: var(--rk-border-radius-df);
+  background-image: var(--rk-select-image);
   background-color: var(--rk-base-white);
   border: 1px solid var(--rk-base-grey);
   font-weight: var(--rk-font-normal);
@@ -16,7 +19,6 @@
   background-clip: padding-box;
   background-position: right;
   padding: .375rem .75rem;
-  background-size: 22px;
   color: var(--rk-text);
   position: relative;
   line-height: 1.5;
@@ -30,5 +32,13 @@
     border-color: var(--rk-primary-light);
     color: var(--rk-text);
     outline: 0;
+  }
+
+  /*==============================================================================
+  // Modifiers
+  //============================================================================*/
+
+  @include modifier("user-agent") {
+    background-image: none;
   }
 }

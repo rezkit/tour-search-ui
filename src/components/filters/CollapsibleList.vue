@@ -1,20 +1,34 @@
 <script setup lang="ts">
-import { toRef } from 'vue'
+import { toRef, computed } from 'vue'
 // Properties and events.
 //
-const emit = defineEmits(['process:clearFilters'])
+const emit = defineEmits(['update:modelValue', 'process:clearFilters'])
 const props = defineProps<{
+  modelValue: boolean
+  styleOpts?: string
   title: string,
 }>()
 // Main variables.
 //
+const styleOpts = toRef(props, 'styleOpts')
 const title = toRef(props, 'title')
+// Model.
+//
+const value = computed({
+  get(): any {
+    return props.modelValue
+  },
+
+  set(value: any) {
+    emit('update:modelValue', value)
+  },
+})
 </script>
 
 <template>
-  <div class="rkts-collapsible-list">
+  <div class="rkts-collapsible-list" :class="[styleOpts]">
     <div class="rkts-collapsible-list__title">
-      <input class="rk-input rk-input--checkbox" type="checkbox" />
+      <input v-model="value" class="rk-input rk-input--checkbox" type="checkbox" />
       <p class="label m-0">{{ title }}</p>
     </div>
     <div class="rkts-collapsible-list__content">

@@ -16,15 +16,17 @@
   @include element("title") {
     --rkts-justify-content: start;
     --rkts-align-items: center;
+    --rkts-position: relative;
+    --rkts-display: flex;
 
+    padding: var(--rk-p-df) var(--rk-p-lg) var(--rk-p-df) 0;
     justify-content: var(--rkts-justify-content);
     align-items: var(--rkts-align-items);
-    padding: 0 var(--rk-p-lg) 0 0;
-    position: relative;
-    display: flex;
+    position: var(--rkts-position);
+    display: var(--rkts-display);
 
     .label {
-      padding: 0 var(--rk-p-df) 0 0;
+      padding-right: var(--rk-p-df);
     }
   }
 

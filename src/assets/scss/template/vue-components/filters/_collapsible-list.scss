@@ -13,19 +13,23 @@
 
   @include element("title") {
     --rkts-justify-content: start;
+    --rkts-position: relative;
     --rkts-align-items: center;
+    --rkts-display: flex;
 
+    padding: var(--rk-p-df) var(--rk-p-lg) var(--rk-p-lg) 0;
     justify-content: var(--rkts-justify-content);
     align-items: var(--rkts-align-items);
-    padding: 0 var(--rk-p-lg) 0 0;
-    position: relative;
-    display: flex;
+    position: var(--rkts-position);
+    display: var(--rkts-display);
 
     .label {
-      padding: 0 var(--rk-p-df) 0 0;
+      padding-right: var(--rk-p-df);
     }
 
     &:after {
+      --rkts-right: 0;
+
       @extend %fontello;
 
       @include insert-transition(transform, .3s, ease-in-out, 0s);
@@ -33,8 +37,8 @@
       content: var(--rkts-collapse-icon);
       font-size: var(--rk-icon-size-sm);
       transform-origin: center;
+      right: var(--rkts-right);
       position: absolute;
-      right: 0;
     }
 
     @include adjoin("open") {
@@ -50,6 +54,6 @@
 
     max-height: var(--rkts-max-height);
     overflow: var(--rkts-overflow);
-    margin: 0 0 var(--rk-m-df);
+    margin-bottom: var(--rk-m-df);
   }
 }

@@ -7,12 +7,14 @@
 .rkts-refine-tag {
   --rkts-tag-bg: var(--rk-base-grey-lightest);
   --rkts-tag-text: var(--rk-text);
+  --rkts-align-items: center;
+  --rkts-display: inline-flex;
 
   margin: 0 var(--rk-m-xs) var(--rk-m-xs) 0;
+  align-items: var(--rkts-align-items);
   background: var(--rkts-tag-bg);
+  display: var(--rkts-display);
   padding: var(--rk-p-df);
-  display: inline-flex;
-  align-items: center;
 
   &:hover,
   &:focus {
@@ -27,7 +29,7 @@
   //============================================================================*/
 
   @include element("icon") {
-    margin: 0 var(--rk-m-sm) 0 0;
+    margin-right: var(--rk-m-sm);
     color: var(--rk-primary);
   }
 

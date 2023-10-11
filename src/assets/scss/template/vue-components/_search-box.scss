@@ -5,22 +5,30 @@
 //============================================================================*/
 
 .rkts-search-box {
+  --rkts-justify-content: start;
+  --rkts-flex-direction: column;
   --rkts-search-icon: "\e814";
+  --rkts-align-items: center;
+  --rkts-position: relative;
+  --rkts-display: flex;
 
-  margin: 0 0 var(--rk-m-df);
-  align-items: center;
-  position: relative;
-  display: flex;
+  justify-content: var(--rkts-justify-content);
+  align-items: var(--rkts-align-items);
+  position: var(--rkts-position);
+  margin-bottom: var(--rk-m-df);
+  display: var(--rkts-display);
 
   &:before {
+    --rkts-left: 0;
+
     @extend %fontello;
 
     font-size: var(--rk-icon-size-df);
     content: var(--rkts-search-icon);
     padding: 0 var(--rk-p-sm);
     color: var(--rk-primary);
+    left: var(--rkts-left);
     position: absolute;
-    left: 0;
   }
 
   /*==============================================================================

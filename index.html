@@ -28,24 +28,6 @@
         <hr />
 
         <div class="py-3">
-          <p class="rk-text rk-text--lead">Results Count:</p>
-          <div class="rk-card">
-            <rkts-results-count :count="results?.hits?.total?.value || 0" label="Showing" message="results"></rkts-results-count>
-          </div>
-        </div>
-
-        <hr />
-
-        <div class="py-3">
-          <p class="rk-text rk-text--lead">Search Box:</p>
-          <div class="rk-card">
-            <rkts-search-box v-model="search"></rkts-search-box>
-          </div>
-        </div>
-
-        <hr />
-
-        <div class="py-3">
           <p class="rk-text rk-text--lead">Collapsible List:</p>
           <div class="rk-card" style="max-width: 400px;">
             <rkts-collapsible-list v-model="filters" :options="response?.aggregations?.categories || []" title="Holiday Type"></rkts-collapsible-list>
@@ -75,7 +57,7 @@
         <div class="py-3">
           <p class="rk-text rk-text--lead">Range Slider:</p>
           <div class="rk-card">
-            <rkts-range-slider></rkts-range-slider>
+            <rkts-range-slider v-model="range"></rkts-range-slider>
           </div>
         </div>
 
@@ -84,7 +66,10 @@
         <div class="py-3">
           <p class="rk-text rk-text--lead">Chosen Date:</p>
           <div class="rk-card">
-            <rkts-chosen-date :date="new Date()" type="Vue"></rkts-chosen-date>
+            <p>User agent:</p>
+            <rkts-chosen-date v-model="dateFrom" style-opts="mb-3"></rkts-chosen-date>
+            <p>Vue date picker:</p>
+            <rkts-chosen-date v-model="dateTo" type="vue" style-opts="mb-3"></rkts-chosen-date>
           </div>
         </div>
 
@@ -93,7 +78,107 @@
         <div class="py-3">
           <p class="rk-text rk-text--lead">Result Card:</p>
 
-          <rkts-result-card :data="[{ title: 'Holiday Title' }]"></rkts-result-card>
+          <rkts-result-card :data="[{ name: 'Holiday Title' }]"></rkts-result-card>
+        </div>
+
+        <hr />
+
+        <div class="py-3">
+          <p class="rk-text rk-text--lead">Filters Panel:</p>
+
+          <rkts-filters-panel layout="horizontal">
+            <div class="rk-filters__facet">
+              <rkts-chosen-date v-model="dateFrom" style-opts="mb-3"></rkts-chosen-date>
+            </div>
+            <div>
+              <rkts-range-slider v-model="range"></rkts-range-slider>
+            </div>
+          </rkts-filters-panel>
+        </div>
+
+        <hr />
+
+        <div class="py-3">
+          <p class="rk-text rk-text--lead">Results Count:</p>
+          <div class="rk-card">
+            <rkts-results-count :count="results?.hits?.total?.value || 0" label="Showing" message="results"></rkts-results-count>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="py-3">
+          <p class="rk-text rk-text--lead">Search Box:</p>
+          <div class="rk-card">
+            <rkts-search-box v-model="search"></rkts-search-box>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="py-3">
+          <p class="rk-text rk-text--lead">Results:</p>
+          <div v-if="!results || results.hits && results.hits.hits.length === 0">
+            No Results Founds
+          </div>
+          <div v-else>
+            <rkts-results-panel>
+              <template v-for="(result, index) in results.hits.hits" :key="`result-${index}`">
+                <rkts-result-card v-slot="result" :data="result._source" :custom-card="true">
+                  <div class="example-card example-card--related w-100">
+                    <div class="example-card__image example-card__image--max-height mb-3">
+                      <img
+                        class="img-fluid"
+                        alt="Product Image"
+                        src="https://via.placeholder.com/450x250&text=..."
+                      />
+                    </div>
+                    <div class="example-card__body">
+                      <h6>{{ result.data.name }}</h6>
+                      <p v-if="result.data.locations.Country" class="example-text example-text--text-sm mb-1">
+                        <i class="example-card__icon fontello icon-sys-info"></i>
+                        <span>{{ result.data.locations.Country[0] }}</span>
+                        <span v-if="result.data.locations.Region">
+                         , {{ result.data.locations.Region[0] }}
+                       </span>
+                      </p>
+                      <p v-html="result.data.description" class="example-text example-text--text-df mb-1"></p>
+                    </div>
+                    <div class="example-card__info">
+                      <div class="info-item">
+                        <i class="example-icon example-icon--primary fontello icon-trek-and-walk"></i>
+                        <p class="example-bold m-0"><p>
+                      </div>
+                    </div>
+                    <div class="example-card__footer d-flex justify-content-between">
+                      <div>
+                        <p class="example-text example-text--text-md example-bold mb-1">
+                          x days from
+                        </p>
+                        <p class="example-text example-text--price mb-1">
+                          £xxx
+                          <span class="example-text example-text--text-sm example-text--default example-weight-normal">
+                           without flights
+                         </span>
+                        </p>
+                        <p class="example-text example-text--price mb-1">
+                          £xxx
+                          <span class="example-text example-text--text-sm example-text--default example-weight-normal">
+                           with flight
+                         </span>
+                        </p>
+                      </div>
+                      <div class="d-flex align-items-end">
+                        <button class="rk-btn example-btn">
+                          View
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </rkts-result-card>
+              </template>
+            </rkts-results-panel>
+          </div>
         </div>
 
       </div>
@@ -112,6 +197,9 @@
             search: ref(''),
             results: ref(),
             filters: ref({}),
+            range: ref(50),
+            dateFrom: ref(new Date()),
+            dateTo: ref(new Date())
           }
         },
 
@@ -134,7 +222,7 @@
             const response = await this.client.search({
               ccy: 'GBP',
               q: this.search,
-              ...filters,
+              // ...filters,
             })
 
             this.results = response

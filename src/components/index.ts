@@ -1,3 +1,7 @@
+export { default as FiltersPanel } from './FiltersPanel.vue'
+
+export { default as ResultsPanel } from './ResultsPanel.vue'
+
 export { default as SortBy } from './SortBy.vue'
 
 export { default as SearchBox } from './SearchBox.vue'
