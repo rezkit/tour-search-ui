@@ -8,7 +8,6 @@ import ListCheckbox from '@/components/elements/ListCheckbox.vue'
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps<{
   modelValue: boolean
-  showCount?: boolean
   styleOpts?: string
   title: string
   text: string
@@ -16,7 +15,6 @@ const props = defineProps<{
 // Main variables.
 //
 const styleOpts = toRef(props, 'styleOpts')
-const showCount = toRef(props, 'showCount')
 const title = toRef(props, 'title')
 const text = toRef(props, 'text')
 // Model.
@@ -36,9 +34,8 @@ const value = computed({
   <div class="rkts-description-list" :class="[styleOpts]">
     <div class="rkts-description-list__title">
       <ul class="rk-list rk-list--no-type">
-        <ListCheckbox v-model="value" :title="title"></ListCheckbox>
+        <ListCheckbox v-model="value" :title="title" :count="10"></ListCheckbox>
       </ul>
-      <span v-if="showCount">(40)</span>
     </div>
     <div class="rkts-description-list__text">
       {{ text }}

@@ -6,10 +6,12 @@ const emit = defineEmits(['update:modelValue'])
 const props = defineProps<{
   modelValue: boolean
   title: string
+  count?: number
 }>()
 // Main variables.
 //
 const title = toRef(props, 'title')
+const count = toRef(props, 'count')
 // Model.
 //
 const value = computed({
@@ -38,6 +40,7 @@ const value = computed({
     </div>
     <p class="rkts-list-checkbox__label">
       {{ title }}
+      <b v-if="count" class="rk-text rk-text--count">({{ count }})</b>
     </p>
   </li>
 </template>

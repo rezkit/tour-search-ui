@@ -62,7 +62,7 @@ const toggle = function toggle() {
       @click="toggle"
     >
       <ul class="rk-list rk-list--no-type">
-        <ListCheckbox v-model="value" :title="title"></ListCheckbox>
+        <ListCheckbox v-model="value" :title="title" :count="20"></ListCheckbox>
       </ul>
     </div>
     <div
