@@ -6,7 +6,7 @@
 
 .rkts-search-box {
   --rkts-justify-content: start;
-  --rkts-flex-direction: column;
+  --rkts-flex-flow: column wrap;
   --rkts-search-icon: "\e814";
   --rkts-align-items: center;
   --rkts-position: relative;

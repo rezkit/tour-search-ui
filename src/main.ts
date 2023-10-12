@@ -151,13 +151,16 @@ export const vue = (key: string, params?: ClientOptions) => ({
     Vue.component('rkts-results-panel', components.ResultsPanel)
     Vue.component('rkts-descriptive-list', components.DescriptiveList)
     Vue.component('rkts-collapsible-list', components.CollapsibleList)
+    Vue.component('rkts-list-checkbox', components.ListCheckbox)
     Vue.component('rkts-range-slider', components.RangeSlider)
     Vue.component('rkts-chosen-date', components.ChosenDate)
+    Vue.component('rkts-tags-panel', components.TagsPanel)
     Vue.component('rkts-refine-tag', components.RefineTag)
     Vue.component('rkts-results-count', components.ResultsCount)
     Vue.component('rkts-result-card', components.ResultCard)
+    Vue.component('rkts-clear-button', components.ClearButton)
     Vue.component('rkts-search-box', components.SearchBox)
     Vue.component('rkts-sort-by', components.SortBy)
     Vue.provide(SEARCH_CLIENT, new Client(key, params))
-  }
+  },
 })

@@ -1,0 +1,55 @@
+/*==============================================================================
+// File:        _list-checkbox.scss
+// Package:     Tour Search UI - Vue3 - RezKit
+// Synopsis:    List checkbox component - SASS
+//============================================================================*/
+
+.rkts-list-checkbox {
+  align-items: center;
+  display: flex;
+
+  &::marker {
+    content: none;
+  }
+
+  /*==============================================================================
+  // Elements
+  //============================================================================*/
+
+  @include element("label") {
+    padding-right: var(--rk-p-df);
+    margin: 0;
+  }
+
+  @include element("choice") {
+    --rkts-border: 2px solid var(--rk-base-grey);
+    --rkts-font-family: fontello;
+    --rkts-border-radius: 2px;
+    --rkts-outer-size: 20px;
+    --rkts-inner-size: 16px;
+    --rkts-content: "";
+    --rkts-left: 2px;
+    --rkts-top: 2px;
+
+    border-radius: var(--rk-border-radius-xs);
+    height: var(--rkts-outer-size);
+    width: var(--rkts-outer-size);
+    margin-right: var(--rk-m-sm);
+    border: var(--rkts-border);
+    position: relative;
+
+    @include adjoin("active") {
+      &:before {
+        border-radius: var(--rkts-border-radius);
+        font-family: var(--rkts-font-family);
+        height: var(--rkts-inner-size);
+        width: var(--rkts-inner-size);
+        background: var(--rk-primary);
+        content: var(--rkts-content);
+        left: var(--rkts-left);
+        top: var(--rkts-top);
+        position: absolute;
+      }
+    }
+  }
+}

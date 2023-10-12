@@ -11,7 +11,7 @@ const layout = toRef(props, 'layout')
 </script>
 
 <template>
-  <div class="rk-filters" :class="{ 'rk-filters--horizontal': layout === 'horizontal'}">
+  <div class="rk-results" :class="{ 'rk-results--fluid': layout === 'fluid' }">
     <slot></slot>
   </div>
 </template>

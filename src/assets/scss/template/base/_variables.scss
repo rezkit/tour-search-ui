@@ -65,7 +65,7 @@ $shadow-dark: rgba($base-black, .5);
 $shadow: rgba($base-black, .15);
 $text-shadow: rgba($base-black, .85);
 $primary-border: rgba($primary, .2);
-$primary-bg: rgba($primary, .1);
+$primary-bg: #EAD8E8;
 $primary-card-bg: rgba($primary, .3);
 
 /*------------------------------------------------------------------------------
@@ -107,7 +107,7 @@ $icon-size-xxs: 1rem; /*-- 15px --*/
 $p-df: 15px;
 $p-xl: 50px;
 $p-lg: 30px;
-$p-md: 20px;
+$p-md: 25px;
 $p-sm: 10px;
 $p-xs: 5px;
 
@@ -169,6 +169,7 @@ $z-index-bottom: 5;
   --rk-text-shadow: #{$text-shadow};
   --rk-text-lighter: #{$text-lighter};
   --rk-text-light: #{$text-light};
+  --rk-text-dark: #{$text-dark};
   --rk-text: #{$text};
   // Colours
   --rk-base-green: #{$base-green};

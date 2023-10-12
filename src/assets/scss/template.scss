@@ -16,14 +16,15 @@
 @import "template/components/icon";
 
 /*-- Vue component styles --*/
-@import "template/vue-components/sort-by";
-@import "template/vue-components/search-box";
-@import "template/vue-components/results-count";
-@import "template/vue-components/result-card";
+@import "template/vue-components/elements/sort-by";
+@import "template/vue-components/elements/search-box";
+@import "template/vue-components/elements/results-count";
+@import "template/vue-components/elements/result-card";
+@import "template/vue-components/elements/refine-tag";
+@import "template/vue-components/elements/list-checkbox";
 @import "template/vue-components/filters/descriptive-list";
 @import "template/vue-components/filters/collapsible-list";
 @import "template/vue-components/filters/range-slider";
-@import "template/vue-components/filters/refine-tag";
 @import "template/vue-components/filters/chosen-date";
 
 /*-- Generic styles --*/
@@ -31,5 +32,6 @@
 
 /*-- Layout styles --*/
 @import "template/layout/body";
+@import "template/layout/tags";
 @import "template/layout/filters";
 @import "template/layout/results";

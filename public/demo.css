@@ -7,3 +7,7 @@
 .rkts-description-list {
     --rkts-max-witdth: 400px;
 }
+
+.rkts-result-card {
+    --rkts-max-witdth: 400px;
+}

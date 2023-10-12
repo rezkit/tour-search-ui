@@ -6,13 +6,13 @@
 
 .rk-filters {
   --rkts-justify-content: start;
-  --rkts-flex-direction: column;
+  --rkts-flex-flow: column wrap;
   --rkts-align-items: center;
   --rkts-display: flex;
 
   justify-content: var(--rkts-justify-content);
-  flex-direction: var(--rkts-flex-direction);
   align-items: var(--rkts-align-items);
+  flex-flow: var(--rkts-flex-flow);
   display: var(--rkts-display);
 
   /*==============================================================================
@@ -20,7 +20,9 @@
   //============================================================================*/
 
   @include element("facet") {
-    padding: var(--rk-df);
+    background: var(--rk-base-white);
+    margin-right: var(--rk-p-df);
+    padding: var(--rk-p-df);
     width: 100%;
   }
 
@@ -30,6 +32,7 @@
 
   @include modifier("horizontal") {
     --rkts-justify-content: space-evenly;
-    --rkts-flex-direction: row;
+    --rkts-align-items: start;
+    --rkts-flex-flow: row;
   }
 }

@@ -30,7 +30,23 @@
         <div class="py-3">
           <p class="rk-text rk-text--lead">Collapsible List:</p>
           <div class="rk-card" style="max-width: 400px;">
-            <rkts-collapsible-list v-model="filters" :options="response?.aggregations?.categories || []" title="Holiday Type"></rkts-collapsible-list>
+            <rkts-collapsible-list
+              v-model="filters.holiday"
+              :options="response?.aggregations?.categories || []"
+              title="Holiday Type"
+              :open="true"
+            >
+              <rkts-list-checkbox v-model="filters.trek" title="Trek"></rkts-list-checkbox>
+            </rkts-collapsible-list>
+            <rkts-collapsible-list
+              v-model="filters.activities"
+              :options="response?.aggregations?.categories || []"
+              title="Activities"
+              :open="false"
+            >
+              <rkts-list-checkbox v-model="filters.cycling" title="Cycling"></rkts-list-checkbox>
+            </rkts-collapsible-list>
+            <rkts-clear-button :filters="filters.holiday" style-opts="mt-3"></rkts-clear-button>
           </div>
         </div>
 
@@ -39,7 +55,12 @@
         <div class="py-3">
           <p class="rk-text rk-text--lead">Descriptive List:</p>
           <div class="rk-card" style="max-width: 400px;">
-            <rkts-descriptive-list title="Grade 1" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></rkts-descriptive-list>
+            <rkts-descriptive-list
+              v-model="filters.grade"
+              title="Grade 1"
+              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            ></rkts-descriptive-list>
+            <rkts-clear-button :filters="filters.grade" style-opts="mt-3"></rkts-clear-button>
           </div>
         </div>
 
@@ -48,7 +69,10 @@
         <div class="py-3">
           <p class="rk-text rk-text--lead">Refine Tag:</p>
           <div class="rk-card">
-            <rkts-refine-tag filter-value="$0 - $1000"></rkts-refine-tag>
+            <rkts-tags-panel>
+              <rkts-refine-tag filter-value="$0 - $1000"></rkts-refine-tag>
+              <rkts-refine-tag filter-value="$0 - $1000"></rkts-refine-tag>
+            </rkts-tags-panel>
           </div>
         </div>
 
@@ -90,7 +114,7 @@
             <div class="rk-filters__facet">
               <rkts-chosen-date v-model="dateFrom" style-opts="mb-3"></rkts-chosen-date>
             </div>
-            <div>
+            <div class="rk-filters__facet">
               <rkts-range-slider v-model="range"></rkts-range-slider>
             </div>
           </rkts-filters-panel>
@@ -122,10 +146,15 @@
             No Results Founds
           </div>
           <div v-else>
-            <rkts-results-panel>
+            <rkts-results-panel layout="fluid">
               <template v-for="(result, index) in results.hits.hits" :key="`result-${index}`">
-                <rkts-result-card v-slot="result" :data="result._source" :custom-card="true">
-                  <div class="example-card example-card--related w-100">
+                <rkts-result-card
+                  v-slot="result"
+                  :data="result._source"
+                  :custom-card="true"
+                  style="--rkts-max-width: 400px;"
+                >
+                  <div class="rk-card example-card example-card--related w-100">
                     <div class="example-card__image example-card__image--max-height mb-3">
                       <img
                         class="img-fluid"
@@ -196,7 +225,13 @@
             sort: ref(['name|asc']),
             search: ref(''),
             results: ref(),
-            filters: ref({}),
+            filters: ref({
+              activities: false,
+              holiday: false,
+              cycling: false,
+              trek: false,
+              grade: false
+            }),
             range: ref(50),
             dateFrom: ref(new Date()),
             dateTo: ref(new Date())

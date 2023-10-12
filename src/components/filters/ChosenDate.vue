@@ -36,7 +36,13 @@ const value = computed({
       :close-on-auto-apply="false"
       format="dd MMM yyyy"
     />
-    <input v-else v-model="value" class="rk-select rk-select--user-agent" :class="[styleOpts]" type="date">
+    <input
+      v-else
+      v-model="value"
+      class="rk-select rk-select--user-agent"
+      :class="[styleOpts]"
+      type="date"
+    />
   </div>
 </template>
 

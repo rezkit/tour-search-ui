@@ -1,12 +1,12 @@
 /*==============================================================================
-// File:        _results.scss
+// File:        _results-count.scss
 // Package:     Tour Search UI - Vue3 - RezKit
-// Synopsis:    Main result styles for the UI - SASS
+// Synopsis:    Results count component - SASS
 //============================================================================*/
 
-.rk-results {
+.rkts-results-count {
   --rkts-justify-content: start;
-  --rkts-flex-flow: column wrap;
+  --rkts-flex-flow: row wrap;
   --rkts-align-items: center;
   --rkts-display: flex;
 
@@ -16,12 +16,19 @@
   display: var(--rkts-display);
 
   /*==============================================================================
-  // Modifiers
+  // Elements
   //============================================================================*/
 
-  @include modifier("fluid") {
-    --rkts-justify-content: space-between;
-    --rkts-flex-flow: row wrap;
-    --rkts-align-items: start;
+  @include element("label") {
+    margin-right: var(--rk-m-xs);
+  }
+
+  @include element("count") {
+    font-weight: var(--rk-font-bold);
+    margin-right: var(--rk-m-xs);
+  }
+
+  @include element("message") {
+    margin-right: var(--rk-m-xs);
   }
 }

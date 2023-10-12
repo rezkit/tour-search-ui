@@ -6,15 +6,13 @@
 
 .rkts-result-card {
   --rkts-justify-content: start;
-  --rkts-flex-direction: row;
   --rkts-align-items: center;
   --rkts-max-width: 100%;
   --rkts-display: flex;
 
   justify-content: var(--rkts-justify-content);
-  flex-direction: var(--rkts-flex-direction);
   align-items: var(--rkts-align-items);
   max-width: var(--rkts-max-width);
-  margin-bottom: var(--rk-m-df);
+  margin-bottom: var(--rk-m-lg);
   display: var(--rkts-display);
 }

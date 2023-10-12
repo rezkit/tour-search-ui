@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { computed, inject, ref } from 'vue'
-import { Client, SEARCH_CLIENT } from '../main';
+import { Client, SEARCH_CLIENT } from '@/main'
+// eslint-disable-next-line vue/no-dupe-keys
 import debounce from 'lodash-es/debounce'
 // Properties and events.
 //
 const emit = defineEmits(['update:model-value'])
 const props = defineProps({
   modelValue: {
-    type: String
+    type: String,
   },
 
   enableSuggestions: {
@@ -19,8 +20,8 @@ const props = defineProps({
   debounce: {
     type: Number,
     required: false,
-    default: 200
-  }
+    default: 200,
+  },
 })
 // Main variables.
 //
@@ -35,24 +36,29 @@ const value = computed({
 
   set(value: string) {
     emit('update:model-value', value)
-  }
+  },
 })
 // Functions.
 //
 debounce(async () => {
-  suggestions.value = await client?.suggest({ ccy: 'GBP', q: value.value || '' })
+  suggestions.value = await client?.suggest({
+    ccy: 'GBP',
+    q: value.value || '',
+  })
 }, props.debounce)
-
 </script>
 
 <template>
-    <div class="rkts-search-box">
-        <input type="search" class="rk-input rk-input--search-box" v-model="value" />
-        <div class="rkts-search-box__suggestions">
-          <ul class="rk-list" v-if="enableSuggestions">
-          </ul>
-        </div>
+  <div class="rkts-search-box">
+    <input
+      type="search"
+      class="rk-input rk-input--search-box"
+      v-model="value"
+    />
+    <div class="rkts-search-box__suggestions">
+      <ul class="rk-list" v-if="enableSuggestions"></ul>
     </div>
+  </div>
 </template>
 
 <style lang="scss"></style>

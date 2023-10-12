@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { toRef, computed } from "vue";
+import { toRef, computed } from 'vue'
 import Slider from '@vueform/slider'
 // Properties and events.
 //

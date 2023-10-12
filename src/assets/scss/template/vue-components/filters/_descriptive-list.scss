@@ -35,6 +35,9 @@
   }
 
   @include element("line-break") {
+    border: none;
+    border-top: 1px solid var(--rk-base-grey);
     margin: var(--rk-m-df) 0;
+    outline: none;
   }
 }

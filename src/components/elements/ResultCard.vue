@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { toRef } from "vue";
+import { toRef } from 'vue'
 // Properties and events.
 //
 const props = defineProps<{
@@ -19,7 +19,11 @@ const data = toRef(props, 'data')
     </template>
     <div v-else class="rk-card">
       <div class="rk-card__image rk-card__image--max-height">
-        <img src="https://placehold.co/325x200" class="img-fluid rounded" alt="Placeholder">
+        <img
+          src="https://placehold.co/325x200"
+          class="img-fluid rounded"
+          alt="Placeholder"
+        />
       </div>
       <div class="rk-card__body">
         <details>

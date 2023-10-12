@@ -55,22 +55,17 @@ const value = computed({
       <option v-else disabled value="default-option">
         {{ setMessage }}
       </option>
-      <optgroup v-if="customOptions" :label="groupLabel ? `${groupLabel}:` : `Options:`">
+      <optgroup
+        v-if="customOptions"
+        :label="groupLabel ? `${groupLabel}:` : `Options:`"
+      >
         <slot></slot>
       </optgroup>
       <optgroup v-else :label="groupLabel ? `${groupLabel}:` : `Options:`">
-        <option value="BEST_SELLER">
-          Best Seller
-        </option>
-        <option value="PRICE_ASC">
-          Price (Ascending)
-        </option>
-        <option value="PRICE_DESC">
-          Price (Descending)
-        </option>
-        <option value="DEPARTURES_ASC">
-          Departures (Soonest First)
-        </option>
+        <option value="BEST_SELLER">Best Seller</option>
+        <option value="PRICE_ASC">Price (Ascending)</option>
+        <option value="PRICE_DESC">Price (Descending)</option>
+        <option value="DEPARTURES_ASC">Departures (Soonest First)</option>
       </optgroup>
     </select>
   </div>

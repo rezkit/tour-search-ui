@@ -20,3 +20,8 @@ body {
   color: var(--rk-text);
   height: 100%;
 }
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
