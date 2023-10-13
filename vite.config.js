@@ -18,10 +18,12 @@ export default defineConfig({
 
     build: {
         copyPublicDir: false,
+        sourcemap: true,
         lib: {
             name: 'tour_search_ui',
             entry: resolve(__dirname, 'src/main.ts'),
             fileName: 'toursui',
+            formats: ['es', 'cjs'],
         },
         rollupOptions: {
             input: {
