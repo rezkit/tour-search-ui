@@ -42,7 +42,9 @@ export default defineConfig({
         alias: {
             '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
             '@': resolve(__dirname, 'src'),
-            'vue': 'vue/dist/vue.esm-bundler.js'
+            'vue': 'vue/dist/vue.esm-bundler.js',
+            $fonts: resolve('/src/assets/fonts'),
+            $images: resolve('/src/assets/images')
         }
     },
     css: {

@@ -243,5 +243,5 @@ $z-index-bottom: 5;
   --rk-z-index-middle: #{$z-index-middle};
   --rk-z-index-bottom: #{$z-index-bottom};
   // Other
-  --rk-select-image: url("../../../images/sys-dropdown.svg");
+  --rk-select-image: url("$images/sys-dropdown.svg");
 }
