@@ -5,7 +5,6 @@ import * as components from './components'
 export * as Filters from './filters'
 import { SearchRequest, SearchResponse, SuggestResponse } from './search'
 
-import '~bootstrap/dist/css/bootstrap-utilities.css'
 import './assets/scss/template.scss'
 
 // ToDO: Testable data!
