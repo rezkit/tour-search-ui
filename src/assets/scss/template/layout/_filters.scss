@@ -20,7 +20,10 @@
   //============================================================================*/
 
   @include element("facet") {
+    --rkts-min-width: 300px;
+
     background: var(--rk-base-white);
+    min-width: var(--rkts-min-width);
     margin-right: var(--rk-p-df);
     padding: var(--rk-p-df);
     width: 100%;
