@@ -31,15 +31,15 @@ const value = computed({
 </script>
 
 <template>
-  <div class="rkts-description-list" :class="[styleOpts]">
-    <div class="rkts-description-list__title">
+  <div class="rkts-descriptive-list" :class="[styleOpts]">
+    <div class="rkts-descriptive-list__title">
       <ul class="rk-list rk-list--no-type">
         <ListCheckbox v-model="value" :title="title" :count="10"></ListCheckbox>
       </ul>
     </div>
-    <div class="rkts-description-list__text">
+    <div class="rkts-descriptive-list__text">
       {{ text }}
-      <hr class="rkts-description-list__line-break" />
+      <hr class="rkts-descriptive-list__line-break" />
     </div>
   </div>
 </template>
