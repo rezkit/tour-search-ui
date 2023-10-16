@@ -36,6 +36,14 @@
   //============================================================================*/
 
   @include element("suggestions") {
+    background: var(--rk-base-white);
+    position: absolute;
+    display: none;
     margin: 0;
+    top: 100%;
+
+    @include adjoin("show") {
+      display: block;
+    }
   }
 }
