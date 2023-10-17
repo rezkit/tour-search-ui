@@ -7,4 +7,7 @@
 .rkts-range-slider {
   --slider-connect-bg: var(--rk-primary);
   --slider-tooltip-bg: var(--rk-primary);
+
+  padding-top: var(--rk-p-xl);
+  margin: 0 var(--rk-p-sm);
 }
