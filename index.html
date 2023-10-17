@@ -82,7 +82,7 @@
         <div class="py-3">
           <p class="rk-text rk-text--lead">Range Slider:</p>
           <div class="rk-card">
-            <rkts-range-slider v-model="range"></rkts-range-slider>
+            <rkts-range-slider v-model="range" :min="200" :max="2000" :format="{ prefix: '$' }"></rkts-range-slider>
           </div>
         </div>
 
@@ -233,7 +233,7 @@
               trek: false,
               grade: false
             }),
-            range: ref(50),
+            range: ref([300, 1000]),
             dateFrom: ref(new Date()),
             dateTo: ref(new Date())
           }
