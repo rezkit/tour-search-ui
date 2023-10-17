@@ -5,16 +5,18 @@
 //============================================================================*/
 
 .rk-select {
+  --rkts-background-colour: transparent;
   --rkts-background-size: 22px;
 
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  background-color: var(--rkts-background-colour);
   background-size: var(--rkts-background-size);
   border-radius: var(--rk-border-radius-df);
   background-image: var(--rk-select-image);
-  background-color: var(--rk-base-white);
   border: 1px solid var(--rk-base-grey);
   font-weight: var(--rk-font-normal);
   font-size: var(--rk-font-size-df);
+  z-index: var(--rk-z-index-df);
   background-repeat: no-repeat;
   background-clip: padding-box;
   background-position: right;
@@ -28,7 +30,7 @@
 
   &:focus {
     box-shadow: 0 0 0 .25rem var(--rk-main-border-color);
-    background-color: var(--rk-base-white);
+    background-color: var(--rkts-background-colour);
     border-color: var(--rk-primary-light);
     color: var(--rk-text);
     outline: 0;

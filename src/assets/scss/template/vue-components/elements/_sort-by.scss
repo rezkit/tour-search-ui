@@ -5,6 +5,7 @@
 //============================================================================*/
 
 .rkts-sort-by {
+  --rkts-background-colour: var(--rk-base-white);
   --rkts-select-message: "Sort By:";
   --rkts-justify-content: start;
   --rkts-flex-flow: row wrap;
@@ -12,6 +13,7 @@
   --rkts-display: flex;
 
   justify-content: var(--rkts-justify-content);
+  background: var(--rkts-background-colour);
   align-items: var(--rkts-align-items);
   flex-flow: var(--rkts-flex-flow);
   display: var(--rkts-display);
@@ -19,8 +21,8 @@
 
   &:before {
     content: var(--rkts-select-message);
+    z-index: var(--rk-z-index-bottom);
     font-weight: var(--rk-font-bold);
-    z-index: var(--rk-z-index-df);
     padding: 0 var(--rk-p-sm);
     position: absolute;
     display: block;
