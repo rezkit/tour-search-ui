@@ -32,7 +32,7 @@ const props = defineProps({
 // Main variables.
 //
 const client = inject<Client>(SEARCH_CLIENT)
-const suggestions = ref()
+const suggestions: any = ref(null)
 // Model.
 //
 const value = computed({
@@ -59,18 +59,18 @@ const chosenSuggestion = function chosenSuggestion(
 watch(
   value,
   debounce(async () => {
-    if (props.enableSuggestions) {
+    if (props.enableSuggestions && value.value.length > 0) {
       const resp = await client?.suggest({
         ccy: 'GBP',
         q: value.value || '',
       })
       if (resp) {
         suggestions.value = resp
-      } else {
-        suggestions.value = null
       }
+    } else {
+      suggestions.value = null
     }
-  }, 500)
+  }, props.debounce)
 )
 </script>
 

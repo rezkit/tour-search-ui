@@ -249,7 +249,11 @@
         watch: {
           // Run a search whenever the search term changes
           search(term, oldTerm) {
-            this.runSearch();
+            if (term) {
+              this.runSearch();
+            } else {
+              this.clearSearch()
+            }
           }
         },
 
@@ -257,9 +261,12 @@
           async runSearch() {
             this.results = await this.client.search({
               ccy: 'GBP',
-              q: this.search,
+              q: this.search || '',
               // ...filters,
             })
+          },
+          clearSearch() {
+            this.results = null
           }
         }
       })
