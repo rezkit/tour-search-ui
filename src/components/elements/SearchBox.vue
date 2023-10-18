@@ -11,6 +11,12 @@ const props = defineProps({
     type: String,
   },
 
+  placeholder: {
+    type: String,
+    required: false,
+    default: 'Enter keyword',
+  },
+
   enableSuggestions: {
     type: Boolean,
     required: false,
@@ -51,9 +57,10 @@ debounce(async () => {
 <template>
   <div class="rkts-search-box">
     <input
+      v-model="value"
       type="search"
       class="rk-input rk-input--search-box"
-      v-model="value"
+      :placeholder="placeholder"
     />
     <div class="rkts-search-box__suggestions">
       <ul class="rk-list" v-if="enableSuggestions"></ul>
