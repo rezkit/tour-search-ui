@@ -36,11 +36,17 @@
   //============================================================================*/
 
   @include element("suggestions") {
+    --rkts-box-shadow: 0, 0, 15px, -2px, var(--rk-box-shadow);
+
+    border: 1px solid var(--rk-main-border-color);
     background: var(--rk-base-white);
+    padding: var(--rk-p-df);
     position: absolute;
     display: none;
     margin: 0;
     top: 100%;
+    right: 0;
+    left: 0;
 
     @include adjoin("show") {
       display: block;

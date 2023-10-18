@@ -29,4 +29,20 @@
       display: inline-block;
     }
   }
+
+  @include modifier("suggestion") {
+    border-bottom: 1px solid var(--rk-base-grey);
+    padding-bottom: var(--rk-p-df);
+    margin-bottom: var(--rk-p-df);
+
+    li {
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        font-weight: var(--rk-font-bold);
+        color: var(--rk-primary);
+      }
+    }
+  }
 }
