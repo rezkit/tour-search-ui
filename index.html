@@ -255,13 +255,11 @@
 
         methods: {
           async runSearch() {
-            const response = await this.client.search({
+            this.results = await this.client.search({
               ccy: 'GBP',
               q: this.search,
               // ...filters,
             })
-
-            this.results = response
           }
         }
       })
