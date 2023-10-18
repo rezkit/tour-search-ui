@@ -3,6 +3,9 @@ import { computed, inject, ref, watch } from 'vue'
 import { Client, SEARCH_CLIENT } from '@/main'
 // eslint-disable-next-line vue/no-dupe-keys
 import debounce from 'lodash-es/debounce'
+// Components.
+//
+import SearchSuggestion from '@/components/elements/SearchSuggestion.vue'
 // Properties and events.
 //
 const emit = defineEmits(['update:model-value', 'process:chosen-suggestion'])
@@ -33,6 +36,8 @@ const props = defineProps({
 //
 const client = inject<Client>(SEARCH_CLIENT)
 const suggestions: any = ref(null)
+const visible = ref(false)
+const searchInput = ref()
 // Model.
 //
 const value = computed({
@@ -56,10 +61,19 @@ const chosenSuggestion = function chosenSuggestion(
   })
 }
 
+const hideSuggestions = function hideSuggestions() {
+  visible.value = false
+}
+
+const showSuggestions = function hideSuggestions() {
+  visible.value = true
+}
+
 watch(
   value,
   debounce(async () => {
     if (props.enableSuggestions && value.value.length > 0) {
+      showSuggestions()
       const resp = await client?.suggest({
         ccy: 'GBP',
         q: value.value || '',
@@ -68,6 +82,7 @@ watch(
         suggestions.value = resp
       }
     } else {
+      hideSuggestions()
       suggestions.value = null
     }
   }, props.debounce)
@@ -77,96 +92,45 @@ watch(
 <template>
   <div class="rkts-search-box">
     <input
+      ref="searchInput"
       v-model="value"
       type="search"
       class="rk-input rk-input--search-box"
       :placeholder="placeholder"
+      @focusout="hideSuggestions"
     />
     <div
       v-if="enableSuggestions"
       class="rkts-search-box__suggestions"
-      :class="{ show: suggestions }"
+      :class="{ show: suggestions && visible }"
     >
-      <ul
-        v-if="
-          suggestions &&
-          suggestions['category'][0].options &&
-          suggestions['category'][0].options.length > 0
-        "
-        class="rk-list rk-list--no-type rk-list--suggestion"
-      >
-        <li>
-          <p class="rk-text rk-text--lead">Categories:</p>
-        </li>
-        <template
-          v-for="(category, i) in suggestions['category'][0].options"
-          :key="`category-suggestion-${i}}`"
-        >
-          <li @click="chosenSuggestion(category.text, 'category')">
-            {{ category.text }}
-          </li>
-        </template>
-      </ul>
-      <ul
-        v-if="
-          suggestions &&
-          suggestions['location'][0].options &&
-          suggestions['location'][0].options.length > 0
-        "
-        class="rk-list rk-list--no-type rk-list--suggestion"
-      >
-        <li>
-          <p class="rk-text rk-text--lead">Locations:</p>
-        </li>
-        <template
-          v-for="(location, i) in suggestions['location'][0].options"
-          :key="`location-suggestion-${i}}`"
-        >
-          <li @click="chosenSuggestion(location.text, 'location')">
-            {{ location.text }}
-          </li>
-        </template>
-      </ul>
-      <ul
-        v-if="
-          suggestions &&
-          suggestions['name'][0].options &&
-          suggestions['name'][0].options.length > 0
-        "
-        class="rk-list rk-list--no-type rk-list--suggestion"
-      >
-        <li>
-          <p class="rk-text rk-text--lead">Tour Names:</p>
-        </li>
-        <template
-          v-for="(name, i) in suggestions['name'][0].options"
-          :key="`name-suggestion-${i}}`"
-        >
-          <li @click="chosenSuggestion(name.text, 'name')">
-            {{ name.text }}
-          </li>
-        </template>
-      </ul>
-      <ul
-        v-if="
-          suggestions &&
-          suggestions['x_code'][0].options &&
-          suggestions['x_code'][0].options.length > 0
-        "
-        class="rk-list rk-list--no-type rk-list--suggestion"
-      >
-        <li>
-          <p class="rk-text rk-text--lead">Tour Codes:</p>
-        </li>
-        <template
-          v-for="(xcode, i) in suggestions['x_code'][0].options"
-          :key="`xcode-suggestion-${i}}`"
-        >
-          <li @click="chosenSuggestion(xcode.text, 'x_code')">
-            {{ xcode.text }}
-          </li>
-        </template>
-      </ul>
+      <SearchSuggestion
+        title="Categories"
+        :suggestions="suggestions"
+        type="category"
+        @process:chosen-suggestion="chosenSuggestion"
+      ></SearchSuggestion>
+
+      <SearchSuggestion
+        title="Locations"
+        :suggestions="suggestions"
+        type="location"
+        @process:chosen-suggestion="chosenSuggestion"
+      ></SearchSuggestion>
+
+      <SearchSuggestion
+        title="Tour Names"
+        :suggestions="suggestions"
+        type="name"
+        @process:chosen-suggestion="chosenSuggestion"
+      ></SearchSuggestion>
+
+      <SearchSuggestion
+        title="Tour Codes"
+        :suggestions="suggestions"
+        type="x_code"
+        @process:chosen-suggestion="chosenSuggestion"
+      ></SearchSuggestion>
     </div>
   </div>
 </template>

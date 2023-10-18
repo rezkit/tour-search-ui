@@ -35,7 +35,7 @@
     padding-bottom: var(--rk-p-df);
     margin-bottom: var(--rk-p-df);
 
-    li {
+    li:not(.title) {
       cursor: pointer;
 
       &:hover,
