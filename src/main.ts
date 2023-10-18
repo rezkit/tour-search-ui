@@ -1,6 +1,4 @@
 import { z } from 'zod'
-import { type App } from 'vue'
-//import { stringify as qsEncode } from 'qs'
 import * as components from './components'
 export * as Filters from './filters'
 import { SearchRequest, SearchResponse, SuggestResponse } from './search'
