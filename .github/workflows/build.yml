@@ -1,0 +1,42 @@
+name: "Package Build"
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'src/**'
+
+jobs:
+  build:
+    name: 'Build'
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: 'Setup node/npm'
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.0.0'
+
+      - name: 'Cache Dependencies'
+        id: cache-npm
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: 'Install Dependencies'
+        run: npm install -d
+      
+      - name: Build Package
+        run: npm run build
+
+      - name: Save artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: toursui
+          path: dist/
