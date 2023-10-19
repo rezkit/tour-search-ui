@@ -1,0 +1,28 @@
+/*==============================================================================
+// File:        _list-container.scss
+// Package:     Tour Search UI - Vue3 - RezKit
+// Synopsis:    List container component - SASS
+//============================================================================*/
+
+.rkts-list-container {
+  position: relative;
+
+  /*==============================================================================
+  // Modifiers
+  //============================================================================*/
+
+  @include modifier("deeper") {
+    padding-left: var(--rk-p-md);
+
+    &:before {
+      background: var(--rk-base-grey);
+      position: absolute;
+      display: block;
+      height: 100%;
+      content: "";
+      width: 1px;
+      left: 10px;
+      top: 0;
+    }
+  }
+}

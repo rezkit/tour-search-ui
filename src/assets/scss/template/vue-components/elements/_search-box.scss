@@ -40,6 +40,7 @@
 
     border: 1px solid var(--rk-main-border-color);
     background: var(--rk-base-white);
+    z-index: var(--rk-z-index-top);
     padding: var(--rk-p-df);
     position: absolute;
     display: none;

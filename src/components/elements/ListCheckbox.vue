@@ -27,21 +27,24 @@ const value = computed({
 
 <template>
   <li class="rkts-list-checkbox">
-    <div
-      class="rkts-list-checkbox__choice"
-      :class="{ active: value }"
-      @click.stop
-    >
-      <input
-        v-model="value"
-        class="rk-input rk-input--checkbox"
-        type="checkbox"
-      />
+    <div class="rkts-list-checkbox__container">
+      <div
+        class="rkts-list-checkbox__choice"
+        :class="{ active: value }"
+        @click.stop
+      >
+        <input
+          v-model="value"
+          class="rk-input rk-input--checkbox"
+          type="checkbox"
+        />
+      </div>
+      <p class="rkts-list-checkbox__label">
+        {{ title }}
+        <b v-if="count" class="rk-text rk-text--count">({{ count }})</b>
+      </p>
     </div>
-    <p class="rkts-list-checkbox__label">
-      {{ title }}
-      <b v-if="count" class="rk-text rk-text--count">({{ count }})</b>
-    </p>
+    <slot></slot>
   </li>
 </template>
 

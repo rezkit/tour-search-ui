@@ -33,7 +33,7 @@
           <div class="rk-card" style="max-width: 400px;">
             <rkts-collapsible-list
               v-model="filters.holiday"
-              :options="response?.aggregations?.categories || []"
+              :sub-options="[]"
               title="Holiday Type"
               :open="true"
             >
@@ -41,7 +41,7 @@
             </rkts-collapsible-list>
             <rkts-collapsible-list
               v-model="filters.activities"
-              :options="response?.aggregations?.categories || []"
+              :sub-options="[]"
               title="Activities"
               :open="false"
             >
@@ -147,6 +147,22 @@
             No Results Founds
           </div>
           <div v-else>
+            <div class="rk-card mb-5">
+              <template v-for="category in results?.aggregations?.categories.buckets" :key="category.key">
+                <rkts-collapsible-list
+                  v-model="filters.holiday"
+                  :sub-options="category.children || []"
+                  :title="category.key"
+                  :count="category.doc_count"
+                  :open="true"
+                >
+                  <template v-for="(child, i) in category.children" :key="`${child.key}-${i}`">
+                    <rkts-list-checkbox :title="child.key" :count="child.doc_count"></rkts-list-checkbox>
+                  </template>
+                </rkts-collapsible-list>
+              </template>
+            </div>
+
             <rkts-results-panel layout="fluid">
               <template v-for="(result, index) in results.hits.hits" :key="`result-${index}`">
                 <rkts-result-card
@@ -250,7 +266,7 @@
           // Run a search whenever the search term changes
           search(term, oldTerm) {
             if (term) {
-              this.runSearch();
+              this.runSearch()
             } else {
               this.clearSearch()
             }
@@ -259,15 +275,20 @@
 
         methods: {
           async runSearch() {
-            this.results = await this.client.search({
-              ccy: 'GBP',
-              q: this.search || '',
-              // ...filters,
-            })
+            let params = {}
+            params.ccy = 'GBP'
+            if (this.search && this.search.length > 2) {
+              params.q = this.search
+            }
+            this.results = await this.client.search(params)
           },
           clearSearch() {
             this.results = null
           }
+        },
+
+        mounted() {
+          this.runSearch()
         }
       })
 

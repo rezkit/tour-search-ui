@@ -148,6 +148,7 @@ export const vue = (key: string, params?: ClientOptions) => ({
     Vue.component('rkts-results-panel', components.ResultsPanel)
     Vue.component('rkts-descriptive-list', components.DescriptiveList)
     Vue.component('rkts-collapsible-list', components.CollapsibleList)
+    Vue.component('rkts-list-container', components.ListContainer)
     Vue.component('rkts-list-checkbox', components.ListCheckbox)
     Vue.component('rkts-range-slider', components.RangeSlider)
     Vue.component('rkts-chosen-date', components.ChosenDate)

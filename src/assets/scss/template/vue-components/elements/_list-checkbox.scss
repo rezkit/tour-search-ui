@@ -5,8 +5,7 @@
 //============================================================================*/
 
 .rkts-list-checkbox {
-  align-items: center;
-  display: flex;
+  margin-bottom: var(--rk-m-sm);
 
   &::marker {
     content: none;
@@ -15,6 +14,12 @@
   /*==============================================================================
   // Elements
   //============================================================================*/
+
+  @include element("container") {
+    margin-bottom: var(--rk-m-df);
+    align-items: center;
+    display: flex;
+  }
 
   @include element("label") {
     padding-right: var(--rk-p-df);

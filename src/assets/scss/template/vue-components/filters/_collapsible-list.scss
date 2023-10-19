@@ -35,24 +35,26 @@
       padding-right: var(--rk-p-df);
     }
 
-    &:after {
-      --rkts-right: 0;
-
-      @extend %fontello;
-
-      @include insert-transition(transform, .3s, ease-in-out, 0s);
-
-      content: var(--rkts-collapse-icon);
-      font-size: var(--rk-icon-size-sm);
-      transform-origin: center;
-      right: var(--rkts-right);
-      position: absolute;
-    }
-
     &:hover,
     &:focus {
       color: var(--rk-text-dark);
       cursor: pointer;
+    }
+
+    @include adjoin("drop-down") {
+      &:after {
+        --rkts-right: 0;
+
+        @extend %fontello;
+
+        @include insert-transition(transform, .3s, ease-in-out, 0s);
+
+        content: var(--rkts-collapse-icon);
+        font-size: var(--rk-icon-size-sm);
+        transform-origin: center;
+        right: var(--rkts-right);
+        position: absolute;
+      }
     }
 
     @include adjoin("open") {

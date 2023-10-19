@@ -6,6 +6,7 @@ export { default as TagsPanel } from '@/components/layout/TagsPanel.vue'
 // Elements.
 //
 export { default as ResultsCount } from './elements/ResultsCount.vue'
+export { default as ListContainer } from './elements/ListContainer.vue'
 export { default as ListCheckbox } from './elements/ListCheckbox.vue'
 export { default as ResultCard } from './elements/ResultCard.vue'
 export { default as SearchBox } from './elements/SearchBox.vue'
