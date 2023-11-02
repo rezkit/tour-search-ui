@@ -3,7 +3,7 @@ import { z } from 'zod'
 /**
  * An array of non-empty strings
  */
-const StringArray = z.array(z.string().nonempty())
+const StringArray = z.array(z.string().min(1))
 
 /**
  * Schema for a tour search request
@@ -23,9 +23,9 @@ export const SearchRequest = z.object({
   c7: StringArray.optional(),
   c8: StringArray.optional(),
   c9: StringArray.optional(),
-  l: z.record(z.string().nonempty(), StringArray).optional(),
-  fh: z.record(z.string().nonempty(), z.union([z.string(), z.number(), z.boolean()])).optional(),
-  fd: z.record(z.string().nonempty(), z.union([z.string(), z.number(), z.boolean()])).optional(),
+  l: z.record(z.string(), StringArray).optional(),
+  fh: z.record(z.string(), z.union([z.string(), z.number(), z.boolean(), z.null(), StringArray])).optional(),
+  fd: z.record(z.string(), z.union([z.string(), z.number(), z.boolean(), z.null(), StringArray])).optional(),
   s: StringArray.optional(),
   i: z.coerce.number().min(1).max(200).optional(),
   o: z.coerce.number().min(0).optional(),
