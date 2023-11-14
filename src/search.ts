@@ -41,7 +41,7 @@ export const SearchRequest = z.object({
 /**
  * A custom field value, which can be a primitive, or array of strings.
  */
-const CustomFieldValue = z.union([ z.string(), z.number(), z.boolean(), z.array(z.string())])
+const CustomFieldValue = z.union([ z.string(), z.number(), z.boolean(), z.array(z.string()), z.null()])
 
 /**
  * Schema for a Holiday result payload
