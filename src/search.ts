@@ -99,6 +99,7 @@ const HolidayHit = z.object({
   calculated: z.object({
     lead_price: z.array(z.coerce.number()),
     months_of_operation: z.array(z.number().int().min(1).max(12)),
+    leading_pricing: z.record(z.string(), z.coerce.number())
   }).required()
 }).required()
 
