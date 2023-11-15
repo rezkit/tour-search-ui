@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { toRef, computed } from 'vue'
+import { ref, toRef, computed } from 'vue'
 // Components.
 //
 import ListCheckbox from '@/components/elements/ListCheckbox.vue'
@@ -11,6 +11,7 @@ const props = defineProps<{
   styleOpts?: string
   title: string
   text: string
+  count?: number
   prefix: string
   term: string
 }>()
@@ -19,6 +20,7 @@ const props = defineProps<{
 const term = toRef(props, 'term')
 const prefix = toRef(props, 'prefix')
 const styleOpts = toRef(props, 'styleOpts')
+const count = props.count ? toRef(props, 'count') : ref(0)
 const title = toRef(props, 'title')
 const text = toRef(props, 'text')
 // Model.
@@ -41,7 +43,7 @@ const value = computed({
         <ListCheckbox
           v-model="value"
           :title="title"
-          :count="10"
+          :count="count"
           :term="term"
           :prefix="prefix"
         ></ListCheckbox>

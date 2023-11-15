@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { toRef, computed } from 'vue'
+import {toRef, computed, ref} from 'vue'
 // Properties and events.
 //
 const emit = defineEmits(['update:modelValue'])
@@ -14,7 +14,7 @@ const props = defineProps<{
 //
 const term = toRef(props, 'term')
 const title = toRef(props, 'title')
-const count = toRef(props, 'count')
+const count = props.count ? toRef(props, 'count') : ref(0)
 const prefix = toRef(props, 'prefix')
 // Model.
 //
@@ -46,7 +46,9 @@ const value = computed({
       </div>
       <label class="rkts-list-checkbox__label" :for="`${prefix}-${term}`">
         {{ title }}
-        <b v-if="count" class="rk-text rk-text--count">({{ count }})</b>
+        <b v-if="count && count > 0" class="rk-text rk-text--count">
+          ({{ count }})
+        </b>
       </label>
     </div>
     <slot></slot>
