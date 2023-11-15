@@ -12,7 +12,10 @@ const filterValue = toRef(props, 'filterValue')
 </script>
 
 <template>
-  <div class="rkts-refine-tag" @click="emit('process:clearFilter')">
+  <div
+    class="rkts-refine-tag"
+    @click="emit('process:clearFilter', filterValue)"
+  >
     <i class="rkts-refine-tag__icon fontello icon-sys-close"></i>
     <span class="rkts-refine-tag__text">{{ filterValue }}</span>
   </div>

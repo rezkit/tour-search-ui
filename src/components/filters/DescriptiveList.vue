@@ -7,13 +7,17 @@ import ListCheckbox from '@/components/elements/ListCheckbox.vue'
 //
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps<{
-  modelValue: boolean
+  modelValue: any
   styleOpts?: string
   title: string
   text: string
+  prefix: string
+  term: string
 }>()
 // Main variables.
 //
+const term = toRef(props, 'term')
+const prefix = toRef(props, 'prefix')
 const styleOpts = toRef(props, 'styleOpts')
 const title = toRef(props, 'title')
 const text = toRef(props, 'text')
@@ -21,7 +25,7 @@ const text = toRef(props, 'text')
 //
 const value = computed({
   get(): any {
-    return props.modelValue
+    return props.modelValue || []
   },
 
   set(value: any) {
@@ -34,7 +38,13 @@ const value = computed({
   <div class="rkts-descriptive-list" :class="[styleOpts]">
     <div class="rkts-descriptive-list__title">
       <ul class="rk-list rk-list--no-type">
-        <ListCheckbox v-model="value" :title="title" :count="10"></ListCheckbox>
+        <ListCheckbox
+          v-model="value"
+          :title="title"
+          :count="10"
+          :term="term"
+          :prefix="prefix"
+        ></ListCheckbox>
       </ul>
     </div>
     <div class="rkts-descriptive-list__text">

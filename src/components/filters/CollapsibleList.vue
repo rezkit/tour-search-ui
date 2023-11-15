@@ -9,15 +9,19 @@ import ListContainer from '@/components/elements/ListContainer.vue'
 //
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps<{
-  modelValue: boolean
+  modelValue: any
   subOptions: any
   styleOpts?: string
   count: number
   title: string
   open: boolean
+  prefix: string
+  term: string
 }>()
 // Main variables.
 //
+const term = toRef(props, 'term')
+const prefix = toRef(props, 'prefix')
 const styleOpts = toRef(props, 'styleOpts')
 const subOptions = toRef(props, 'subOptions')
 const count = toRef(props, 'count')
@@ -32,7 +36,7 @@ const hasChildren = computed(() => children.value && children.value.length > 0)
 //
 const value = computed({
   get(): any {
-    return props.modelValue || false
+    return props.modelValue || []
   },
 
   set(value: any) {
@@ -75,6 +79,8 @@ const toggle = function toggle() {
         <ListCheckbox
           v-model="value"
           :title="title"
+          :prefix="prefix"
+          :term="term"
           :count="count"
         ></ListCheckbox>
       </ListContainer>

@@ -36,6 +36,8 @@
               :sub-options="[]"
               title="Holiday Type"
               :open="true"
+              prefix="example"
+              term="example"
             >
               <rkts-list-checkbox v-model="filters.trek" title="Trek"></rkts-list-checkbox>
             </rkts-collapsible-list>
@@ -44,6 +46,8 @@
               :sub-options="[]"
               title="Activities"
               :open="false"
+              prefix="example"
+              term="example"
             >
               <rkts-list-checkbox v-model="filters.cycling" title="Cycling"></rkts-list-checkbox>
             </rkts-collapsible-list>
@@ -59,6 +63,8 @@
             <rkts-descriptive-list
               v-model="filters.grade"
               title="Grade 1"
+              prefix="example"
+              term="example"
               text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
             ></rkts-descriptive-list>
             <rkts-clear-button :filters="filters.grade" style-opts="mt-3"></rkts-clear-button>
@@ -155,6 +161,8 @@
                   :title="category.key"
                   :count="category.doc_count"
                   :open="true"
+                  prefix="example"
+                  :term="category.term"
                 >
                   <template v-for="(child, i) in category.children" :key="`${child.key}-${i}`">
                     <rkts-list-checkbox :title="child.key" :count="child.doc_count"></rkts-list-checkbox>
