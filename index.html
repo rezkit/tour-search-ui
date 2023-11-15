@@ -77,7 +77,10 @@
           <p class="rk-text rk-text--lead">Refine Tag:</p>
           <div class="rk-card">
             <rkts-tags-panel>
-              <rkts-refine-tag filter-value="$0 - $1000"></rkts-refine-tag>
+              <rkts-refine-tag
+                filter-value="$0 - $1000"
+                @process:clear-filter="clearFilter"
+              ></rkts-refine-tag>
               <rkts-refine-tag filter-value="$0 - $1000"></rkts-refine-tag>
             </rkts-tags-panel>
           </div>
@@ -290,8 +293,13 @@
             }
             this.results = await this.client.search(params)
           },
+
           clearSearch() {
             this.results = null
+          },
+
+          clearFilter() {
+            console.log('Clear filter')
           }
         },
 

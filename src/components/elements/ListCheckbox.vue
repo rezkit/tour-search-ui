@@ -31,11 +31,10 @@ const value = computed({
 
 <template>
   <li class="rkts-list-checkbox">
-    <div class="rkts-list-checkbox__container">
+    <div class="rkts-list-checkbox__container" @click.stop>
       <div
         class="rkts-list-checkbox__choice"
         :class="{ active: value.includes(term) }"
-        @click.stop
       >
         <input
           v-model="value"
