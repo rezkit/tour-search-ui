@@ -9,17 +9,19 @@ import ListContainer from '@/components/elements/ListContainer.vue'
 //
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps<{
-  modelValue: any
+  modelValue?: any
   subOptions: any
   styleOpts?: string
-  count: number
+  count?: number
   title: string
   open: boolean
-  prefix: string
-  term: string
+  prefix?: string
+  term?: string
+  headingOnly?: boolean
 }>()
 // Main variables.
 //
+const headingOnly = toRef(props, 'headingOnly')
 const term = toRef(props, 'term')
 const prefix = toRef(props, 'prefix')
 const styleOpts = toRef(props, 'styleOpts')
@@ -75,12 +77,15 @@ const toggle = function toggle() {
       :class="{ open: open && hasChildren, 'drop-down': hasChildren }"
       @click="toggle"
     >
-      <ListContainer>
+      <label v-if="headingOnly">
+        {{ title }}
+      </label>
+      <ListContainer v-else>
         <ListCheckbox
           v-model="value"
           :title="title"
-          :prefix="prefix"
-          :term="term"
+          :prefix="prefix || ''"
+          :term="term || ''"
           :count="count"
         ></ListCheckbox>
       </ListContainer>
