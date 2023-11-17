@@ -1,7 +1,7 @@
 {
   "name": "@rezkit/toursui",
   "private": false,
-  "version": "0.2.20",
+  "version": "0.2.21",
   "type": "module",
   "main": "./dist/toursui.umd.cjs",
   "module": "./dist/toursui.js",
@@ -34,6 +34,7 @@
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/eslint-config-typescript": "^11.0.0",
     "@vue/tsconfig": "^0.1.3",
+    "@hennge/vue3-pagination": "^1.0.17",
     "bootstrap": "^5.2.3",
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.3.0",

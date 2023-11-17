@@ -1,0 +1,91 @@
+/*==============================================================================
+// File:        _list-pagination.scss
+// Package:     Tour Search UI - Vue3 - RezKit
+// Synopsis:    List pagination component - SASS
+//============================================================================*/
+
+.rkts-list-pagination {
+  padding: var(--rk-p-lg) 0;
+
+  .Pagination {
+    justify-content: center;
+    list-style: none;
+    display: flex;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+    .DotsHolder {
+      --rkts-dot-width: 50px;
+
+      padding: var(--rk-p-xs) var(--rk-p-df);
+      width: var(--rkts-dot-width);
+      display: block;
+    }
+
+    .PaginationControl {
+      --rkts-page-max-width: 35px;
+
+      border: 1px solid var(--rk-base-grey);
+      max-width: var(--rkts-page-max-width);
+      background: var(--rk-base-white);
+      margin: 0 0 0 -1px;
+      flex: auto;
+
+      .Control {
+        --rkts-control-height: 32px;
+        --rkts-control-width: 32px;
+
+        height: var(--rkts-control-height);
+        width: var(--rkts-control-width);
+      }
+
+      svg {
+        fill: var(--rk-base-grey);
+      }
+
+      &:hover,
+      &:focus {
+        background: var(--rk-base-grey-light);
+        border-color: var(--rk-base-grey);
+        color: var(--rk-text);
+        cursor: pointer;
+      }
+
+      svg.Control-active {
+        fill: var(--rk-primary);
+      }
+    }
+
+    .Page {
+      --rkts-page-min-height: 35px;
+      --rkts-page-min-width: 35px;
+
+      min-height: var(--rkts-page-min-height);
+      min-width: var(--rkts-page-min-width);
+      border: 1px solid var(--rk-base-grey);
+      padding: var(--rk-p-xs);
+      margin: 0 0 0 -1px;
+      border-radius: 0;
+
+      &:hover,
+      &:focus {
+        background: var(--rk-base-grey-light) !important;
+        border-color: var(--rk-base-grey);
+        color: var(--rk-text);
+        cursor: pointer;
+      }
+
+      &.Page-active {
+        color: var(--rk-base-white);
+        border: none;
+
+        &:hover,
+        &:focus {
+          background: var(--rk-primary) !important;
+          cursor: default;
+        }
+      }
+    }
+  }
+}

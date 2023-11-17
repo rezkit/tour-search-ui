@@ -20,6 +20,13 @@
         <h6>Available Components</h6>
 
         <div class="py-3">
+          <p class="rk-text rk-text--lead">Pagination:</p>
+          <div class="rk-card">
+            <rkts-list-pagination v-model="pagination" active-colour="#84288E" :pages="4"></rkts-list-pagination>
+          </div>
+        </div>
+
+        <div class="py-3">
           <p class="rk-text rk-text--lead">Sort By:</p>
           <div class="rk-card">
             <rkts-sort-by v-model="sort"></rkts-sort-by>
@@ -250,6 +257,7 @@
 
         data() {
           return {
+            pagination: ref([]),
             sort: ref(['name|asc']),
             search: ref(''),
             results: ref(),

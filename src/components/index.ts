@@ -5,6 +5,7 @@ export { default as ResultsPanel } from '@/components/layout/ResultsPanel.vue'
 export { default as TagsPanel } from '@/components/layout/TagsPanel.vue'
 // Elements.
 //
+export { default as ListPagination } from './elements/ListPagination.vue'
 export { default as ResultsCount } from './elements/ResultsCount.vue'
 export { default as ListContainer } from './elements/ListContainer.vue'
 export { default as ListCheckbox } from './elements/ListCheckbox.vue'
