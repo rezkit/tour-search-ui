@@ -51,18 +51,14 @@ const value = computed({
 })
 // Functions.
 //
-const chosenSuggestion = function chosenSuggestion(
-  option: string,
-  type: string
-) {
-  emit('process:chosen-suggestion', {
-    option,
-    type,
-  })
+const chosenSuggestion = function chosenSuggestion(suggestion: any) {
+  emit('process:chosen-suggestion', suggestion)
 }
 
 const hideSuggestions = function hideSuggestions() {
-  visible.value = false
+  setTimeout(() => {
+    visible.value = false
+  }, 500)
 }
 
 const showSuggestions = function hideSuggestions() {
@@ -103,6 +99,7 @@ watch(
       v-if="enableSuggestions"
       class="rkts-search-box__suggestions"
       :class="{ show: suggestions && visible }"
+      @click.stop
     >
       <SearchSuggestion
         title="Categories"

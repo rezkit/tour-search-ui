@@ -151,7 +151,12 @@
         <div class="py-3">
           <p class="rk-text rk-text--lead">Search Box:</p>
           <div class="rk-card">
-            <rkts-search-box v-model="search" placeholder="Example placeholder" :enable-suggestions="true"></rkts-search-box>
+            <rkts-search-box
+              v-model="search"
+              placeholder="Example placeholder"
+              :enable-suggestions="true"
+              @process:chosen-suggestion="testSuggestion"
+            ></rkts-search-box>
           </div>
         </div>
 
@@ -300,6 +305,10 @@
               params.q = this.search
             }
             this.results = await this.client.search(params)
+          },
+
+          testSuggestion(ev) {
+            console.log(ev)
           },
 
           clearSearch() {
