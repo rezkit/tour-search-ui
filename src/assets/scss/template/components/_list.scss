@@ -36,12 +36,14 @@
     margin-bottom: var(--rk-p-df);
 
     li:not(.title) {
-      cursor: pointer;
+      .suggestion-label {
+        cursor: pointer;
 
-      &:hover,
-      &:focus {
-        font-weight: var(--rk-font-bold);
-        color: var(--rk-primary);
+        &:hover,
+        &:focus {
+          font-weight: var(--rk-font-bold);
+          color: var(--rk-primary);
+        }
       }
     }
   }

@@ -43,7 +43,9 @@ const chosenSuggestion = function chosenSuggestion(
       :key="`${type}-suggestion-${i}}`"
     >
       <li @click="chosenSuggestion(suggestion.text, type)">
-        {{ suggestion.text }}
+        <span class="suggestion-label">
+          {{ suggestion.text }}
+        </span>
       </li>
     </template>
   </ul>
