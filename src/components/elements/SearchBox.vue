@@ -18,7 +18,7 @@ const props = defineProps({
     type: String,
   },
 
-  placeholder: {
+  placeholderText: {
     type: String,
     required: false,
     default: 'Enter keyword',
@@ -108,7 +108,7 @@ watch(
       type="search"
       class="rk-input rk-input--search-box"
       :class="`layout-${layout}`"
-      :placeholder="placeholder"
+      :placeholder="placeholderText"
       @focusout="hideSuggestions"
       @keyup.enter="fieldKeyup"
     />
