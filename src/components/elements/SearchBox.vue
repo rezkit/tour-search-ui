@@ -8,7 +8,11 @@ import debounce from 'lodash-es/debounce'
 import SearchSuggestion from '@/components/elements/SearchSuggestion.vue'
 // Properties and events.
 //
-const emit = defineEmits(['update:model-value', 'process:chosen-suggestion'])
+const emit = defineEmits([
+  'update:model-value',
+  'process:chosen-suggestion',
+  'process:keyup',
+])
 const props = defineProps({
   modelValue: {
     type: String,
@@ -31,9 +35,16 @@ const props = defineProps({
     required: false,
     default: 200,
   },
+
+  layout: {
+    type: String,
+    required: false,
+    default: 'default',
+  },
 })
 // Main variables.
 //
+const layout = props.layout ? ref(props.layout) : ref('default')
 const client = inject<Client>(SEARCH_CLIENT)
 const suggestions: any = ref(null)
 const visible = ref(false)
@@ -53,6 +64,10 @@ const value = computed({
 //
 const chosenSuggestion = function chosenSuggestion(suggestion: any) {
   emit('process:chosen-suggestion', suggestion)
+}
+
+const fieldKeyup = function fieldKeyup() {
+  emit('process:keyup', value.value)
 }
 
 const hideSuggestions = function hideSuggestions() {
@@ -86,15 +101,24 @@ watch(
 </script>
 
 <template>
-  <div class="rkts-search-box">
+  <div class="rkts-search-box" :class="`rkts-search-box--${layout}`">
     <input
       ref="searchInput"
       v-model="value"
       type="search"
       class="rk-input rk-input--search-box"
+      :class="`layout-${layout}`"
       :placeholder="placeholder"
       @focusout="hideSuggestions"
+      @keyup.enter="fieldKeyup"
     />
+    <button
+      v-if="layout === 'primary'"
+      class="rkts-search-box__submit"
+      @click="fieldKeyup"
+    >
+      <i class="fontello icon-sys-search-1"></i>
+    </button>
     <div
       v-if="enableSuggestions"
       class="rkts-search-box__suggestions"

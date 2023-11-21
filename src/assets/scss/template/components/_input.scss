@@ -58,8 +58,11 @@
 
     background: var(--rkts-search-bg);
     position: var(--rkts-position);
-    padding-left: var(--rk-p-xl);
     color: var(--rk-primary);
+
+    &:not(.layout-primary) {
+      padding-left: var(--rk-p-xl);
+    }
   }
 
   @include modifier("checkbox") {

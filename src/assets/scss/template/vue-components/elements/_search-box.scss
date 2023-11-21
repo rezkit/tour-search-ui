@@ -35,6 +35,41 @@
   // Elements
   //============================================================================*/
 
+  @include element("submit") {
+    --rkts-bottom: 5px;
+    --rkts-right: 5px;
+    --rkts-top: 5px;
+
+    border-width: var(--rkts-border-width);
+    border-style: var(--rk-border-style);
+    font-family: var(--rk-primary-font);
+    font-size: var(--rk-icon-size-df);
+    font-weight: var(--rk-font-bold);
+    border-color: var(--rk-primary);
+    background: var(--rk-primary);
+    color: var(--rk-base-white);
+    bottom: var(--rkts-bottom);
+    right: var(--rkts-right);
+    padding: var(--rk-p-sm);
+    text-decoration: none;
+    top: var(--rkts-top);
+    align-items: center;
+    position: absolute;
+    display: flex;
+
+    &:active,
+    &:hover,
+    &:focus {
+      border-color: var(--rk-primary-light);
+      background: var(--rk-primary-light);
+      color: var(--rk-base-white);
+      text-decoration: none;
+      box-shadow: none;
+      cursor: pointer;
+      outline: none;
+    }
+  }
+
   @include element("suggestions") {
     --rkts-box-shadow: 0, 0, 15px, -2px, var(--rk-box-shadow);
 
@@ -51,6 +86,16 @@
 
     @include adjoin("show") {
       display: block;
+    }
+  }
+
+  /*==============================================================================
+  // Modifiers
+  //============================================================================*/
+
+  @include modifier("primary") {
+    &:before {
+      content: none;
     }
   }
 }
