@@ -40,7 +40,7 @@
           <div class="rk-card" style="max-width: 400px;">
             <rkts-collapsible-list
               v-model="filters.holiday"
-              :sub-options="[]"
+              :sub-options="true"
               title="Holiday Type"
               :open="true"
               prefix="example"
@@ -173,7 +173,7 @@
               <template v-for="category in results?.aggregations?.categories.buckets" :key="category.key">
                 <rkts-collapsible-list
                   v-model="filters.holiday"
-                  :sub-options="category.children || []"
+                  :sub-options="false"
                   :title="category.key"
                   :count="category.doc_count"
                   :open="true"

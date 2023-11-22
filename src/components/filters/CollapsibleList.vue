@@ -32,8 +32,17 @@ const open = toRef(props, 'open')
 const collapsibleGroup = ref()
 const collapsibleTitle = ref()
 const collapsibleContent = ref()
-const children = ref(flatMap(subOptions.value))
-const hasChildren = computed(() => children.value && children.value.length > 0)
+const children: any =
+  typeof subOptions.value === 'boolean'
+    ? ref(true)
+    : ref(flatMap(subOptions.value))
+const hasChildren = computed(() => {
+  if (typeof subOptions.value === 'boolean') {
+    return children.value
+  } else {
+    return children.value && children.value.length > 0
+  }
+})
 // Model.
 //
 const value = computed({
