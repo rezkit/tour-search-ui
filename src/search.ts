@@ -62,7 +62,7 @@ const HolidaySource = z.object({
 
 const DepartureHit = z.object({
   _id: z.string(),
-  _score: z.number().nonnegative(),
+  _score: z.number().nonnegative().nullable(),
   _routing: z.string(),
   _source: z.object({
     type: z.literal('departure'),
@@ -81,7 +81,7 @@ const DepartureHit = z.object({
 
 const HolidayHit = z.object({
   _id: z.string(),
-  _score: z.number().nonnegative(),
+  _score: z.number().nonnegative().nullable(),
   _routing: z.string(),
   _source: HolidaySource,
   inner_hits: z.object({
