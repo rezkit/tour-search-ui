@@ -49,7 +49,8 @@ const CustomFieldValue = z.union([ z.string(), z.number(), z.boolean(), z.array(
 const HolidaySource = z.object({
   name: z.string(),
   code: z.string(),
-  description: z.string(),
+  introduction: z.string().nullable(),
+  description: z.string().nullable(),
   published: z.boolean(),
   type: z.literal('holiday'),
   duration: z.array(z.number().int().nonnegative()),
