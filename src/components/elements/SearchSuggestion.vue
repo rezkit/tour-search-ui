@@ -17,11 +17,13 @@ const suggestions: any = toRef(props, 'suggestions')
 //
 const chosenSuggestion = function chosenSuggestion(
   option: string,
-  type: string
+  type: string,
+  id: any
 ) {
   emit('process:chosen-suggestion', {
     option,
     type,
+    id,
   })
 }
 </script>
@@ -42,7 +44,9 @@ const chosenSuggestion = function chosenSuggestion(
       v-for="(suggestion, i) in suggestions[type][0].options"
       :key="`${type}-suggestion-${i}}`"
     >
-      <li @click="chosenSuggestion(suggestion.text, type)">
+      <li
+        @click="chosenSuggestion(suggestion.text, type, suggestion._id || null)"
+      >
         <span class="suggestion-label">
           {{ suggestion.text }}
         </span>
