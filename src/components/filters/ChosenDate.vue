@@ -1,17 +1,21 @@
 <script setup lang="ts">
-import { toRef, computed } from 'vue'
+import { ref, toRef, computed } from 'vue'
 import VueDatePicker from '@vuepic/vue-datepicker'
 // Properties and events.
 //
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps<{
+  placeholderText?: any | null
   modelValue: any | null
   styleOpts?: string
+  format?: string
   type?: string
 }>()
 // Main variables.
 //
+const placeholderText = toRef(props, 'placeholderText')
 const styleOpts = toRef(props, 'styleOpts')
+const format = props.format ? toRef(props, 'format') : ref('dd MMM yyyy')
 const type = toRef(props, 'type')
 // Model.
 //
@@ -34,7 +38,8 @@ const value = computed({
       :class="[styleOpts]"
       auto-apply
       :close-on-auto-apply="false"
-      format="dd MMM yyyy"
+      :format="format"
+      :placeholder="placeholderText || null"
     />
     <input
       v-else
