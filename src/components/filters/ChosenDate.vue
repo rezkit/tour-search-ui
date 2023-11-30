@@ -30,13 +30,6 @@ const fieldMinDate = props.fieldMinDate
 const fieldMaxDate = props.fieldMaxDate
   ? toRef(props, 'fieldMaxDate')
   : ref(null)
-const fieldStartDate = props.fieldStartDate
-  ? toRef(props, 'fieldStartDate')
-  : ref(null)
-const setFocusStart =
-  props.setFocusStart && fieldStartDate.value
-    ? toRef(props, 'setFocusStart')
-    : ref(false)
 const type = toRef(props, 'type')
 // Model.
 //
@@ -49,6 +42,12 @@ const value = computed({
     emit('update:modelValue', value)
   },
 })
+// Computed items.
+//
+const fieldStartDate = computed(() => props.fieldStartDate || null)
+const setFocusStart = computed(() =>
+  props.setFocusStart && props.fieldStartDate ? props.setFocusStart : false
+)
 </script>
 
 <template>

@@ -110,7 +110,7 @@
             <p>User agent:</p>
             <rkts-chosen-date v-model="dateFrom" style-opts="mb-3"></rkts-chosen-date>
             <p>Vue date picker:</p>
-            <rkts-chosen-date v-model="dateTo" type="vue" style-opts="mb-3"></rkts-chosen-date>
+            <rkts-chosen-date v-model="dateTo" :field-start-date="new Date(2025, 1)" :set-focus-start="true" type="vue" style-opts="mb-3"></rkts-chosen-date>
           </div>
         </div>
 
