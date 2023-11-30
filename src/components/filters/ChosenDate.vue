@@ -5,6 +5,7 @@ import VueDatePicker from '@vuepic/vue-datepicker'
 //
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps<{
+  allowTimePicker?: boolean
   fieldMinDate?: any
   fieldMaxDate?: any
   fieldStartDate?: any
@@ -20,6 +21,9 @@ const props = defineProps<{
 const placeholderText = toRef(props, 'placeholderText')
 const styleOpts = toRef(props, 'styleOpts')
 const format = props.format ? toRef(props, 'format') : ref('dd MMM yyyy')
+const allowTimePicker = props.allowTimePicker
+  ? toRef(props, 'allowTimePicker')
+  : ref(false)
 const fieldMinDate = props.fieldMinDate
   ? toRef(props, 'fieldMinDate')
   : ref(null)
@@ -61,6 +65,7 @@ const value = computed({
       :start-date="fieldStartDate"
       :focus-start-date="setFocusStart"
       :placeholder="placeholderText || null"
+      :enable-time-picker="allowTimePicker"
     />
     <input
       v-else
