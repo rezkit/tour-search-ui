@@ -5,6 +5,8 @@ import VueDatePicker from '@vuepic/vue-datepicker'
 //
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps<{
+  fieldStartDate?: any
+  setFocusStart?: boolean
   placeholderText?: any | null
   modelValue: any | null
   styleOpts?: string
@@ -16,6 +18,13 @@ const props = defineProps<{
 const placeholderText = toRef(props, 'placeholderText')
 const styleOpts = toRef(props, 'styleOpts')
 const format = props.format ? toRef(props, 'format') : ref('dd MMM yyyy')
+const fieldStartDate = props.fieldStartDate
+  ? toRef(props, 'fieldStartDate')
+  : ref(null)
+const setFocusStart =
+  props.setFocusStart && fieldStartDate.value
+    ? toRef(props, 'setFocusStart')
+    : ref(false)
 const type = toRef(props, 'type')
 // Model.
 //
@@ -39,6 +48,8 @@ const value = computed({
       auto-apply
       :close-on-auto-apply="false"
       :format="format"
+      :start-date="fieldStartDate"
+      :focus-start-date="setFocusStart"
       :placeholder="placeholderText || null"
     />
     <input
