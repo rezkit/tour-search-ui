@@ -35,8 +35,8 @@ export const SearchRequest = z.object({
   df: z.string().or(z.date()).optional(),
   dt: z.string().or(z.date()).optional(),
   j: z.literal('a').or(z.literal('d')).optional(),
-  hdt: z.coerce.number().min(0).int().optional(),
-  hdf: z.coerce.number().min(0).int().optional(),
+  hdt: z.coerce.number().optional(),
+  hdf: z.coerce.number().optional(),
 }).refine( params => !(params.q && params.qs), { message: '`q` and `qs` are mutually exclusive' , path: ['q', 'qs'] } )
 
 
