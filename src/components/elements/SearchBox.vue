@@ -24,6 +24,30 @@ const props = defineProps({
     default: 'Enter keyword',
   },
 
+  categorySuggestionText: {
+    type: String,
+    required: false,
+    default: 'Categories',
+  },
+
+  locationSuggestionText: {
+    type: String,
+    required: false,
+    default: 'Locations',
+  },
+
+  tourNameSuggestionText: {
+    type: String,
+    required: false,
+    default: 'Tour Names',
+  },
+
+  tourCodeSuggestionText: {
+    type: String,
+    required: false,
+    default: 'Tour Codes',
+  },
+
   enableSuggestions: {
     type: Boolean,
     required: false,
@@ -126,28 +150,28 @@ watch(
       @click.stop
     >
       <SearchSuggestion
-        title="Categories"
+        :title="categorySuggestionText"
         :suggestions="suggestions"
         type="category"
         @process:chosen-suggestion="chosenSuggestion"
       ></SearchSuggestion>
 
       <SearchSuggestion
-        title="Locations"
+        :title="locationSuggestionText"
         :suggestions="suggestions"
         type="location"
         @process:chosen-suggestion="chosenSuggestion"
       ></SearchSuggestion>
 
       <SearchSuggestion
-        title="Tour Names"
+        :title="tourNameSuggestionText"
         :suggestions="suggestions"
         type="name"
         @process:chosen-suggestion="chosenSuggestion"
       ></SearchSuggestion>
 
       <SearchSuggestion
-        title="Tour Codes"
+        :title="tourCodeSuggestionText"
         :suggestions="suggestions"
         type="x_code"
         @process:chosen-suggestion="chosenSuggestion"
