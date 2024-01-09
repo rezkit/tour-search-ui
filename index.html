@@ -156,7 +156,10 @@
               placeholder-text="Example placeholder"
               :enable-suggestions="true"
               layout="primary"
+              :more-count="9"
+              more-text="More +"
               @process:chosen-suggestion="testSuggestion"
+              @process:keyup="testSuggestion"
             ></rkts-search-box>
           </div>
         </div>

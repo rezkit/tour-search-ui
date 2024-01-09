@@ -65,6 +65,18 @@ const props = defineProps({
     required: false,
     default: 'default',
   },
+
+  moreCount: {
+    type: Number,
+    required: false,
+    default: null,
+  },
+
+  moreText: {
+    type: String,
+    required: false,
+    default: null,
+  },
 })
 // Main variables.
 //
@@ -102,6 +114,10 @@ const hideSuggestions = function hideSuggestions() {
 
 const showSuggestions = function hideSuggestions() {
   visible.value = true
+}
+
+const moreResults = function moreResults() {
+  emit('process:keyup', value.value)
 }
 
 watch(
@@ -153,28 +169,40 @@ watch(
         :title="categorySuggestionText"
         :suggestions="suggestions"
         type="category"
+        :more-count="moreCount || null"
+        :more-text="moreText || null"
         @process:chosen-suggestion="chosenSuggestion"
+        @process:more-items="moreResults"
       ></SearchSuggestion>
 
       <SearchSuggestion
         :title="locationSuggestionText"
         :suggestions="suggestions"
         type="location"
+        :more-count="moreCount || null"
+        :more-text="moreText || null"
         @process:chosen-suggestion="chosenSuggestion"
+        @process:more-items="moreResults"
       ></SearchSuggestion>
 
       <SearchSuggestion
         :title="tourNameSuggestionText"
         :suggestions="suggestions"
         type="name"
+        :more-count="moreCount || null"
+        :more-text="moreText || null"
         @process:chosen-suggestion="chosenSuggestion"
+        @process:more-items="moreResults"
       ></SearchSuggestion>
 
       <SearchSuggestion
         :title="tourCodeSuggestionText"
         :suggestions="suggestions"
         type="x_code"
+        :more-count="moreCount || null"
+        :more-text="moreText || null"
         @process:chosen-suggestion="chosenSuggestion"
+        @process:more-items="moreResults"
       ></SearchSuggestion>
     </div>
   </div>
