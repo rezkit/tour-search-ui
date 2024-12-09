@@ -4,7 +4,6 @@ export * as Filters from './filters'
 import { SearchRequest, SearchResponse, SuggestResponse } from './search'
 
 import './assets/scss/template.scss'
-import {ListPagination} from "./components";
 
 // ToDO: Testable data!
 export const SEARCH_HOST = 'https://api.tours.rezkit.app'
@@ -159,6 +158,7 @@ export const vue = (key: string, params?: ClientOptions) => ({
     Vue.component('rkts-results-count', components.ResultsCount)
     Vue.component('rkts-result-card', components.ResultCard)
     Vue.component('rkts-clear-button', components.ClearButton)
+    Vue.component('rkts-apply-button', components.ApplyButton)
     Vue.component('rkts-search-box', components.SearchBox)
     Vue.component('rkts-sort-by', components.SortBy)
     Vue.provide(SEARCH_CLIENT, new Client(key, params))
