@@ -1,15 +1,17 @@
 import { defineStore, createPinia } from 'pinia'
 import * as Qs from 'https://cdn.jsdelivr.net/npm/qs@6.11.2/+esm'
 
-const DEFAULT_PAGE_SIZE = 48;
+const DEFAULT_PAGE_SIZE = 48
 
 function flattenTree(treeData, depth = 0, filters = {}) {
-
   for (prop in treeData) {
-    filters['c' + depth] ??= [];
+    filters['c' + depth] ??= []
 
-    if (typeof treeData[prop] === "object" && Object.entries(treeData[prop]).length > 0) {
-      filters = flattenTree(treeData[prop], depth+1, filters)
+    if (
+      typeof treeData[prop] === 'object' &&
+      Object.entries(treeData[prop]).length > 0
+    ) {
+      filters = flattenTree(treeData[prop], depth + 1, filters)
     }
   }
 
@@ -27,9 +29,15 @@ export const useSearchStore = defineStore({
         total: { value: 0 },
       },
       aggregations: {},
-      query : {
+      sourceAggregation: {},
+      activeSelection: {
+        query: '',
+        value: '',
+        count: 0,
+      },
+      query: {
         // Currency -- set by the user session
-        ccy: window.__SESSION?.geoip?.currency ?? 'GBP',
+        ccy: 'GBP',
 
         // Holiday Duration From
         hdf: null,
@@ -83,11 +91,9 @@ export const useSearchStore = defineStore({
         c3: [],
         c4: [],
       },
-
     }
   },
   getters: {
-
     /**
      *
      * @param {*} state
@@ -99,7 +105,6 @@ export const useSearchStore = defineStore({
       for (let i = 0; i < 10; i++) {
         if (state.query[`c${i}`]?.length > 0) {
           selected.concat(state.query[`c${i}`])
-
         }
       }
 
@@ -112,7 +117,6 @@ export const useSearchStore = defineStore({
      * @returns { SearchParams } Search Parameters
      */
     searchParams(state) {
-
       const query = {
         ...state.query,
       }
@@ -123,15 +127,18 @@ export const useSearchStore = defineStore({
       if (!query.pi > 0) delete query.pi
       if (query.df === null) delete query.df
       if (query.dt === null) delete query.dt
-      if (query.pt <= 0) delete query.pt;
-      if (query.pf <= 0) delete query.pf;
-      if (query.q?.trim() === "") delete query.q;
+      if (query.pt <= 0) delete query.pt
+      if (query.pf <= 0) delete query.pf
+      if (query.q?.trim() === '') delete query.q
 
       return query
     },
 
     deepLink(state) {
-      const params = { ...this.searchParams,  categories: state.query.categories}
+      const params = {
+        ...this.searchParams,
+        categories: state.query.categories,
+      }
       const u = new URLSearchParams()
 
       delete params.ccy
@@ -142,28 +149,27 @@ export const useSearchStore = defineStore({
         // handle simple string values
         if (typeof v === 'string') {
           // Skip default param values
-          if (param === 'j' && v === 'a') continue;
+          if (param === 'j' && v === 'a') continue
 
           u.set(param, v)
           // handle simple number values
         } else if (typeof v === 'number') {
-
           // Skip values if they're still default
-          if (param === 'i' && v === DEFAULT_PAGE_SIZE) continue;
-          if (param === 'o' && v === 0) continue;
+          if (param === 'i' && v === DEFAULT_PAGE_SIZE) continue
+          if (param === 'o' && v === 0) continue
 
           u.set(param, v.toString(10))
           // complex (non-scalar) values
         } else {
           // simple string arrays
           if (param === 's' || param.match(/^c(\d)$/)) {
-            v.forEach(s => u.append(param + '[]', s))
+            v.forEach((s) => u.append(param + '[]', s))
             // locations (map of string arrays)
           } else if (param === 'l') {
             // fields (map of strings)
             for (const key in v) {
               const vs = Array.from(v[key])
-              vs.forEach(x => u.append(`l[${key}][]`, x))
+              vs.forEach((x) => u.append(`l[${key}][]`, x))
             }
           } else if (param === 'df' || param == 'dt') {
             if (typeof v === 'object') {
@@ -178,6 +184,11 @@ export const useSearchStore = defineStore({
   },
 
   actions: {
+    async setAggregation(client) {
+      const { aggregations } = await client.search(this.searchParams)
+
+      this.sourceAggregation = aggregations
+    },
     async search(client) {
       const { hits, aggregations } = await client.search(this.searchParams)
 
@@ -233,7 +244,7 @@ export const useSearchStore = defineStore({
       this.$patch({ query })
     },
     rkGetSameDatetimeInAllTimezones(date) {
-      if(!date) return null
+      if (!date) return null
       const timezoneOffset = date.getTimezoneOffset()
 
       let final
