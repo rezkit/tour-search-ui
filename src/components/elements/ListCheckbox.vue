@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {toRef, computed, ref} from 'vue'
+import { toRef, computed, ref } from 'vue'
 // Properties and events.
 //
 const emit = defineEmits(['update:modelValue'])

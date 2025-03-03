@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap-grid.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootilities@0.5.0/dist/css/bootilities.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/demo.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tours UI</title>
+</head>
+<body class="rk-body p-3">
+<h1 class="mb-5">Tours UI - Demo Page</h1>
+
+<main id="vue-app" class="pb-5">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-5 col-md-4 col-lg-3">
+        <template v-for="category in search.aggregations.categories?.buckets" :key="category.term">
+          <div class="me-3">
+            <p>{{ category.key }}</p>
+            <div class="rk-filters__facet ">
+              <template v-for="(c1, i) in category.children" :key="`${c1.key}-${i}`">
+                <rkts-collapsible-list
+                  v-model="search.query.c1"
+                  :sub-options="c1.children || []"
+                  :title="c1.key"
+                  :count="c1.doc_count"
+                  :open="true"
+                  prefix="categories"
+                  :term="c1.term"
+                >
+                  <template v-for="(c2, i) in c1.children" :key="`${c2.key}-${i}`">
+                    <rkts-list-checkbox
+                      v-model="search.query.c2"
+                      :title="c2.key"
+                      prefix="categories"
+                      :term="c2.term"
+                      :count="c2.doc_count">
+                    </rkts-list-checkbox>
+                  </template>
+                </rkts-collapsible-list>
+              </template>
+              <rkts-clear-button
+                style-opts="mt-3"
+                @process:clear-filters="clearSectionFilters(['c1', 'c2'], `${category.key}`)"
+              ></rkts-clear-button>
+            </div>
+          </div>
+        </template>
+      </div>
+      <div class="col-7 col-md-8 col-lg-9">
+        <p class="rk-text rk-text--lead">Results:</p>
+        <rkts-results-count
+          :count="search.results?.total?.value"
+          style-opts="pt-2"
+          label="Showing"
+          message="trips"
+        ></rkts-results-count>
+        <div class="rk-search__results">
+          <div class="container">
+            <div class="row">
+              <div class="col-12 px-0">
+                <div
+                  v-if="search.results && search.results.hits?.length === 0 && !loading"
+                  style="display:none;"
+                  :class="{ 'd-block': noResults }"
+                >
+                  <p class="lead">
+                    No Results Found
+                  </p>
+                </div>
+                <div v-else-if="!search.results || loading">
+                  <div class="container-fluid p-0">
+                    <div class="row row-cols-1 row-cols-md-3 my-4"></div>
+                  </div>
+                </div>
+                <div v-else>
+                  <rkts-results-panel layout="fluid">
+                    <template v-for="result in search.results.hits" :key="result._id">
+
+                      <div class="rk-card example-card example-card--related">
+
+                        <div class="example-card__image example-card__image--max-height mb-3">
+                          <img
+                            class="img-fluid"
+                            alt="Product Image"
+                            src="https://placehold.co/450x250?text=..."
+                          />
+                        </div>
+
+                        <div class="rk-card__interactive">
+                          <div class="d-flex justify-content-between align-items-center">
+                            <div class="me-3"></div>
+                            <div class="position-relative"></div>
+                          </div>
+                        </div>
+
+                        <a :href="result._path" class="rk-link rk-link--dark d-block">
+                          <div class="example-card__body pt-0">
+                            <div class="rk-card__heading">
+                              <h6 class="mb-0">
+                                {{ result._source.name }}
+                              </h6>
+                            </div>
+                            <p v-if="result._source.locations.Country" class="rk-text rk-text--text-sm mb-3">
+                              <i class="rk-card__icon fontello icon-pin me-1"></i>
+                              <span>{{ result._source.locations.Country[0] }}</span>
+                              <span v-if="result._source.locations.Country[1]">, {{ result._source.locations.Country[1] }}</span>
+                              <span v-if="result._source.locations.Country[2]">, {{ result._source.locations.Country[2] }}</span>
+                              <span v-if="result._source.locations.Country[3]">, {{ result._source.locations.Country[3] }}</span>
+                            </p>
+                            <p
+                              v-if="result._source.introduction"
+                              class="rk-text rk-text--text-df rk-line-height-md mb-1"
+                            >
+                              {{ result._source.introduction }}
+                            </p>
+                          </div>
+
+                          <div class="rk-card__info">
+                            <div class="row row-cols-3">
+                              <div v-if="result._source.custom_fields.main_activity_icon" class="info-item col d-flex flex-column mx-auto">
+                                <div class="holiday-type category-item d-flex flex-column align-items-center">
+                                  <!-- Assuming you have a method to get the icon class for the main activity -->
+                                  <i
+                                    class="rk-icon fontello rk-icon--primary rk-icon--text-df"
+                                    :class="getIconClass(result._source.custom_fields.main_activity_icon)"
+                                  ></i>
+                                  <span class="rk-text rk-text--text-xs rk-bold rk-uppercase text-center mt-2">
+                                        {{ result._source.custom_fields.main_activity_icon }}
+                                      </span>
+                                </div>
+                              </div>
+
+                              <div v-if="result._source.custom_fields.group_type_icon" class="info-item col d-flex flex-column mx-auto">
+                                <div class="holiday-type category-item d-flex flex-column align-items-center">
+                                  <!-- Assuming you have a method to get the icon class for the group type -->
+                                  <i
+                                    class="rk-icon fontello rk-icon--primary rk-icon--text-df"
+                                    :class="getIconClass(result._source.custom_fields.group_type_icon)"
+                                  ></i>
+                                  <span class="rk-text rk-text--text-xs rk-bold rk-uppercase text-center mt-2">
+                                        {{ result._source.custom_fields.group_type_icon }}
+                                      </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="rk-card__footer d-flex justify-content-between">
+                            <div class="w-100">
+                              <p class="rk-text rk-text--text-md rk-bold mb-1 text-center">
+                                {{ result._source.duration[0] }}
+                              </p>
+                              <div class="d-flex justify-content-center">
+                                <div
+                                  v-if="result.calculated.leading_pricing['Tour Space / Adult Price'] || result.calculated.leading_pricing['Tour Space / Child']"
+                                  :class="{
+                                        'without-flights text-center me-4': (result.calculated.leading_pricing['Tour Space / Adult Price'] || result.calculated.leading_pricing['Tour Space / Child']) && (result.calculated.leading_pricing['Tour Space / Adult Flight Inclusive Price'] || result.calculated.leading_pricing['Tour Space / Child Flight Inclusive Price']),
+                                        'without-flights text-center': (result.calculated.leading_pricing['Tour Space / Adult Price'] || result.calculated.leading_pricing['Tour Space / Child']) && !(result.calculated.leading_pricing['Tour Space / Adult Flight Inclusive Price'] || result.calculated.leading_pricing['Tour Space / Child Flight Inclusive Price'])
+                                      }"
+                                >
+                                  <p v-if="result.calculated.leading_pricing['Tour Space / Adult Price']" class="rk-text rk-text--price mb-1">
+                                    {{ priceFormat(result.calculated.leading_pricing['Tour Space / Adult Price']) }}
+                                  </p>
+
+                                  <span v-if="result._source.custom_fields.group_type_icon === 'Family'">
+                                    <p v-if="result.calculated.leading_pricing['Tour Space / Child']" class="rk-text rk-text--price mb-1">
+                                      {{ priceFormat(result.calculated.leading_pricing['Tour Space / Child']) }}
+                                    </p>
+                                  </span>
+                                </div>
+                                <div
+                                  v-if="result.calculated.leading_pricing['Tour Space / Adult Flight Inclusive Price'] || result.calculated.leading_pricing['Tour Space / Child Flight Inclusive Price']"
+                                  :class="{
+                                        'with-flights text-center ms-5': (result.calculated.leading_pricing['Tour Space / Adult Price'] || result.calculated.leading_pricing['Tour Space / Child']) && (result.calculated.leading_pricing['Tour Space / Adult Flight Inclusive Price'] || result.calculated.leading_pricing['Tour Space / Child Flight Inclusive Price']),
+                                        'with-flights text-center': !(result.calculated.leading_pricing['Tour Space / Adult Price'] || result.calculated.leading_pricing['Tour Space / Child']) && (result.calculated.leading_pricing['Tour Space / Adult Flight Inclusive Price'] || result.calculated.leading_pricing['Tour Space / Child Flight Inclusive Price'])
+                                      }"
+                                >
+                                  <p v-if="result.calculated.leading_pricing['Tour Space / Adult Flight Inclusive Price']" class="rk-text rk-text--price mb-1">
+                                    {{ priceFormat(result.calculated.leading_pricing['Tour Space / Adult Flight Inclusive Price']) }}
+                                  </p>
+
+                                  <span v-if="result._source.custom_fields.group_type_icon === 'Family'">
+                                        <p v-if="result.calculated.leading_pricing['Tour Space / Child Flight Inclusive Price']" class="rk-text rk-text--price mb-1">
+                                          {{ priceFormat(result.calculated.leading_pricing['Tour Space / Child Flight Inclusive Price']) }}
+                                        </p>
+                                      </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="d-flex align-items-end"></div>
+                          </div>
+                        </a>
+                      </div>
+                    </template>
+                  </rkts-results-panel>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+  import { createApp, ref, watch, inject } from 'vue'
+  import { store, useSearchStore } from '@/stores/global.js'
+  import { debounce } from 'lodash-es'
+  import * as SearchUI from './src/main.ts'
+  const app = createApp({
+    name: 'Search UI Demo',
+
+    data() {
+      return {
+        priceRange: ref([100, 10000]),
+        durationRange: ref([1, 31]),
+        sortBy: ref('default-option'),
+        currencySymbol: ref('£'),
+        loading: ref(false),
+        noResults: ref(false),
+        fromDateChosen: ref(false),
+        toDateChosen: ref(false),
+        pageNum: ref(1),
+      }
+    },
+
+    setup() {
+      const search = useSearchStore()
+      const client = inject(SearchUI.SEARCH_CLIENT)
+
+      const searcher = debounce( () => useSearchStore().search(client), 250)
+
+      return {
+        search,
+        client,
+        searcher,
+      }
+    },
+
+    watch: {
+      'search.results.hits': {
+        deep: true,
+        handler(value) {
+          this.loading = false
+          if (value && value.length === 0) {
+            this.noResults = true
+          }
+        }
+      },
+      'search.query.hdf': {
+        deep: true,
+        handler(value) {
+          this.runSearch()
+        }
+      },
+      'search.query.hdt': {
+        deep: true,
+        handler(value) {
+          this.runSearch()
+        }
+      },
+      'search.query.pf': {
+        deep: true,
+        handler(value) {
+          this.runSearch()
+        }
+      },
+      'search.query.pt': {
+        deep: true,
+        handler(value) {
+          this.runSearch()
+        }
+      },
+      'search.query.o': {
+        deep: true,
+        handler(value) {
+          this.pageNum = value
+          this.runSearch()
+        }
+      },
+      'search.query.s': {
+        deep: true,
+        handler(value) {
+          this.runSearch()
+        }
+      },
+      'search.query.df': {
+        deep: true,
+        handler(value) {
+          this.fromDateChosen = !!value;
+          this.runSearch()
+        }
+      },
+      'search.query.dt': {
+        deep: true,
+        handler(value) {
+          this.toDateChosen = !!value;
+          this.runSearch()
+        }
+      },
+      'search.query.c1': {
+        deep: true,
+        handler(value) {
+          this.runSearch()
+        }
+      },
+      'search.query.c2': {
+        deep: true,
+        handler(value) {
+          this.runSearch()
+        }
+      },
+      'search.query.l': {
+        deep: true,
+        handler(value) {
+          this.runSearch()
+        }
+      },
+      'search.query.q': {
+        deep: true,
+        handler(value) {
+          this.runSearch()
+        }
+      },
+    },
+
+    methods: {
+      async runSearch() {
+        this.noResults = false
+        this.loading = true
+        await this.searcher()
+        let params = this.search.deepLink
+        if (params.length > 0) {
+          history.pushState(null, null, window.location.pathname + '?' + params)
+        } else {
+          history.pushState(null, null, window.location.pathname)
+        }
+      },
+
+      getIconClass(icon) {
+        icon = icon.replace('&', 'and-');
+        icon = icon.replace(' ', '-');
+        icon = icon.replace (' ', '');
+        return `icon-${icon.toLowerCase()}`;
+      },
+
+      getHolidayGrade(categories) {
+        const gradeCategory = categories.find(category => category.includes('Holiday Ratings~'));
+        return gradeCategory ? gradeCategory.split('~')[1] : null;
+      },
+
+      extractHolidayRating(item) {
+        if (item.includes('Holiday Ratings')) {
+          return item.split('~').pop();
+        } else {
+          return 0;
+        }
+      },
+
+      convertToGradeText(item) {
+        const output = item.split('~').pop();
+        if (output >= 1 && output <= 3) {
+          return 'LEISURELY';
+        } else if (output >= 4 && output <= 6) {
+          return 'MODERATE';
+        } else if (output >= 7 && output <= 9) {
+          return 'CHALLENGING';
+        } else if (output >= 10 && output <= 12) {
+          return 'TOUGH';
+        } else {
+          return 'INVALID GRADE'; // You can customize this message for values outside the specified ranges
+        }
+      },
+
+      findCategory(name) {
+        return this.search.aggregations?.categories?.buckets.find(b => b.key === name)
+      },
+
+      resolveFilterText(filterTerm) {
+        return filterTerm.split('~').pop()
+      },
+
+      reviewScore(score) {
+        return Math.round((score.toFixed(1) / 5) * 100);
+      },
+
+      setDurationRange(ev) {
+        this.search.query.hdf = ev[0]
+        this.search.query.hdt = ev[1]
+      },
+
+      setPriceRange(ev) {
+        this.search.query.pf = ev[0]
+        this.search.query.pt = ev[1]
+      },
+
+      setDateFormat(dateStr) {
+        const date = new Date(dateStr)
+        date.setUTCHours(0,0,0,0)
+        const formattedDate = this.rkGetSameDatetimeInAllTimezones(date)
+        const dateOptions = {
+          weekday: 'short',
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric'
+        }
+        return formattedDate.toLocaleDateString('en-GB', dateOptions)
+      },
+
+      setCurrencySymbol() {
+        const ccy = 'GBP'
+        const currencySymbols = {
+          USD: '$',
+          EUR: '€',
+          GBP: '£',
+          CAD: '$',
+          NZD: '$',
+          AUD: '$',
+          INR: '₹',
+        }
+        this.currencySymbol = currencySymbols[ccy] || '£'
+      },
+
+      setGradeDescription(text) {
+        let output = ''
+        switch (text) {
+          case 'Leisurely':
+            output =
+              'Suitable for most people in good health, holidays at this grade include only limited amounts of activity.'
+            break
+          case 'Moderate':
+            output =
+              'Suitable for reasonably fit individuals, such as weekend walkers and cyclists. There can be the occasional more difficult day.'
+            break
+          case 'Challenging':
+            output =
+              'Physically challenging holidays, where you need to be prepared before you go.'
+            break
+          case 'Tough':
+            output =
+              'Our toughest holidays, involving many long days, often in isolated areas. A high level of fitness and previous wilderness and mountain experience is essential.'
+            break
+        }
+        return output
+      },
+
+      priceFormat(value) {
+        const ccy = 'GBP'
+        return new Intl.NumberFormat('en-GB', {
+          style: 'currency',
+          currency: ccy,
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        }).format(value)
+      },
+
+      clearSectionFilters(params, prefix) {
+        const itemLength = params.length
+        for (let i = 0; i < itemLength; i++) {
+          const idx = this.search.query[params[i]].findIndex((p) => p.includes(prefix))
+          this.search.query[params[i]].splice(idx, 1)
+        }
+        this.search.$patch()
+      },
+
+      clearFilter(filter, param, find, clearVal) {
+        const isArray = Array.isArray(filter)
+        if (isArray) {
+          for (let i = 0; i < filter.length; i++) {
+            this.search.query[param[i]] = clearVal[i]
+            if (param[i] === 'hdf') {
+              this.durationRange = [1, 31]
+            }
+            if (param[i] === 'pf') {
+              this.priceRange = [100, 10000]
+            }
+          }
+        } else if (find) {
+          const idx = this.search.query[param].findIndex((f) => f === filter)
+          this.search.query[param].splice(idx, 1)
+        } else {
+          this.search.query[param] = clearVal
+        }
+      },
+
+      clearSearchQuery () {
+        delete this.search.query['q']
+        this.search.$patch()
+      },
+
+      clearLocationFilter(filter, param, key) {
+        const idx = this.search.query[param][key].findIndex((f) => f === filter)
+        this.search.query[param][key].splice(idx, 1)
+      },
+
+      clearLocationSectionFilters(params, key) {
+        delete this.search.query[params][key]
+        this.search.$patch()
+      },
+
+      clearFilters() {
+        this.priceRange = [100, 10000]
+        this.durationRange = [1, 31]
+        this.sortBy = 'default-option'
+        this.search.$reset()
+      },
+      sortDescending(array) {
+        if(array) {
+          return array.sort(function(a, b) {
+            return b.doc_count - a.doc_count;
+          })
+        }
+      },
+      // Ensures the selected datetime is output correctly and not changed by the browser e.g. selecting 6/6/2020 4am will be shown as 6/6/2020 4am in all timezones
+      //
+      rkGetSameDatetimeInAllTimezones(date) {
+        if(!date) return null
+        const timezoneOffset = date.getTimezoneOffset()
+
+        let final
+
+        if (timezoneOffset < 0) {
+          final = new Date(date.getTime() - Math.sign(timezoneOffset * 60000))
+        } else {
+          final = new Date(date.getTime() + Math.sign(timezoneOffset * 60000))
+        }
+        final.setSeconds(0, 0)
+
+        return final
+      },
+      // Ensures the selected datetime is saved correctly (when selected by the user) and not changed by the browser e.g. selecting 6/6/2020 4am will be shown as 6/6/2020 4am in all timezones
+      //
+      rkSetSameDatetimeInAllTimezones(date) {
+        if (!date) return null
+
+        const timezoneOffset = date.getTimezoneOffset()
+
+        date.setMinutes(date.getMinutes() - timezoneOffset)
+        date.setSeconds(0, 0)
+
+        return date
+      },
+      // Can't use date methods e.g. localeDateString as it reverts the timezone offset
+      formatDateTimeOutput(datetime) {
+        if(!datetime) return datetime
+
+        const isoString = datetime.toISOString()
+
+        const monthNames = [
+          "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+        // Split the ISO string into date and time parts
+        const [datePart, timePart] = isoString.split('T')
+
+        // Split the date part into year, month, and day
+        const [year, month, day] = datePart.split('-')
+
+        // Split the time part into hours, minutes, and seconds (ignore seconds)
+        const [hours, minutes] = timePart.split(':')
+
+        const formattedString = `${day} ${monthNames[Number(month - 1)]} ${year}`
+        return formattedString
+      }
+    },
+
+    computed: {
+      sortedLocations() {
+        return this.sortDescending(this.search.aggregations.locations_Location?.buckets);
+      },
+
+      sortedRegions() {
+        return this.sortDescending(this.search.aggregations.locations_Region?.buckets);
+      },
+      dateFrom: {
+        get() {
+          return this.rkGetSameDatetimeInAllTimezones(this.search.query.df)
+        },
+        set(value) {
+
+          if (value instanceof Date) {
+            value.setHours(0,0,0,0)
+          }
+          const test = this.rkSetSameDatetimeInAllTimezones(value)
+          this.search.query.df = test
+        }
+      },
+      dateTo: {
+        get() {
+          const date = this.rkGetSameDatetimeInAllTimezones(this.search.query.dt)
+          return date ? date.setUTCHours(0,0,0,0) : date
+        },
+        set(value) {
+          if (value instanceof Date) {
+            value.setHours(23, 59, 0, 0)
+          }
+          this.search.query.dt = this.rkSetSameDatetimeInAllTimezones(value)
+        }
+      },
+    },
+
+    mounted() {
+      let params = window.location.search
+      if (params.startsWith('?')) params = params.substr(1)
+      this.search.loadParams(params)
+      this.runSearch()
+      this.setCurrencySymbol()
+    }
+  })
+
+
+  app.use(store)
+  app.use(SearchUI.vue('ke', {host: 'https://rezkit-tours-staging.fly.dev'}))
+  app.mount('#vue-app')
+</script>
+</body>
+</html>
