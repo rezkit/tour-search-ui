@@ -58,6 +58,7 @@ module.exports = {
       true,
       {
         ignorePseudoClasses: ['v-deep, :deep'],
+        ignorePseudoElements: ['v-deep, :deep'],
       },
     ],
     'selector-pseudo-element-no-unknown': [
@@ -69,7 +70,7 @@ module.exports = {
     'selector-type-no-unknown': [
       true,
       {
-        ignore: ['custom-elements'],
+        ignore: ['custom-elements', 'custom-content-elements'],
       },
     ],
     'string-no-newline': true,
@@ -185,7 +186,7 @@ module.exports = {
     'number-max-precision': 4,
     'number-no-trailing-zeros': true,
     'property-case': 'lower',
-    'property-no-vendor-prefix': null,
+    'property-no-vendor-prefix': false,
     'rule-empty-line-before': [
       'always-multi-line',
       {
