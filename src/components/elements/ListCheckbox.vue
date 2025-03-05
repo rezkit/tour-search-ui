@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {toRef, computed, ref} from 'vue'
+import { toRef, computed, ref } from 'vue'
 // Properties and events.
 //
 const emit = defineEmits(['update:modelValue'])
@@ -30,7 +30,7 @@ const value = computed({
 </script>
 
 <template>
-  <li class="rkts-list-checkbox">
+  <li class="rkts-list-checkbox" :class="{ 'hide-option': count === 0 }">
     <div class="rkts-list-checkbox__container" @click.stop>
       <div
         class="rkts-list-checkbox__choice"
