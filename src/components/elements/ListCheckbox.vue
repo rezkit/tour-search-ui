@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { toRef, computed, ref } from 'vue'
+import { toRef, computed } from 'vue'
 // Properties and events.
 //
 const emit = defineEmits(['update:modelValue'])
@@ -9,13 +9,17 @@ const props = defineProps<{
   count?: number
   prefix: string
   term: string
+  loading?: boolean
+  parent?: string | null
 }>()
 // Main variables.
 //
 const term = toRef(props, 'term')
 const title = toRef(props, 'title')
-const count = props.count ? toRef(props, 'count') : ref(0)
+const count = toRef(props, 'count')
 const prefix = toRef(props, 'prefix')
+const loading = toRef(props, 'loading')
+const parent = toRef(props, 'parent')
 // Model.
 //
 const value = computed({
@@ -34,7 +38,10 @@ const value = computed({
     <div class="rkts-list-checkbox__container" @click.stop>
       <div
         class="rkts-list-checkbox__choice"
-        :class="{ active: value.includes(term) }"
+        :class="{
+          active: value.includes(term),
+          inactive: count === 0 && !parent,
+        }"
       >
         <input
           v-model="value"
@@ -44,10 +51,20 @@ const value = computed({
           type="checkbox"
         />
       </div>
-      <label class="rkts-list-checkbox__label" :for="`${prefix}-${term}`">
+      <label
+        class="rkts-list-checkbox__label"
+        :for="`${prefix}-${term}`"
+        :class="{
+          active: value.includes(term),
+          inactive: count === 0 && !parent,
+        }"
+      >
         {{ title }}
-        <b v-if="count && count > 0" class="rk-text rk-text--count">
-          ({{ count }})
+        <b class="rk-text rk-text--count">
+          <span v-if="loading"></span>
+          <span v-else-if="count && count > 0"> ({{ count }}) </span>
+          <span v-else-if="count === 0 && !parent"> ({{ count }}) </span>
+          <span v-else> (+) </span>
         </b>
       </label>
     </div>

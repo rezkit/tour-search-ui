@@ -91,6 +91,62 @@ export const useSearchStore = defineStore({
         c3: [],
         c4: [],
       },
+      sourceQuery: {
+        // Currency -- set by the user session
+        ccy: 'GBP',
+
+        // Holiday Duration From
+        hdf: null,
+
+        // Holiday Duration To
+        hdt: null,
+
+        // Dates From
+        df: null,
+
+        // Dates To
+        dt: null,
+
+        // Fields (Departure)
+        fd: {},
+
+        // Fields (Holiday)
+        fh: {},
+
+        // Increment (page size)
+        i: DEFAULT_PAGE_SIZE,
+
+        // Join mode
+        j: 'd',
+
+        // Locations
+        l: {},
+
+        // Offset
+        o: 0,
+
+        // Price From
+        pf: null,
+
+        // Price Increment
+        pi: null,
+
+        // Price To
+        pt: null,
+
+        // Query
+        q: '',
+
+        // Sort
+        s: [],
+
+        // Categories
+        c0: [],
+        c1: [],
+        c2: [],
+        c3: [],
+        c4: [],
+      },
     }
   },
   getters: {
@@ -116,6 +172,25 @@ export const useSearchStore = defineStore({
      * @param state
      * @returns { SearchParams } Search Parameters
      */
+
+    sourceParams(state) {
+      const query = {
+        ...state.sourceQuery,
+      }
+
+      // Remove spurious parameters
+      delete query.categories
+
+      if (!query.pi > 0) delete query.pi
+      if (query.df === null) delete query.df
+      if (query.dt === null) delete query.dt
+      if (query.pt <= 0) delete query.pt
+      if (query.pf <= 0) delete query.pf
+      if (query.q?.trim() === '') delete query.q
+
+      return query
+    },
+
     searchParams(state) {
       const query = {
         ...state.query,
@@ -185,7 +260,7 @@ export const useSearchStore = defineStore({
 
   actions: {
     async setAggregation(client) {
-      const { aggregations } = await client.search(this.searchParams)
+      const { aggregations } = await client.search(this.sourceParams)
 
       this.sourceAggregation = aggregations
     },

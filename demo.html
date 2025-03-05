@@ -13,41 +13,50 @@
   <title>Tours UI</title>
 </head>
 <body class="rk-body p-3">
-<h1 class="mb-5">Tours UI - Demo Page</h1>
-
 <main id="vue-app" class="pb-5">
   <div class="container-fluid">
     <div class="row">
+      <div class="col-12">
+        <h1 class="mb-5">Tours UI - Demo Page</h1>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-5 col-md-4 col-lg-3">
-        <rkts-collapsible-list
-          :sub-options="true"
-          :heading-only="true"
-          title="Region"
-          :open="true"
-        >
-          <template v-for="region in search?.sourceAggregation?.locations_Region?.buckets" :key="region.key">
-            <rkts-list-checkbox
-              v-model="search.query.l['Region']"
-              :title="region.key"
-              prefix="region"
-              :term="region.key"
-              :count="region.doc_count"
-              @update:model-value="setActiveOption(region.key, 'locations_Region')"
+        <div class="me-3">
+          <div class="rk-filters__facet ">
+            <rkts-collapsible-list
+              :sub-options="true"
+              :heading-only="true"
+              title="Region"
+              :open="true"
             >
-            </rkts-list-checkbox>
-          </template>
-          <rkts-clear-button
-            style-opts="mt-3"
-            text="Clear"
-            @process:clear-filters="clearLocationSectionFilters('l', 'Region')"
-          ></rkts-clear-button>
-        </rkts-collapsible-list>
-        <template v-for="category in search?.sourceAggregation?.categories?.buckets" :key="category.term">
+              <template v-for="(region, i) in search?.aggregations?.locations_Region?.buckets" :key="region.key">
+                <rkts-list-checkbox
+                  v-model="search.query.l['Region']"
+                  :title="region.key"
+                  prefix="region"
+                  :term="region.key"
+                  :count="region.doc_count"
+                  :class="{ 'no-option': region.doc_count === 0 }"
+                  :parent="activeParent"
+                  @update:model-value="setParent('region')"
+                >
+                </rkts-list-checkbox>
+              </template>
+              <rkts-clear-button
+                style-opts="mt-3"
+                text="Clear"
+                @process:clear-filters="clearLocationSectionFilters('l', 'Region')"
+              ></rkts-clear-button>
+            </rkts-collapsible-list>
+          </div>
+        </div>
+        <template v-for="(category, i) in search?.aggregations?.categories?.buckets" :key="category.term">
           <div class="me-3">
             <p>{{ category.key }}</p>
             <div class="rk-filters__facet ">
-              {{ search?.activeSelection }}
-              <template v-for="(c1, i) in category.children" :key="`${c1.key}-${i}`">
+              <template v-for="(c1, idx) in category.children" :key="`${c1.key}-${i}`">
+                <p>{{ setCount(search?.sourceAggregation?.categories?.buckets[i].children, c1).doc_count }}</p>
                 <rkts-collapsible-list
                   v-model="search.query.c1"
                   :sub-options="c1.children || []"
@@ -56,16 +65,21 @@
                   :open="true"
                   prefix="categories"
                   :term="c1.term"
+                  :class="{ 'no-option': c1.doc_count === 0 }"
+                  :parent="activeParent"
+                  @update:model-value="setParent(category.term)"
                 >
-                  <template v-for="(c2, i) in c1.children" :key="`${c2.key}-${i}`">
+                  <template v-for="(c2, idy) in c1.children" :key="`${c2.key}-${idy}`">
+                    <p>{{ setCount(setCount(search?.sourceAggregation?.categories?.buckets[i].children, c1).children, c2).doc_count }}</p>
                     <rkts-list-checkbox
                       v-model="search.query.c2"
                       :title="c2.key"
                       prefix="categories"
                       :term="c2.term"
-                      :count="search?.activeSelection?.value === c2.term ? search?.activeSelection?.count : c2.doc_count"
-                      :class="{ tester: search?.activeSelection?.value === c2.term }"
-                      @update:model-value="setActiveOption(c2.term, 'categories')"
+                      :count="c2.doc_count"
+                      :class="{ 'no-option': c2.doc_count === 0 }"
+                      :parent="activeParent"
+                      @update:model-value="setParent(category.term)"
                     ></rkts-list-checkbox>
                   </template>
                 </rkts-collapsible-list>
@@ -79,18 +93,24 @@
         </template>
       </div>
       <div class="col-7 col-md-8 col-lg-9">
-        <p class="rk-text rk-text--lead">Results:</p>
-        <rkts-results-count
-          :count="search.results?.total?.value"
-          style-opts="pt-2"
-          label="Showing"
-          message="trips"
-        ></rkts-results-count>
-        <rkts-clear-button
-          text="Clear Filters"
-          style-opts="outlined ms-3"
-          @process:clear-filters="clearFilters"
-        ></rkts-clear-button>
+        <div class="d-flex justify-content-between px-3 mb-5">
+          <div>
+            <p class="rk-text rk-text--lead">Results:</p>
+            <rkts-results-count
+              :count="search.results?.total?.value"
+              style-opts="pt-2"
+              label="Showing"
+              message="trips"
+            ></rkts-results-count>
+          </div>
+          <div>
+            <rkts-clear-button
+              text="Clear Filters"
+              style-opts="outlined ms-3"
+              @process:clear-filters="clearFilters"
+            ></rkts-clear-button>
+          </div>
+        </div>
         <div class="rk-search__results">
           <div class="container">
             <div class="row">
@@ -243,7 +263,7 @@
 <script type="module">
   import { createApp, ref, watch, inject } from 'vue'
   import { store, useSearchStore } from '@/stores/global.js'
-  import { debounce } from 'lodash-es'
+  import { debounce, toArray } from 'lodash-es'
   import * as SearchUI from './src/main.ts'
   const app = createApp({
     name: 'Search UI Demo',
@@ -259,6 +279,7 @@
         fromDateChosen: ref(false),
         toDateChosen: ref(false),
         pageNum: ref(1),
+        activeParent: ref(null)
       }
     },
 
@@ -266,13 +287,13 @@
       const search = useSearchStore()
       const client = inject(SearchUI.SEARCH_CLIENT)
       const searcher = debounce( () => useSearchStore().search(client), 250)
-      const sourceAggregation = debounce( () => useSearchStore().setAggregation(client), 250)
+      const rootAggregation = debounce(() => useSearchStore().setAggregation(client), 250)
 
       return {
         search,
         client,
         searcher,
-        sourceAggregation
+        rootAggregation
       }
     },
 
@@ -364,6 +385,22 @@
     },
 
     methods: {
+      setCount(list, target) {
+        // console.log("List:", list);
+        // console.log("Target:", target);
+        let output = list
+
+        // Ensure list is an array
+        if (!Array.isArray(output)) {
+          // console.error("Error: list is not an array", list);
+          output = toArray(list)
+        }
+
+        const tester = output.find((item) => item.key === target.key);
+        console.log("Found Item:", tester);
+
+        return tester || target;
+      },
       async runSearch() {
         this.noResults = false
         this.loading = true
@@ -376,56 +413,8 @@
         }
       },
 
-      setActiveOption(value, type) {
-        const levels = value?.includes('~') ? value.split('~') : [value]
-        console.log('Levels:', levels)
-        const aggregation = Object.keys(this.search?.sourceAggregation || {}).map((key) => [
-          key,
-          this.search.sourceAggregation[key],
-        ])
-
-        const facet = aggregation.find(([key]) => key === type)
-        if (!facet) {
-          console.error(`Facet type '${type}' not found.`)
-          return
-        }
-
-        let currentLevel = facet?.[1]?.buckets ? Object.values(facet[1].buckets) : []
-
-        console.log('Initial Level:', currentLevel)
-
-        for (const level of levels) {
-          if (!currentLevel) {
-            console.error(`Invalid data structure at level: '${level}'`, currentLevel)
-            return
-          }
-
-          const childrenArray = Array.isArray(currentLevel) ? currentLevel : Object.values(currentLevel)
-
-          console.log(`Searching for level: '${level}' in`, childrenArray.map((c) => c.key))
-
-          const nextLevel = childrenArray.find((item) => item.key === level)
-          if (!nextLevel) {
-            console.warn(`Level '${level}' not found in facet type '${type}'.`)
-            currentLevel = null
-            break
-          }
-
-          currentLevel = nextLevel.children && Object.keys(nextLevel.children).length > 0
-            ? Object.values(nextLevel.children)
-            : nextLevel
-        }
-        const docCount = typeof currentLevel ==='object' && 'doc_count' in currentLevel
-          ? currentLevel.doc_count
-          : 0
-
-        console.log('Final Level:', currentLevel)
-        console.log('Doc Count:', docCount)
-
-        this.search.activeSelection = {
-          value,
-          count: docCount,
-        }
+      setParent(target) {
+        this.activeParent = target
       },
 
       getIconClass(icon) {
@@ -464,7 +453,7 @@
       },
 
       findCategory(name) {
-        return this.search.sourceAggregation?.categories?.buckets.find(b => b.key === name)
+        return this.search.aggregations?.categories?.buckets.find(b => b.key === name)
       },
 
       resolveFilterText(filterTerm) {
@@ -594,7 +583,6 @@
         this.durationRange = [1, 31]
         this.sortBy = 'default-option'
         this.search.$reset()
-        this.sourceAggregation()
       },
       sortDescending(array) {
         if(array) {
@@ -658,11 +646,11 @@
 
     computed: {
       sortedLocations() {
-        return this.sortDescending(this.search.sourceAggregation.locations_Location?.buckets);
+        return this.sortDescending(this.search.aggregations.locations_Location?.buckets);
       },
 
       sortedRegions() {
-        return this.sortDescending(this.search.sourceAggregation.locations_Region?.buckets);
+        return this.sortDescending(this.search.aggregations.locations_Region?.buckets);
       },
       dateFrom: {
         get() {
@@ -697,7 +685,7 @@
       this.search.loadParams(params)
       this.runSearch()
       this.setCurrencySymbol()
-      this.sourceAggregation()
+      this.rootAggregation()
     }
   })
 
