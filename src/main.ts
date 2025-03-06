@@ -160,6 +160,7 @@ export const vue = (key: string, params?: ClientOptions) => ({
     Vue.component('rkts-clear-button', components.ClearButton)
     Vue.component('rkts-apply-button', components.ApplyButton)
     Vue.component('rkts-search-box', components.SearchBox)
+    Vue.component('rkts-spinner', components.Spinner)
     Vue.component('rkts-sort-by', components.SortBy)
     Vue.provide(SEARCH_CLIENT, new Client(key, params))
   },

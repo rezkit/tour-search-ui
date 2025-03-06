@@ -14,6 +14,7 @@ export { default as SearchBox } from './elements/SearchBox.vue'
 export { default as RefineTag } from './elements/RefineTag.vue'
 export { default as ClearButton } from './elements/ClearButton.vue'
 export { default as ApplyButton } from './elements/ApplyButton.vue'
+export { default as Spinner } from './elements/Spinner.vue'
 export { default as SortBy } from './elements/SortBy.vue'
 // Filters.
 //
