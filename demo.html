@@ -686,12 +686,13 @@
       this.runSearch()
       this.setCurrencySymbol()
       this.rootAggregation()
+      this.activeParent = null
     }
   })
 
 
   app.use(store)
-  app.use(SearchUI.vue('ke', {host: 'https://rezkit-tours-staging.fly.dev'}))
+  app.use(SearchUI.vue('ke-adventure', {host: 'https://tours.api.rezkit.app'}))
   app.mount('#vue-app')
 </script>
 </body>

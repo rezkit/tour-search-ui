@@ -18,7 +18,6 @@ const props = defineProps<{
   prefix?: string
   term?: string
   headingOnly?: boolean
-  parent?: string
 }>()
 // Main variables.
 //
@@ -30,7 +29,6 @@ const subOptions = toRef(props, 'subOptions')
 const count = props.count ? toRef(props, 'count') : ref(0)
 const title = toRef(props, 'title')
 const open = toRef(props, 'open')
-const parent = toRef(props, 'parent')
 const collapsibleGroup = ref()
 const collapsibleTitle = ref()
 const collapsibleContent = ref()
@@ -98,7 +96,6 @@ const toggle = function toggle() {
           :prefix="prefix || ''"
           :term="term || ''"
           :count="count"
-          :parent="parent"
         ></ListCheckbox>
       </ListContainer>
     </div>

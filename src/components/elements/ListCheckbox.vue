@@ -10,7 +10,6 @@ const props = defineProps<{
   prefix: string
   term: string
   loading?: boolean
-  parent?: string | null
 }>()
 // Main variables.
 //
@@ -19,7 +18,6 @@ const title = toRef(props, 'title')
 const count = toRef(props, 'count')
 const prefix = toRef(props, 'prefix')
 const loading = toRef(props, 'loading')
-const parent = toRef(props, 'parent')
 // Model.
 //
 const value = computed({
@@ -40,7 +38,7 @@ const value = computed({
         class="rkts-list-checkbox__choice"
         :class="{
           active: value.includes(term),
-          inactive: count === 0 && !parent,
+          inactive: count === 0 && value.includes(term),
         }"
       >
         <input
@@ -56,14 +54,14 @@ const value = computed({
         :for="`${prefix}-${term}`"
         :class="{
           active: value.includes(term),
-          inactive: count === 0 && !parent,
+          inactive: count === 0 && value.includes(term),
         }"
       >
         {{ title }}
         <b class="rk-text rk-text--count">
           <span v-if="loading"></span>
+          <span v-else-if="count === 0 && value.includes(term)">(0)</span>
           <span v-else-if="count && count > 0"> ({{ count }}) </span>
-          <span v-else-if="count === 0 && !parent"> ({{ count }}) </span>
           <span v-else> (+) </span>
         </b>
       </label>

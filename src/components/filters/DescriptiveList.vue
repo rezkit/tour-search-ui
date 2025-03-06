@@ -14,7 +14,6 @@ const props = defineProps<{
   count?: number
   prefix: string
   term: string
-  parent?: string
 }>()
 // Main variables.
 //
@@ -24,7 +23,6 @@ const styleOpts = toRef(props, 'styleOpts')
 const count = props.count ? toRef(props, 'count') : ref(0)
 const title = toRef(props, 'title')
 const text = toRef(props, 'text')
-const parent = toRef(props, 'parent')
 // Model.
 //
 const value = computed({
@@ -48,7 +46,6 @@ const value = computed({
           :count="count"
           :term="term"
           :prefix="prefix"
-          :parent="parent"
         ></ListCheckbox>
       </ul>
     </div>
