@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { toRef, computed } from 'vue'
+import Spinner from '@/components/elements/Spinner.vue'
 // Properties and events.
 //
 const emit = defineEmits(['update:modelValue'])
@@ -10,6 +11,7 @@ const props = defineProps<{
   prefix: string
   term: string
   loading?: boolean
+  activeSection?: boolean
 }>()
 // Main variables.
 //
@@ -18,6 +20,7 @@ const title = toRef(props, 'title')
 const count = toRef(props, 'count')
 const prefix = toRef(props, 'prefix')
 const loading = toRef(props, 'loading')
+const activeSection = toRef(props, 'activeSection')
 // Model.
 //
 const value = computed({
@@ -29,6 +32,18 @@ const value = computed({
     emit('update:modelValue', value)
   },
 })
+// Computed variables.
+//
+const isInactive = computed(() => {
+  if (count.value && count.value > 0) return false
+  if (
+    count.value === 0 &&
+    value.value.includes(term.value) &&
+    !activeSection.value
+  )
+    return true
+  return !(activeSection.value && count.value === 0)
+})
 </script>
 
 <template>
@@ -38,7 +53,7 @@ const value = computed({
         class="rkts-list-checkbox__choice"
         :class="{
           active: value.includes(term),
-          inactive: count === 0 && value.includes(term),
+          inactive: isInactive,
         }"
       >
         <input
@@ -54,15 +69,16 @@ const value = computed({
         :for="`${prefix}-${term}`"
         :class="{
           active: value.includes(term),
-          inactive: count === 0 && value.includes(term),
+          inactive: isInactive,
         }"
       >
         {{ title }}
         <b class="rk-text rk-text--count">
-          <span v-if="loading"></span>
+          <span v-if="count && count > 0"> ({{ count }}) </span>
+          <Spinner v-else-if="loading" />
           <span v-else-if="count === 0 && value.includes(term)">(0)</span>
-          <span v-else-if="count && count > 0"> ({{ count }}) </span>
-          <span v-else> (+) </span>
+          <span v-else-if="activeSection && count === 0">(+)</span>
+          <span v-else>(0)</span>
         </b>
       </label>
     </div>

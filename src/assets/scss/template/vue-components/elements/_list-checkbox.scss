@@ -12,8 +12,7 @@
   }
 
   @include adjoin("no-option") {
-    .inactive,
-    .active {
+    .inactive {
       pointer-events: none;
       opacity: .5;
     }
