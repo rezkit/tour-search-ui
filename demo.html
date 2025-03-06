@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap-grid.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootilities@0.5.0/dist/css/bootilities.min.css" rel="stylesheet">
+
   <link rel="stylesheet" href="/demo.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tours UI</title>
@@ -34,11 +35,11 @@
                 <rkts-list-checkbox
                   v-model="search.query.l['Region']"
                   :title="region.key"
+                  :loading="loading"
                   prefix="region"
                   :term="region.key"
                   :count="region.doc_count"
-                  :class="{ 'no-option': region.doc_count === 0 }"
-                  :parent="activeParent"
+                  :active-section="search?.query?.l['Region']?.length > 0"
                   @update:model-value="setParent('region')"
                 >
                 </rkts-list-checkbox>
@@ -52,11 +53,12 @@
           </div>
         </div>
         <template v-for="(category, i) in search?.aggregations?.categories?.buckets" :key="category.term">
-          <div class="me-3">
+          <div v-if="category.key ==='Activities'" class="me-3">
             <p>{{ category.key }}</p>
             <div class="rk-filters__facet ">
+              <p>{{ search.query.c1 }}</p>
+              <p>{{ search.query.c2 }}</p>
               <template v-for="(c1, idx) in category.children" :key="`${c1.key}-${i}`">
-                <p>{{ setCount(search?.sourceAggregation?.categories?.buckets[i].children, c1).doc_count }}</p>
                 <rkts-collapsible-list
                   v-model="search.query.c1"
                   :sub-options="c1.children || []"
@@ -65,20 +67,18 @@
                   :open="true"
                   prefix="categories"
                   :term="c1.term"
-                  :class="{ 'no-option': c1.doc_count === 0 }"
-                  :parent="activeParent"
                   @update:model-value="setParent(category.term)"
                 >
                   <template v-for="(c2, idy) in c1.children" :key="`${c2.key}-${idy}`">
-                    <p>{{ setCount(setCount(search?.sourceAggregation?.categories?.buckets[i].children, c1).children, c2).doc_count }}</p>
+                    <p>{{ c2.key }}</p>
                     <rkts-list-checkbox
                       v-model="search.query.c2"
                       :title="c2.key"
+                      :loading="loading"
                       prefix="categories"
                       :term="c2.term"
                       :count="c2.doc_count"
-                      :class="{ 'no-option': c2.doc_count === 0 }"
-                      :parent="activeParent"
+                      :active-section="search.query.c2 && search.query.c2.some(item => item.includes(c1.key + '~')) || false"
                       @update:model-value="setParent(category.term)"
                     ></rkts-list-checkbox>
                   </template>
