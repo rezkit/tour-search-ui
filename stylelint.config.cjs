@@ -57,6 +57,7 @@ module.exports = {
     'selector-pseudo-class-no-unknown': [
       true,
       {
+        ignorePseudoClasses: ['v-deep, :deep'],
         ignorePseudoElements: ['v-deep, :deep'],
       },
     ],
@@ -69,7 +70,7 @@ module.exports = {
     'selector-type-no-unknown': [
       true,
       {
-        ignore: ['custom-content-elements'],
+        ignore: ['custom-elements', 'custom-content-elements'],
       },
     ],
     'string-no-newline': true,

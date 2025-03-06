@@ -32,7 +32,7 @@ const value = computed({
 </script>
 
 <template>
-  <li class="rkts-list-checkbox">
+  <li class="rkts-list-checkbox" :class="{ 'no-option': count === 0 }">
     <div class="rkts-list-checkbox__container" @click.stop>
       <div
         class="rkts-list-checkbox__choice"
