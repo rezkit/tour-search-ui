@@ -25,6 +25,17 @@
       <div class="container">
         <div class="col-12">
           <p>{{ search?.query?.c2 }}</p>
+          <div v-if="search.query.l['Region']">
+            {{ getResultCount('locations_Region', 0) }}
+            <template v-for="region in search.query.l['Region']" :key="region">
+              <p>
+                {{ getResultCount('locations_Region', 0, region) }}
+              </p>
+              <p>
+                {{ region }}
+              </p>
+            </template>
+          </div>
           <div v-if="search.query.c2">
             <template v-for="c2Term in search.query.c2" :key="c2Term">
               <p>{{ getResultCount('categories', 2, c2Term) }}</p>
@@ -33,6 +44,7 @@
                 :filter-text="resolveFilterText(c2Term)"
               ></rkts-refine-tag>
             </template>
+
           </div>
         </div>
       </div>
@@ -479,7 +491,7 @@
           if (currentLevel === level + 1) {
             results.push({
               key: r.key,
-              term: r.term,
+              term: r.term || r.key,
               doc_count: r.doc_count
             })
             return
@@ -494,7 +506,7 @@
 
         if (!findTerm) return results
 
-        return results.find(item => item.term === findTerm)?.doc_count || 0
+        return results.find(item => item.term ? item.term === findTerm : item.key === findTerm)?.doc_count || 0
       },
 
       getIconClass(icon) {
