@@ -85,10 +85,14 @@
           <div class="rk-card">
             <rkts-tags-panel>
               <rkts-refine-tag
+                :filter-count="0"
+                filter-text="Example 1"
                 filter-value="$0 - $1000"
                 @process:clear-filter="clearFilter"
               ></rkts-refine-tag>
-              <rkts-refine-tag filter-value="$0 - $1000"></rkts-refine-tag>
+              <rkts-refine-tag
+                filter-text="Example 2"
+                filter-value="$0 - $1000"></rkts-refine-tag>
             </rkts-tags-panel>
           </div>
         </div>
