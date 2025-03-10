@@ -22,6 +22,22 @@
       </div>
     </div>
     <div class="row">
+      <div class="container">
+        <div class="col-12">
+          <p>{{ search?.query?.c2 }}</p>
+          <div v-if="search.query.c2">
+            <template v-for="c2Term in search.query.c2" :key="c2Term">
+              <p>{{ getResultCount('categories', 2, c2Term) }}</p>
+              <rkts-refine-tag
+                :filter-value="c2Term"
+                :filter-text="resolveFilterText(c2Term)"
+              ></rkts-refine-tag>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-5 col-md-4 col-lg-3">
         <div class="me-3">
           <div class="rk-filters__facet ">
@@ -451,6 +467,34 @@
         if (!uniqueSet.has(newItem)) {
           this.activeSections.push({ ev, parent });
         }
+      },
+
+      getResultCount(target, level, findTerm) {
+        const searchData = this.search?.aggregations[target]?.buckets
+        if (!searchData) return 0
+
+        let results = []
+
+        function traverse(r, currentLevel) {
+          if (currentLevel === level + 1) {
+            results.push({
+              key: r.key,
+              term: r.term,
+              doc_count: r.doc_count
+            })
+            return
+          }
+
+          if (r.children) {
+            Object.values(r.children).forEach(child => traverse(child, currentLevel + 1))
+          }
+        }
+
+        searchData.forEach(bucket => traverse(bucket, 1))
+
+        if (!findTerm) return results
+
+        return results.find(item => item.term === findTerm)?.doc_count || 0
       },
 
       getIconClass(icon) {
