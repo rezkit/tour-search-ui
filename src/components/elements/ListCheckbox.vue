@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { toRef, computed } from 'vue'
+// Components.
+//
 import Spinner from '@/components/elements/Spinner.vue'
 // Properties and events.
 //
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'process:deselect'])
 const props = defineProps<{
   modelValue: any
   title: string

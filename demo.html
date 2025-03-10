@@ -40,7 +40,6 @@
                   :term="region.key"
                   :count="region.doc_count"
                   :active-section="search?.query?.l['Region']?.length > 0"
-                  @update:model-value="setParent('region')"
                 >
                 </rkts-list-checkbox>
               </template>
@@ -53,7 +52,7 @@
           </div>
         </div>
         <template v-for="(category, i) in search?.aggregations?.categories?.buckets" :key="category.term">
-          <div v-if="category.key ==='Activities'" class="me-3">
+          <div class="me-3">
             <p>{{ category.key }}</p>
             <div class="rk-filters__facet ">
               <p>{{ search.query.c1 }}</p>
@@ -67,7 +66,6 @@
                   :open="true"
                   prefix="categories"
                   :term="c1.term"
-                  @update:model-value="setParent(category.term)"
                 >
                   <template v-for="(c2, idy) in c1.children" :key="`${c2.key}-${idy}`">
                     <p>{{ c2.key }}</p>
@@ -79,7 +77,6 @@
                       :term="c2.term"
                       :count="c2.doc_count"
                       :active-section="search.query.c2 && search.query.c2.some(item => item.includes(c1.key + '~')) || false"
-                      @update:model-value="setParent(category.term)"
                     ></rkts-list-checkbox>
                   </template>
                 </rkts-collapsible-list>
@@ -115,6 +112,7 @@
           <div class="container">
             <div class="row">
               <div class="col-12 px-0">
+                {{ lastTerm }}
                 <div
                   v-if="search.results && search.results.hits?.length === 0 && !loading"
                   style="display:none;"
@@ -279,7 +277,12 @@
         fromDateChosen: ref(false),
         toDateChosen: ref(false),
         pageNum: ref(1),
-        activeParent: ref(null)
+        activeParent: ref(null),
+        activeSections: ref([]),
+        lastTerm: ref({
+          query: '',
+          value: ''
+        })
       }
     },
 
@@ -361,12 +364,20 @@
       'search.query.c1': {
         deep: true,
         handler(value) {
+          this.lastTerm = {
+            query: 'c1',
+            value
+          }
           this.runSearch()
         }
       },
       'search.query.c2': {
         deep: true,
         handler(value) {
+          this.lastTerm = {
+            query: 'c2',
+            value
+          }
           this.runSearch()
         }
       },
@@ -382,6 +393,14 @@
           this.runSearch()
         }
       },
+      'search.results.total': {
+        deep: true,
+        handler(value) {
+          if (value.value === 0 && ['c1', 'c2'].includes(this.lastTerm.query)) {
+            this.search.query[this.lastTerm.query] = [];
+          }
+        }
+      }
     },
 
     methods: {
@@ -415,6 +434,23 @@
 
       setParent(target) {
         this.activeParent = target
+      },
+
+      removeFromQuery(term) {
+        this.search.query.c2 = this.search.query.c2.filter(item => item !== term);
+      },
+
+      countCheck(ev, parent) {
+        // const tester = this.search.query.c2 && this.search.query.c2.some(item => item.includes(c1.key + '~'))
+        console.log(ev)
+
+        const uniqueSet = new Set(this.activeSections.map(item => JSON.stringify(item)));
+
+        const newItem = JSON.stringify({ ev, parent });
+
+        if (!uniqueSet.has(newItem)) {
+          this.activeSections.push({ ev, parent });
+        }
       },
 
       getIconClass(icon) {
@@ -687,7 +723,7 @@
       this.setCurrencySymbol()
       this.rootAggregation()
       this.activeParent = null
-    }
+    },
   })
 
 
