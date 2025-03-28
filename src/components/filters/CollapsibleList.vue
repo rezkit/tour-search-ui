@@ -18,6 +18,7 @@ const props = defineProps<{
   prefix?: string
   term?: string
   headingOnly?: boolean
+  activeSection?: boolean
 }>()
 // Main variables.
 //
@@ -26,6 +27,7 @@ const term = toRef(props, 'term')
 const prefix = toRef(props, 'prefix')
 const styleOpts = toRef(props, 'styleOpts')
 const subOptions = toRef(props, 'subOptions')
+const activeSection = toRef(props, 'activeSection')
 const count = props.count ? toRef(props, 'count') : ref(0)
 const title = toRef(props, 'title')
 const open = toRef(props, 'open')
@@ -96,6 +98,7 @@ const toggle = function toggle() {
           :prefix="prefix || ''"
           :term="term || ''"
           :count="count"
+          :active-section="activeSection"
         ></ListCheckbox>
       </ListContainer>
     </div>
