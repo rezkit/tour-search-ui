@@ -18,6 +18,7 @@ const props = defineProps<{
   prefix?: string
   term?: string
   headingOnly?: boolean
+  activeSection?: boolean
 }>()
 // Main variables.
 //
@@ -90,12 +91,14 @@ const toggle = function toggle() {
         {{ title }}
       </label>
       <ListContainer v-else>
+        <p>{{ activeSection }}</p>
         <ListCheckbox
           v-model="value"
           :title="title"
           :prefix="prefix || ''"
           :term="term || ''"
           :count="count"
+          :active-section="activeSection"
         ></ListCheckbox>
       </ListContainer>
     </div>
