@@ -14,6 +14,7 @@ const props = defineProps<{
   count?: number
   prefix: string
   term: string
+  activeSection?: boolean
 }>()
 // Main variables.
 //
@@ -23,6 +24,7 @@ const styleOpts = toRef(props, 'styleOpts')
 const count = props.count ? toRef(props, 'count') : ref(0)
 const title = toRef(props, 'title')
 const text = toRef(props, 'text')
+const activeSection = toRef(props, 'activeSection')
 // Model.
 //
 const value = computed({
@@ -46,6 +48,7 @@ const value = computed({
           :count="count"
           :term="term"
           :prefix="prefix"
+          :active-section="activeSection"
         ></ListCheckbox>
       </ul>
     </div>
