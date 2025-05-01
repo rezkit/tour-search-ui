@@ -12,7 +12,6 @@ const props = defineProps<{
   max?: number
   step?: number
   format?: object
-  spacing?: number
 }>()
 // Main variables.
 //
@@ -22,7 +21,6 @@ const format = toRef(props, 'format')
 const step = toRef(props, 'step')
 const min = toRef(props, 'min')
 const max = toRef(props, 'max')
-const spacing = toRef(props, 'spacing')
 // Model.
 //
 const value = computed({
@@ -59,7 +57,6 @@ const typeSwitch = function typeSwitch(typeOf: string) {
       :max="max || 1000"
       :step="step || 10"
       :format="format || {}"
-      :options="{ margin: spacing || 25 }"
     />
   </div>
 </template>
