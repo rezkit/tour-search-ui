@@ -76,8 +76,14 @@ const isInactive = computed(() => {
         <b class="rk-text rk-text--count">
           <span v-if="count && count > 0"> ({{ count }}) </span>
           <Spinner v-else-if="loading" />
-          <span v-else-if="count === 0 && value.includes(term)">(0)</span>
-          <span v-else-if="activeSection && count === 0">(+)</span>
+          <span
+            v-else-if="count === 0 && value.includes(term)"
+            class="rkts-term-zero"
+            >(0)</span
+          >
+          <span v-else-if="activeSection && count === 0" class="rkts-plus">
+            (+)
+          </span>
           <span v-else>(0)</span>
         </b>
       </label>
