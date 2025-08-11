@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { toRef, ref } from 'vue'
+import { toRef, ref, watch } from 'vue'
 import VPagination from '@hennge/vue3-pagination'
 // Properties and events.
 //
@@ -8,11 +8,13 @@ const props = defineProps<{
   pages: any
   styleOpts?: string
   activeColour: string
+  resetPage?: boolean
 }>()
 // Main variables.
 //
 const activeColour = toRef(props, 'activeColour')
 const styleOpts = toRef(props, 'styleOpts')
+const resetPage = toRef(props, 'resetPage')
 const pages = toRef(props, 'pages')
 const model = ref(1)
 // Functions.
@@ -20,6 +22,13 @@ const model = ref(1)
 function updateHandler() {
   emit('update', model.value)
 }
+
+watch(resetPage, (newState) => {
+  if (newState) {
+    model.value = 1
+    emit('update:resetPage', false)
+  }
+})
 </script>
 <template>
   <div class="rkts-list-pagination" :class="[styleOpts]">
